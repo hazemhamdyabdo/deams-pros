@@ -9,7 +9,7 @@ import { BootstrapVue3, BToastPlugin } from 'bootstrap-vue-3'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import FlagIcon from 'vue-flag-icon';
-import VueSelect from 'vue3-select2-component'
+import Select2 from 'vue3-select2-component'
 import DatePicker from 'vue3-datepicker'
 import Vue3Autocounter from 'vue3-autocounter';
 import Toaster from '@meforma/vue-toaster'
@@ -28,6 +28,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 //shared
 import GForm from './components/form/index.vue';
 import GField from './components/form/inputs/field.vue';
+import GSelect from './components/form/inputs/select.vue';
 import i18n from '@/libs/i18n';
 import axiosIns from '@/libs/axios';
 import '@validations';
@@ -103,16 +104,17 @@ app.component('breadcrumb', breadcrumb)
 /*********Dashboard**********/
 app.component('indexpage', DashboardPage);
 
-
-app.component('vue-select', VueSelect);
+app.component('vue-select', Select2);
 app.component('datepicker', DatePicker);
 app.component('vue3-autocounter', Vue3Autocounter)
 app.component(VueFeather.name, VueFeather);
 app.component('star-rating', StarRating)
 app.component('SummernoteEditor', SummernoteEditor);
 //shaared
+
 app.component('gform', GForm);
 app.component('gfield', GField);
+app.component('GSelect', GSelect);
 app.use(Toaster, {
   position: "top-right",
 });

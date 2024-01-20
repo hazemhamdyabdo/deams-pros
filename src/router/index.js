@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Addbrand from '../views/pages/product/addbrand';
 import Addcategory from '../views/pages/product/addcategory';
 import Addproduct from '../views/pages/product/addproduct';
@@ -27,7 +27,22 @@ import Forgetpassword from '../views/pages/auth/forgetpassword';
 import banks from '../views/pages/PublicCodes/banks/List.vue';
 import EditBanks from '../views/pages/PublicCodes/banks/Edit.vue';
 import AddBank from '../views/pages/PublicCodes/banks/Edit.vue';
-import PaymentMehtod from '../views/pages/PublicCodes/Paymentmethods/List.vue'
+import PaymentMehtod from '../views/pages/PublicCodes/paymentmethods/List.vue'
+import AddPaymentmethod from '../views/pages/PublicCodes/paymentmethods/Edit.vue'
+import EditPaymentMethod  from '../views/pages/PublicCodes/paymentmethods/Edit.vue'
+import Building from '../views/pages/PublicCodes/buildings/List.vue'
+import AddBuilding from '../views/pages/PublicCodes/buildings/Edit.vue'
+import EditBuilding from '../views/pages/PublicCodes/buildings/Edit.vue'
+import Nationality  from '../views/pages/PublicCodes/nationalities/List.vue'
+import AddNationality from '../views/pages/PublicCodes/nationalities/Edit.vue'
+import EditNationality from '../views/pages/PublicCodes/nationalities/Edit.vue'
+import RentType from '../views/pages/PublicCodes/rentTypes/List.vue'
+import AddRentType from '../views/pages/PublicCodes/rentTypes/Edit.vue'
+import EditRentType from '../views/pages/PublicCodes/rentTypes/Edit.vue'
+import kitchenType from '../views/pages/PublicCodes/kitchensTypes/List.vue'
+import AddkitchenType from '../views/pages/PublicCodes/kitchensTypes/Edit.vue'
+import EditkitchenType from '../views/pages/PublicCodes/kitchensTypes/Edit.vue' 
+
 const routes = [
   {
     path: '/',
@@ -234,16 +249,16 @@ const routes = [
   {
     path: '/addBank',
     name: 'addBank',
-    component: EditBanks,
+    component: AddBank,
     meta: {
       headerClass: 'header',
       sidebarClass: '',
     },
   },
   {
-    path: '/editBank/id',
+    path: '/editBank/:id',
     name: 'editBank',
-    component: AddBank,
+    component: EditBanks,
     meta: {
       headerClass: 'header',
       sidebarClass: '',
@@ -258,6 +273,133 @@ const routes = [
       sidebarClass: '',
     },
   },
+  {
+    path: '/addPaymentmethod',
+    name: 'addPaymentmethod',
+    component: AddPaymentmethod,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/editPaymentMethod/:id',
+    name: 'editPaymentMethod',
+    component: EditPaymentMethod,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/building',
+    name: 'building',
+    component: Building,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/addBuilding',
+    name: 'addBuilding',
+    component: AddBuilding,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/editBuilding/:id',
+    name: 'editBuilding',
+    component: EditBuilding,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/nationality',
+    name: 'nationality',
+    component: Nationality,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/addNationality',
+    name: 'addBuilding',
+    component: AddNationality,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/editNationality/:id',
+    name: 'editBuilding',
+    component: EditNationality,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/rentType',
+    name: 'rentType',
+    component: RentType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/addRentType',
+    name: 'addRentType',
+    component: AddRentType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/editRentType/:id',
+    name: 'editRentType',
+    component: EditRentType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/kitchenType',
+    name: 'kitchenType',
+    component: kitchenType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/addkitchenType',
+    name: 'addkitchenType',
+    component: AddkitchenType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  {
+    path: '/editkitchenType/:id',
+    name: 'editkitchenType',
+    component: EditkitchenType,
+    meta: {
+      headerClass: 'header',
+      sidebarClass: '',
+    },
+  },
+  
   {
     path: '/newuseredit',
     name: 'newuseredit',
@@ -274,7 +416,9 @@ const routes = [
   },
 ];
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   // linkActiveClass: 'active',
   routes,
 });
+
+export default router;

@@ -1,6 +1,6 @@
 {
     "publicCodes": "الأكواد العامة",
-    "Code": "الكود",
+    "code": "الكود",
     "bankName": "اسم البنك",
     "AccountNumber": "رقم الحساب",
     "notes": "الملاحظات",
@@ -16,6 +16,7 @@
     "New Expense": "إضافة مصـروف",
     "Close": "إغلاق",
     "save": "حفظ",
+    "Save": "حفظ",
     "Are you sure?": "هل أنت متأكد؟",
     "Yes, delete it!": "نعم حذف!",
     "areYouSureYouWantToDelete?": "هل بالفعل تريد الحذف ؟",
@@ -23,5 +24,16 @@
     "Cancel": "إلغاء",
     "savedSuccessfully": "تم الحفظ بنجاح",
     "deletedSuccessfully": "تم الحذف بنجاح",
-    "updatedSuccessfully": "تم التعديل بنجاح"
+    "updatedSuccessfully": "تم التعديل بنجاح",
+    "building": "المبانى",
+    "buidingInService": "فى الخدمة",
+    "Nationalities": "الجنسيات",
+    "RentTypes": "أنواع الايجار",
+    "kitchensTypes": "أنواع المطابخ",
+    "space": "المساحة",
+    "nationality": "الجنسيه",
+    "name": "الاسم",
+    "kitchenType": "نوع المطبخ",
+    "rentType": "نوع الايجار"
+
 }

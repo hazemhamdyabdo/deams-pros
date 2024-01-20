@@ -12,12 +12,12 @@
               <b-row>
                 <b-col md="4">
                   <!-- <gfield
-                    label-text="Code"
-                    ref="code"
-                    name="code"
-                    id="code"
-                    v-model="selectedItem.code"
-                  /> -->
+                      label-text="Code"
+                      ref="code"
+                      name="code"
+                      id="code"
+                      v-model="selectedItem.code"
+                    /> -->
                   <label>{{ $t('code') }}</label>
                   <input
                     type="text"
@@ -28,11 +28,11 @@
                 <b-col md="4">
                   <!-- arabicName  -->
                   <!-- <gfield
-                    id="arabicName"
-                    rules="required"
-                    v-model="selectedItem.arabicName"
-                    label-text="arabicName"
-                  /> -->
+                      id="arabicName"
+                      rules="required"
+                      v-model="selectedItem.arabicName"
+                      label-text="arabicName"
+                    /> -->
                   <label>{{ $t('arabicName') }}</label>
                   <input
                     type="text"
@@ -41,17 +41,17 @@
                     required
                   />
                   <div class="invalid-feedback">
-                    {{ $t("NameIsRequired") }}
+                    {{ $t('NameIsRequired') }}
                   </div>
                 </b-col>
                 <b-col md="4">
                   <!-- <gfield
-                    id="englishName"
-                    ref="englishName"
-                    v-model="selectedItem.englishName"
-                    name="englishName"
-                    label-text="englishName"
-                  /> -->
+                      id="englishName"
+                      ref="englishName"
+                      v-model="selectedItem.englishName"
+                      name="englishName"
+                      label-text="englishName"
+                    /> -->
                   <label>{{ $t('englishName') }}</label>
                   <input
                     type="text"
@@ -61,36 +61,23 @@
                 </b-col>
               </b-row>
               <b-row>
-                <!-- accountNumber -->
-                <b-col md="4">
-                  <!-- <gfield
-                    id="accountNumber"
-                    v-model="selectedItem.accountNumber"
-                    name="accountNumber"
-                    label-text="accountNumber"
-                  /> -->
-                  <label>{{ $t('accountNumber') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="selectedItem.accountNumber"
-                  />
+                <b-col md="2">
+                  <label
+                    style="font-size: 14px; margin-bottom: 7px"
+                    for="buidingInService"
+                  >
+                    {{ $t('buidingInService') }}
+                  </label>
+                  <b-form-group>
+                    <b-form-checkbox
+                      v-model="selectedItem.status"
+                      class="mr-0 mt-50"
+                      name="is-rtl"
+                      inline
+                    />
+                  </b-form-group>
                 </b-col>
-                <!-- iban  -->
-                <b-col md="4">
-                  <!-- <gfield
-                    id="iban"
-                    v-model="selectedItem.iban"
-                    label-text="iban"
-                    name="iban"
-                  /> -->
-                  <label>{{ $t('iban') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="selectedItem.iban"
-                  />
-                </b-col>
+
                 <b-col md="2">
                   <label
                     style="font-size: 14px; margin-bottom: 7px"
@@ -183,6 +170,8 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$route.params.id);
+    console.log(this.id);
     this.id = this.$route.params.id;
     if (this.id > 0) {
       this.getSelectedBank();
@@ -196,25 +185,25 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'Banks',
+          url: 'Buildings',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'banks' });
+          this.$router.push({ name: 'building' });
         });
       } else {
         this.create({
-          url: 'Banks',
+          url: 'Buildings',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'banks' });
+          this.$router.push({ name: 'building' });
         });
       }
     },
     getSelectedBank() {
-      this.get({ url: 'Banks', id: this.id }).then((data) => {
+      this.get({ url: 'Buildings', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },

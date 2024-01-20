@@ -21,7 +21,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addBank' });
+                  $router.push({ name: 'addRentType' });
                 }
               "
             >
@@ -33,8 +33,7 @@
                     variant="custom"
                     class="btn-icon"
                     size="sm"
-                    v-permission="'editAreas'"
-                    @click="editBank(item)"
+                    @click="edit(item)"
                   >
                     <feather-icon
                       icon="EyeIcon"
@@ -49,8 +48,7 @@
                     variant="custom"
                     class="btn-icon"
                     size="sm"
-                    v-permission="'editAreas'"
-                    @click="editBank(item)"
+                    @click="edit(item)"
                   >
                     <vue-feather
                       type="edit"
@@ -64,7 +62,6 @@
                     variant="flat-danger"
                     class="btn-icon"
                     size="sm"
-                    v-permission="'deleteAreas'"
                     @click="remove(item)"
                   >
                     <vue-feather
@@ -119,19 +116,8 @@ export default {
   computed: {
     tableColumns() {
       return [
-        { key: 'code', label: this.$t('Code'), sortable: true },
-        { key: 'arabicName', label: this.$t('bankName'), sortable: true },
-        {
-          key: 'accountNumber',
-          label: this.$t('AccountNumber'),
-          sortable: true,
-        },
-        {
-          key: 'iban',
-          field: 'iban',
-          label: this.$t('Iban'),
-          sortable: true,
-        },
+        { key: 'code', label: this.$t('code'), sortable: true },
+        { key: 'arabicName', label: this.$t('rentType'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },
       ];
@@ -142,58 +128,20 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'Banks' }).then((data) => {
+      this.get({ url: 'RentTypes' }).then((data) => {
         // this.items = this.getItemsBasedOnCurrentBranch(data);
         this.items = data;
-      });
-      this.get({ url: 'PaymentMethods' }).then((data) => {
-        this.paymentMethods = data;
       });
     },
     onFiltered(filteredItems) {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
-    save() {
-      this.create({
-        url: 'Banks',
-        data: this.selectedItem,
-      }).then(() => {
-        this.doneAlert({ text: this.$t('savedSuccessfully') });
-        this.$router.push({ name: 'banks' });
-      });
-      this.create({
-        url: 'Banks',
-        data: this.selectedItem,
-      })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Axios error:', error);
-        });
-    },
-    editBank(item) {
+    edit(item) {
       this.$router.push({
-        name: 'editBank',
+        name: 'editRentType',
         params: { id: item.id },
       });
-    },
-    isBankUsed(bankId) {
-      const relatedPayMethod = this.paymentMethods.find(
-        (val) => val.bankId === bankId
-      );
-      if (relatedPayMethod) {
-        this.doneAlert({
-          text: `${this.$t('bankRelatedToPaymentMethod')} ${
-            relatedPayMethod.arabicName
-          }`,
-          type: 'warning',
-        });
-        return true;
-      }
-
-      return false;
     },
     remove(item) {
       this.confirmAction(
@@ -201,13 +149,8 @@ export default {
           text: this.$t('areYouSureYouWantToDelete'),
         },
         () => {
-          // validate if bank used in payment method
-          if (this.isBankUsed(item.id)) {
-            return;
-          }
-
           // then delete
-          this.delete({ url: 'Banks', id: item.id }).then(() => {
+          this.delete({ url: 'RentTypes', id: item.id }).then(() => {
             this.doneAlert({ text: this.$t('deletedSuccessfully') });
             this.getItems();
           });
@@ -215,6 +158,6 @@ export default {
       );
     },
   },
-  name: 'banks',
+  name: 'RentTypes',
 };
 </script>

@@ -396,4 +396,7 @@ export default {
     padding-right: 0;
     list-style: none;
 }
+.form-control.is-valid, .was-validated .form-control:valid {
+    border-color: #fe9f43 !important;
+}
 </style>

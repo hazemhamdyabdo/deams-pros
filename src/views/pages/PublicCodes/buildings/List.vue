@@ -20,10 +20,10 @@
                 :createButton="{ visiable: true }"
                 :searchInput="{ visiable: true }"
                 @on-create="
-                (v) => {
-                  $router.push({ name: 'addPaymentmethod' });
-                }
-              "
+                  (v) => {
+                    $router.push({ name: 'addBuilding' });
+                  }
+                "
               >
                 <template #actions="{ item }">
                   <div class="text-nowrap">
@@ -33,7 +33,8 @@
                       variant="custom"
                       class="btn-icon"
                       size="sm"
-                      @click="editPaymentMethod(item)"
+                      v-permission="'editAreas'"
+                      @click="edit(item)"
                     >
                       <feather-icon
                         icon="EyeIcon"
@@ -48,7 +49,7 @@
                       variant="custom"
                       class="btn-icon"
                       size="sm"
-                      @click="editPaymentMethod(item)"
+                      @click="edit(item)"
                     >
                       <vue-feather
                         type="edit"
@@ -62,7 +63,6 @@
                       variant="flat-danger"
                       class="btn-icon"
                       size="sm"
-                      v-permission="'deleteAreas'"
                       @click="remove(item)"
                     >
                       <vue-feather
@@ -94,6 +94,7 @@
         selectedItem: {
           Code: '',
         },
+        paymentMethods: [],
         totalRows: 0,
         currentPage: 1,
         perPage: 25,
@@ -104,13 +105,31 @@
         items: [],
         title: 'Product Add',
         title1: 'Create new product',
+        Category: ['Choose Category', 'Computers'],
+        SubCategory: ['Choose Sub Category', 'Fruits'],
+        Brand: ['Choose Brand', 'Brand'],
+        Unit: ['Choose Unit', 'Unit'],
+        Tax: ['Choose Tax', '2%'],
+        Percentage: ['Percentage', '10%', '20%'],
+        Closed: ['Closed', 'Open'],
       };
     },
     computed: {
       tableColumns() {
         return [
           { key: 'code', label: this.$t('Code'), sortable: true },
-          { key: 'arabicName', label: this.$t('paymentMethod'), sortable: true },
+          { key: 'arabicName', label: this.$t('bankName'), sortable: true },
+          {
+            key: 'englishName',
+            label: this.$t('englishName'),
+            sortable: true,
+          },
+          {
+            key: 'status',
+            field: 'status',
+            label: this.$t('status'),
+            sortable: true,
+          },
           { key: 'notes', label: this.$t('notes'), sortable: true },
           { key: 'actions' },
         ];
@@ -120,51 +139,38 @@
       this.getItems();
     },
     methods: {
-        remove(item) {
-      this.confirmAction(
-        {
-          text: this.$t('areYouSureYouWantToDelete'),
-        },
-        () => {
-          this.delete({ url: 'PaymentMethods', id: item.id }).then(() => {
-            this.doneAlert({ text: this.$t('deletedSuccessfully') });
-            this.getItems();
-          });
-        }
-      );
-    },
       getItems() {
-        this.get({ url: 'PaymentMethods' }).then((data) => {
+        this.get({ url: 'Buildings' }).then((data) => {
+          // this.items = this.getItemsBasedOnCurrentBranch(data);
           this.items = data;
-          console.log(this.items);
         });
       },
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
         this.currentPage = 1;
       },
-      editPaymentMethod(item) {
-        console.log(item);
+      edit(item) {
         this.$router.push({
-          name: 'editPaymentMethod',
+          name: 'editBuilding',
           params: { id: item.id },
         });
       },
       remove(item) {
-      this.confirmAction(
-        {
-          text: this.$t('areYouSureYouWantToDelete'),
-        },
-        () => {
-          this.delete({ url: 'PaymentMethods', id: item.id }).then(() => {
-            this.doneAlert({ text: this.$t('deletedSuccessfully') });
-            this.getItems();
-          });
-        }
-      );
+        this.confirmAction(
+          {
+            text: this.$t('areYouSureYouWantToDelete'),
+          },
+          () => {  
+            // then delete
+            this.delete({ url: 'Buildings', id: item.id }).then(() => {
+              this.doneAlert({ text: this.$t('deletedSuccessfully') });
+              this.getItems();
+            });
+          }
+        );
+      },
     },
-    },
-    name: 'addproduct',
+    name: 'Buildings',
   };
   </script>
   

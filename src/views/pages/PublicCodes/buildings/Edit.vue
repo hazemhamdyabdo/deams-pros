@@ -1,62 +1,39 @@
 <template>
   <div class="main-wrapper">
-    <layouts></layouts>
-    <sidebar></sidebar>
     <div class="page-wrapper">
       <div class="content">
         <pageheader :title="title" :title1="title1" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
-            <b-form class="was-validated" @submit="save()">
+            <gform class="was-validated" @submit="save()">
               <b-row>
                 <b-col md="4">
-                  <!-- <gfield
-                      label-text="Code"
-                      ref="code"
-                      name="code"
-                      id="code"
-                      v-model="selectedItem.code"
-                    /> -->
-                  <label>{{ $t('code') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    label-text="Code"
+                    ref="code"
+                    name="code"
+                    id="code"
                     v-model="selectedItem.code"
                   />
                 </b-col>
                 <b-col md="4">
                   <!-- arabicName  -->
-                  <!-- <gfield
-                      id="arabicName"
-                      rules="required"
-                      v-model="selectedItem.arabicName"
-                      label-text="arabicName"
-                    /> -->
-                  <label>{{ $t('arabicName') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    id="arabicName"
+                    rules="required"
                     v-model="selectedItem.arabicName"
-                    required
+                    label-text="arabicName"
+                    ref="arabicName"
                   />
-                  <div class="invalid-feedback">
-                    {{ $t('NameIsRequired') }}
-                  </div>
                 </b-col>
                 <b-col md="4">
-                  <!-- <gfield
-                      id="englishName"
-                      ref="englishName"
-                      v-model="selectedItem.englishName"
-                      name="englishName"
-                      label-text="englishName"
-                    /> -->
-                  <label>{{ $t('englishName') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    id="englishName"
+                    ref="englishName"
                     v-model="selectedItem.englishName"
+                    name="englishName"
+                    label-text="englishName"
                   />
                 </b-col>
               </b-row>
@@ -127,7 +104,7 @@
                   </b-button>
                 </b-col>
               </b-row>
-            </b-form>
+            </gform>
           </div>
         </div>
       </div>

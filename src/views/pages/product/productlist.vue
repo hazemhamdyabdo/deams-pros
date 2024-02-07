@@ -19,15 +19,15 @@
                     v-on:click="filter = !filter"
                     :class="{ setclose: filter }"
                   >
-                    <img src="../../../assets/img/icons/filter.svg" alt="img" />
+                    <img src="@/assets/img/icons/filter.svg" alt="img" />
                     <span
-                      ><img src="../../../assets/img/icons/closes.svg" alt="img"
+                      ><img src="@/assets/img/icons/closes.svg" alt="img"
                     /></span>
                   </a>
                 </div>
                 <div class="search-input">
                   <a class="btn btn-searchset"
-                    ><img src="../../../assets/img/icons/search-white.svg" alt="img"
+                    ><img src="@/assets/img/icons/search-white.svg" alt="img"
                   /></a>
                   <div id="DataTables_Table_0_filter" class="dataTables_filter">
                     <label>
@@ -44,18 +44,29 @@
               <div class="wordset">
                 <ul>
                   <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"
+                    <a
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="pdf"
                       ><img src="../../../assets/img/icons/pdf.svg" alt="img"
                     /></a>
                   </li>
                   <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"
+                    <a
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="excel"
                       ><img src="../../../assets/img/icons/excel.svg" alt="img"
                     /></a>
                   </li>
                   <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"
-                      ><img src="../../../assets/img/icons/printer.svg" alt="img"
+                    <a
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="print"
+                      ><img
+                        src="../../../assets/img/icons/printer.svg"
+                        alt="img"
                     /></a>
                   </li>
                 </ul>
@@ -75,12 +86,18 @@
                     <div class="row">
                       <div class="col-lg col-sm-6 col-12">
                         <div class="form-group">
-                          <vue-select :options="Product" placeholder="Choose Product" />
+                          <vue-select
+                            :options="Product"
+                            placeholder="Choose Product"
+                          />
                         </div>
                       </div>
                       <div class="col-lg col-sm-6 col-12">
                         <div class="form-group">
-                          <vue-select :options="Choose" placeholder="Choose Category" />
+                          <vue-select
+                            :options="Choose"
+                            placeholder="Choose Category"
+                          />
                         </div>
                       </div>
                       <div class="col-lg col-sm-6 col-12">
@@ -131,7 +148,9 @@
                     <div class="productimgname">
                       <a href="javascript:void(0);" class="product-img">
                         <img
-                          :src="require('../../../assets/img/product/' + record.img)"
+                          :src="
+                            require('../../../assets/img/product/' + record.img)
+                          "
                           alt="product"
                         />
                       </a>
@@ -140,13 +159,17 @@
                   </template>
                   <template v-else-if="column.key === 'action'">
                     <router-link class="me-3" to="product-details">
-                      <img src="../../../assets/img/icons/eye.svg" alt="img" />
+                      <img src="@/assets/img/icons/eye.svg" alt="img" />
                     </router-link>
                     <router-link class="me-3" to="editproduct">
-                      <img src="../../../assets/img/icons/edit.svg" alt="img" />
+                      <img src="@/assets/img/icons/edit.svg" alt="img" />
                     </router-link>
-                    <a class="confirm-text" href="javascript:void(0);" @click="showAlert">
-                      <img src="../../../assets/img/icons/delete.svg" alt="img" />
+                    <a
+                      class="confirm-text"
+                      href="javascript:void(0);"
+                      @click="showAlert"
+                    >
+                      <img src="@/assets/img/icons/delete.svg" alt="img" />
                     </a>
                   </template>
                 </template>

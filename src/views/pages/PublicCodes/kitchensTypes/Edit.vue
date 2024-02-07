@@ -1,79 +1,50 @@
 <template>
   <div class="main-wrapper">
-    <layouts></layouts>
-    <sidebar></sidebar>
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="title" :title1="title1" />
-        <!-- /add -->
+        <pageheader :title=$t(title) :title1=$t(title1) />
         <div class="card">
           <div class="card-body">
-            <b-form class="was-validated" @submit="save()">
+            <gform class="was-validated" @submit="save()">
               <b-row>
                 <b-col md="4">
-                  <!-- <gfield
-                      label-text="Code"
-                      ref="code"
-                      name="code"
-                      id="code"
-                      v-model="selectedItem.code"
-                    /> -->
-                  <label>{{ $t('code') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    label-text="code"
+                    ref="code"
+                    name="code"
+                    id="code"
                     v-model="selectedItem.code"
                   />
                 </b-col>
                 <b-col md="4">
                   <!-- arabicName  -->
-                  <!-- <gfield
-                      id="arabicName"
-                      rules="required"
-                      v-model="selectedItem.arabicName"
-                      label-text="arabicName"
-                    /> -->
-                  <label>{{ $t('arabicName') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    id="arabicName"
+                    rules="required"
                     v-model="selectedItem.arabicName"
-                    required
+                    label-text="arabicName"
+                    ref="arabicName"
                   />
-                  <div class="invalid-feedback">
-                    {{ $t('NameIsRequired') }}
-                  </div>
                 </b-col>
                 <b-col md="4">
-                  <!-- <gfield
-                      id="englishName"
-                      ref="englishName"
-                      v-model="selectedItem.englishName"
-                      name="englishName"
-                      label-text="englishName"
-                    /> -->
-                  <label>{{ $t('englishName') }}</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <gfield
+                    id="englishName"
+                    ref="englishName"
                     v-model="selectedItem.englishName"
+                    name="englishName"
+                    label-text="englishName"
                   />
                 </b-col>
               </b-row>
               <b-row>
                 <!-- accountNumber -->
                 <b-col md="4">
-                  <!-- <gfield
-                      id="accountNumber"
-                      v-model="selectedItem.accountNumber"
-                      name="accountNumber"
-                      label-text="accountNumber"
-                    /> -->
-                  <label>{{ $t('space') }}</label>
-                  <input
-                    type="decimal"
-                    class="form-control"
+                  <gfield
+                    id="space"
                     v-model="selectedItem.space"
+                    name="space"
+                    label-text="space"
+                    ref="space"
                   />
                 </b-col>
                 <b-col md="2">
@@ -125,7 +96,7 @@
                   </b-button>
                 </b-col>
               </b-row>
-            </b-form>
+            </gform>
           </div>
         </div>
       </div>
@@ -143,27 +114,10 @@ export default {
   },
   data() {
     return {
-      selectedItem: {
-        code: '',
-        arabicName: '',
-      },
-      totalRows: 0,
-      currentPage: 1,
-      perPage: 25,
-      searchQuery: '',
-      sortDirection: 'asc',
-      filter: null,
-      filterOn: [],
+      selectedItem: {},
       items: [],
-      title: 'Product Add',
-      title1: 'Create new product',
-      Category: ['Choose Category', 'Computers'],
-      SubCategory: ['Choose Sub Category', 'Fruits'],
-      Brand: ['Choose Brand', 'Brand'],
-      Unit: ['Choose Unit', 'Unit'],
-      Tax: ['Choose Tax', '2%'],
-      Percentage: ['Percentage', '10%', '20%'],
-      Closed: ['Closed', 'Open'],
+      title: 'kichensType',
+      title1: 'addKitchenType',
       id: 0,
     };
   },

@@ -1,13 +1,33 @@
-<!-- DataTable.vue -->
-
 <template>
   <div>
+    <div class="search-sort">
+      <a class="btn btn-searchset"
+        ><img src="@/assets/img/icons/search-white.svg" alt="img"
+      /></a>
+      <input
+        v-model="searchQuery"
+        @input="updateSearch"
+        placeholder="Search..."
+      />
+      <select v-model="selectedSort" @change="updateSort">
+        <option value="">Sort by...</option>
+        <option v-for="column in columns" :key="column" :value="column">
+          {{ column }}
+        </option>
+      </select>
+      <select v-model="sortOrder" @change="updateSortOrder">
+        <option value="1">Ascending</option>
+        <option value="-1">Descending</option>
+      </select>
+    </div>
+
     <table>
       <thead>
         <tr>
           <th v-for="(column, index) in columns" :key="index">
             <span @click="sortData(column)">{{ column }}</span>
           </th>
+          <th>action</th>
         </tr>
       </thead>
       <tbody>
@@ -15,11 +35,33 @@
           <td v-for="(column, colIndex) in columns" :key="colIndex">
             {{ item[column] }}
           </td>
+          <td>
+            <router-link
+              class="me-3"
+              :to="{ name: 'product-details', params: { id: index } }"
+            >
+              <img src="@/assets/img/icons/eye.svg" alt="img" />
+            </router-link>
+            <router-link
+              class="me-3"
+              :to="{ name: 'editproduct', params: { id: index } }"
+            >
+              <img src="@/assets/img/icons/edit.svg" alt="img" />
+            </router-link>
+            <a
+              class="confirm-text"
+              href="javascript:void(0);"
+              @click="showAlert"
+            >
+              <img src="@/assets/img/icons/delete.svg" alt="img" />
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
 
     <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
       <template v-for="page in totalPages" :key="page">
         <button
           @click="goToPage(page)"
@@ -28,6 +70,9 @@
           {{ page }}
         </button>
       </template>
+      <button @click="nextPage" :disabled="currentPage === totalPages">
+        Next
+      </button>
     </div>
 
     <div class="entries">
@@ -53,7 +98,7 @@ export default {
     },
     initialItemsPerPage: {
       type: Number,
-      default: 5,
+      default: 10,
     },
     perPageOptions: {
       type: Array,
@@ -66,6 +111,8 @@ export default {
       itemsPerPage: this.initialItemsPerPage,
       sortBy: null,
       sortOrder: 1,
+      searchQuery: "",
+      selectedSort: "",
     };
   },
   computed: {
@@ -82,13 +129,21 @@ export default {
         return this.data;
       }
     },
+    filteredData() {
+      const query = this.searchQuery.toLowerCase();
+      return this.sortedData.filter((item) =>
+        this.columns.some((column) =>
+          String(item[column]).toLowerCase().includes(query)
+        )
+      );
+    },
     totalPages() {
-      return Math.ceil(this.sortedData.length / this.itemsPerPage);
+      return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     paginatedData() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
-      return this.sortedData.slice(startIndex, endIndex);
+      return this.filteredData.slice(startIndex, endIndex);
     },
   },
   methods: {
@@ -99,6 +154,7 @@ export default {
         this.sortBy = column;
         this.sortOrder = 1;
       }
+      this.$emit("field-sort", this.sortBy, this.sortOrder);
     },
     nextPage() {
       if (this.currentPage < this.totalPages) {
@@ -112,6 +168,21 @@ export default {
         this.showRestOfData();
       }
     },
+    showAlert() {
+      // Use sweetalert2
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: "#FF9F43",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "Your file has been deleted.");
+        }
+      });
+    },
     goToPage(page) {
       if (page !== this.currentPage && page >= 1 && page <= this.totalPages) {
         this.currentPage = page;
@@ -124,7 +195,7 @@ export default {
     },
     showRestOfData() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      const remainingData = this.sortedData.slice(startIndex);
+      const remainingData = this.filteredData.slice(startIndex);
       const extraPages = Math.ceil(remainingData.length / this.itemsPerPage);
 
       if (extraPages > 1) {
@@ -137,6 +208,18 @@ export default {
           );
         }
       }
+    },
+    updateSearch() {
+      this.currentPage = 1;
+      this.showRestOfData();
+      this.$emit("search-change", this.searchQuery);
+    },
+    updateSort() {
+      this.sortBy = this.selectedSort;
+      this.$emit("field-sort", this.sortBy, this.sortOrder);
+    },
+    updateSortOrder() {
+      this.$emit("field-sort", this.sortBy, this.sortOrder);
     },
   },
 };
@@ -151,13 +234,25 @@ table {
 
 th,
 td {
-  border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
+tbody > tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
 th span {
   cursor: pointer;
+}
+
+.search-sort {
+  margin-bottom: 10px;
+}
+
+.search-sort input,
+.search-sort select {
+  margin-right: 10px;
 }
 
 .pagination {
@@ -170,5 +265,10 @@ th span {
 
 .entries {
   margin-top: 10px;
+}
+.btn-searchset {
+  position: absolute;
+  right: 15%;
+  top: 16px;
 }
 </style>

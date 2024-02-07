@@ -13,14 +13,24 @@
             <div class="row">
               <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
-                  <label>Product Name</label>
-                  <input type="text" value="Macbook pro" />
+                  <FormInput
+                    label="Product Name"
+                    id="productname"
+                    name="productname"
+                    v-model="productname"
+                  />
                 </div>
               </div>
               <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
-                  <label>Category</label>
-                  <vue-select :options="Computers" placeholder="Computers" />
+                  <FormInput
+                    id="category"
+                    name="category"
+                    label="Category"
+                    type="select"
+                    :options="Computers"
+                    style="width: 100rem"
+                  />
                 </div>
               </div>
               <div class="col-lg-3 col-sm-6 col-12">
@@ -55,8 +65,13 @@
               </div>
               <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
-                  <label>Quantity</label>
-                  <input type="text" value="50" />
+                  <FormInput
+                    type="number"
+                    :label="$t('Quantity')"
+                    id="quantity"
+                    name="quantity"
+                    class="w-full"
+                  />
                 </div>
               </div>
               <div class="col-lg-12">
@@ -97,7 +112,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                   <div class="image-upload">
                     <input type="file" />
                     <div class="image-uploads">
-                      <img src="../../../assets/img/icons/upload.svg" alt="img" />
+                      <img
+                        src="../../../assets/img/icons/upload.svg"
+                        alt="img"
+                      />
                       <h4>Drag and drop a file to upload</h4>
                     </div>
                   </div>
@@ -113,7 +131,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     >
                       <div class="productviews">
                         <div class="productviewsimg">
-                          <img src="../../../assets/img/icons/macbook.svg" alt="img" />
+                          <img
+                            src="../../../assets/img/icons/macbook.svg"
+                            alt="img"
+                          />
                         </div>
                         <div class="productviewscontent">
                           <div class="productviewsname">
@@ -133,8 +154,12 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 </div>
               </div>
               <div class="col-lg-12">
-                <a href="javascript:void(0);" class="btn btn-submit me-2">Update</a>
-                <router-link to="productlist" class="btn btn-cancel">Cancel</router-link>
+                <a href="javascript:void(0);" class="btn btn-submit me-2"
+                  >Update</a
+                >
+                <router-link to="productlist" class="btn btn-cancel"
+                  >Cancel</router-link
+                >
               </div>
             </div>
           </div>
@@ -145,13 +170,23 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
   </div>
 </template>
 <script>
+import FormInput from "@/views/pages/Shared/form/FormItem.vue";
+
 export default {
+  components: {
+    FormInput,
+  },
   data() {
     return {
       filter: true,
       title: "Product Edit",
       title1: "Update your product",
-      Computers: ["Computers", "Mac"],
+      productname: "",
+      Computers: [
+        { value: "Computers", label: "Computers" },
+        { value: "lap", label: "lap" },
+        { value: "mobile", label: "mobile" },
+      ],
       None: ["None", "option1"],
       Tax: ["Choose Tax", "2%"],
       Percentage: ["Percentage", "10%", "20%"],

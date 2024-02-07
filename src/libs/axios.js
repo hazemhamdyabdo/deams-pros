@@ -1,15 +1,20 @@
-import { createApp } from 'vue';
-import Router from '@/router';
-import VueI18n from '@/libs/i18n/index';
+import { createApp } from "vue";
+import Router from "@/router";
+import VueI18n from "@/libs/i18n/index";
 
 // axios
-import axios from 'axios';
+import axios from "axios";
 
 import {
-  baseURL, TOKEN_KEY, PROFILE_KEY, LANG, BRANCH_ID, CURRENT_YEAR,
-} from './acl/config';
+  baseURL,
+  TOKEN_KEY,
+  PROFILE_KEY,
+  LANG,
+  BRANCH_ID,
+  CURRENT_YEAR,
+} from "./acl/config";
 
-console.log(baseURL, 'baseURL');
+console.log(baseURL, "baseURL");
 const axiosIns = axios.create({
   // You can add your headers here
   // ================================
@@ -19,13 +24,13 @@ const axiosIns = axios.create({
 });
 
 axiosIns.interceptors.request.use((request) => {
-//   if (request.method === 'post' || request.method === 'put') {
-//     if (request.data) {
-//       if (Object.globalProperties.hasOwnProperty.call(request.data, 'englishName')) {
-//         request.data.englishName = request.data.englishName || request.data.arabicName;
-//       }
-//     }
-//   }
+  //   if (request.method === 'post' || request.method === 'put') {
+  //     if (request.data) {
+  //       if (Object.globalProperties.hasOwnProperty.call(request.data, 'englishName')) {
+  //         request.data.englishName = request.data.englishName || request.data.arabicName;
+  //       }
+  //     }
+  //   }
   const token = window.localStorage.getItem(TOKEN_KEY);
   const lang = window.localStorage.getItem(LANG);
   const branchId = window.localStorage.getItem(BRANCH_ID);
@@ -34,12 +39,12 @@ axiosIns.interceptors.request.use((request) => {
     request.headers.Authorization = `Bearer ${token}`;
   }
 
-  request.headers.Language = lang || 'en';
+  request.headers.Language = lang || "en";
   request.headers.Branch = branchId;
-//   if (JSON.parse(fiscalYear)) {
-//     request.headers.FiscalYear = JSON.parse(fiscalYear).year;
-//   } else {
-//     request.headers.FiscalYear = new Date().getFullYear();
+  //   if (JSON.parse(fiscalYear)) {
+  //     request.headers.FiscalYear = JSON.parse(fiscalYear).year;
+  //   } else {
+  //     request.headers.FiscalYear = new Date().getFullYear();
   // }
 
   return request;

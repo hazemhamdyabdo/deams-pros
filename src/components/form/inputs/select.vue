@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <label :for="label">{{ $t(labelText) }}</label>
-    <vue-select
-      v-model="selectedValue"
-      :options="optionsData"
-      @input="handleChange"
-      label="customInput"
-    ></vue-select>
-  </div>
+  <vue-select v-model="selectedValue" :options="optionsData" @input="handleChange" label="customInput" />
 </template>
 
 <script>
@@ -37,6 +29,7 @@ export default {
   },
   methods: {
     handleChange(newValue) {
+      console.log(newValue)
       this.selectedValue = newValue;
       this.$emit('input', newValue);
     },
@@ -57,10 +50,12 @@ export default {
 .was-validated .form-select:valid:not([multiple])[size='1'] {
   background-image: url('https://cdn4.iconfinder.com/data/icons/ios-edge-glyph-3/25/Down-Carrot-512.png') !important;
 }
+
 .form-select.is-valid,
 .was-validated .form-select:valid {
   border-color: darkgray !important;
 }
+
 select option:hover {
   background-color: #ff9f43 !important;
   color: white !important;

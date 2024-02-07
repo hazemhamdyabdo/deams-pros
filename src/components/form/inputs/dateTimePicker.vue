@@ -7,28 +7,25 @@
       :vid="$attrs.name || ''"
       mode="eager"
     >
-        <flat-pickr
-          :value="inputValue"
-          class="form-control"
-          :config="{ enableTime: true,dateFormat: 'Y-m-d H:i:S'}"
-          @input="(v) => changeValue(v)"
-        />
-        <small
-          class="text-danger"
-          >{{ errors[0] }}</small
-        >
+      <flat-pickr
+        :value="inputValue"
+        class="form-control"
+        :config="{ enableTime: true, dateFormat: 'Y-m-d H:i:S' }"
+        @input="(v) => changeValue(v)"
+      />
+      <small class="text-danger">{{ errors[0] }}</small>
     </ValidationProvider>
   </b-form-group>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate';
-import flatPickr from 'vue-flatpickr-component'
+import { ValidationProvider } from "vee-validate";
+import flatPickr from "vue-flatpickr-component";
 
 export default {
   components: {
     ValidationProvider,
-    flatPickr
+    flatPickr,
   },
   props: {
     dir: {
@@ -37,7 +34,7 @@ export default {
     value: {
       type: String,
       required: false,
-      default: '',
+      default: "",
     },
     disabled: {
       type: Boolean,
@@ -45,13 +42,13 @@ export default {
     },
     rules: {
       type: String,
-      default: '',
+      default: "",
     },
   },
-  emits: ['update:value'],
+  emits: ["update:value"],
   data() {
     return {
-      inputValue: '',
+      inputValue: "",
     };
   },
   mounted() {
@@ -66,15 +63,15 @@ export default {
   },
   methods: {
     changeValue(val) {
-      val = val || ''
-      val = val.replace(' ', 'T')
-      this.$emit('update:value', val);
-      this.$emit('change', val);
+      val = val || "";
+      val = val.replace(" ", "T");
+      this.$emit("update:value", val);
+      this.$emit("change", val);
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/libs/vue-flatpicker.scss';
+@import "@core/scss/vue/libs/vue-flatpicker.scss";
 </style>

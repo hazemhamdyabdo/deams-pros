@@ -18,8 +18,8 @@ const images11 = require("@/assets/img/layout-03.png");
 const images12 = require("@/assets/img/layout-01.png");
 const images13 = require("@/assets/img/layout-04.png");
 const images14 = require("@/assets/img/layout-03.png");
-import {mapActions, mapGetters , mapMutations } from 'vuex'
-import store from '@/store/app';
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import store from "@/store/app";
 export default {
   name: "App",
   data: function () {
@@ -27,11 +27,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      show: 'app.overLay'
-    })
+      show: "app.overLay",
+    }),
   },
   mounted() {
-	console.log(store);
+    console.log(store);
     // Sidebar Visible
 
     $(".open-layout").on("click", function (s) {
@@ -113,10 +113,10 @@ export default {
           .removeClass("active");
         $(
           '.tabs_container .tab_content[data-tab="' +
-          $theTab +
-          '"], ul.tabs li[id="' +
-          $theTab +
-          '"]'
+            $theTab +
+            '"], ul.tabs li[id="' +
+            $theTab +
+            '"]'
         ).addClass("active");
       }
     });
@@ -358,45 +358,50 @@ export default {
     }
   },
   methods: {
-	...mapActions({
-		setBranches:'app/setBranches'
-	}),
-	...mapMutations({
-		setCompany:'app/setCompany'
-	})
-  }
+    ...mapActions({
+      setBranches: "app/setBranches",
+    }),
+    ...mapMutations({
+      setCompany: "app/setCompany",
+    }),
+  },
 };
 </script>
 <style>
-.b-table-empty-slot, .b-table{
-	text-align: center !important;
+#body {
+	font-family: "Cairo", sans-serif !important;
+}
+.b-table-empty-slot,
+.b-table {
+  text-align: center !important;
 }
 .pagination {
-    --bs-pagination-padding-x: 0.75rem;
-    --bs-pagination-padding-y: 0.375rem;
-    --bs-pagination-font-size: 1rem;
-    --bs-pagination-color: var(--bs-link-color);
-    --bs-pagination-bg: #fff;
-    --bs-pagination-border-width: 1px;
-    --bs-pagination-border-color: #dee2e6;
-    --bs-pagination-border-radius: 0.375rem;
-    --bs-pagination-hover-color: var(--bs-link-hover-color);
-    --bs-pagination-hover-bg: #e9ecef;
-    --bs-pagination-hover-border-color: #dee2e6;
-    --bs-pagination-focus-color: var(--bs-link-hover-color);
-    --bs-pagination-focus-bg: #e9ecef;
-    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: #ff9f43 !important;
-    --bs-pagination-active-border-color: #0d6efd;
-    --bs-pagination-disabled-color: #6c757d;
-    --bs-pagination-disabled-bg: #fff;
-    --bs-pagination-disabled-border-color: #dee2e6;
-    display: flex;
-    padding-right: 0;
-    list-style: none;
+  --bs-pagination-padding-x: 0.75rem;
+  --bs-pagination-padding-y: 0.375rem;
+  --bs-pagination-font-size: 1rem;
+  --bs-pagination-color: var(--bs-link-color);
+  --bs-pagination-bg: #fff;
+  --bs-pagination-border-width: 1px;
+  --bs-pagination-border-color: #dee2e6;
+  --bs-pagination-border-radius: 0.375rem;
+  --bs-pagination-hover-color: var(--bs-link-hover-color);
+  --bs-pagination-hover-bg: #e9ecef;
+  --bs-pagination-hover-border-color: #dee2e6;
+  --bs-pagination-focus-color: var(--bs-link-hover-color);
+  --bs-pagination-focus-bg: #e9ecef;
+  --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  --bs-pagination-active-color: #fff;
+  --bs-pagination-active-bg: #ff9f43 !important;
+  --bs-pagination-active-border-color: #0d6efd;
+  --bs-pagination-disabled-color: #6c757d;
+  --bs-pagination-disabled-bg: #fff;
+  --bs-pagination-disabled-border-color: #dee2e6;
+  display: flex;
+  padding-right: 0;
+  list-style: none;
 }
-.form-control.is-valid, .was-validated .form-control:valid {
-    border-color: #fe9f43 !important;
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: #fe9f43 !important;
 }
 </style>

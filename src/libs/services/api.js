@@ -1,4 +1,4 @@
-import $axios from '../axios'
+import $axios from "../axios";
 
 export default {
   app: {
@@ -7,10 +7,10 @@ export default {
         url += id.reduce((query, val) => {
           query += `/${val}`;
           return query;
-        }, '');
+        }, "");
         return $axios.post(url);
       }
-      return $axios.get(`${url}${id ? `/${id}` : ''}`)
+      return $axios.get(`${url}${id ? `/${id}` : ""}`);
     },
     create: (url, data) => $axios.post(url, data),
     update: (url, id, data) => {
@@ -18,7 +18,7 @@ export default {
         url += id.reduce((query, val) => {
           query += `/${val}`;
           return query;
-        }, '');
+        }, "");
         return $axios.post(url, data);
       }
       if (id) {
@@ -33,10 +33,10 @@ export default {
         url += id.reduce((query, val) => {
           query += `/${val}`;
           return query;
-        }, '');
+        }, "");
         return $axios.post(url);
       }
       return $axios.delete(`${url}/${id}`);
     },
   },
-}
+};

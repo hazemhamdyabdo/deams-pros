@@ -1,7 +1,5 @@
 <template>
   <div class="main-wrapper">
-    <layouts></layouts>
-    <sidebar></sidebar>
     <div class="page-wrapper">
       <div class="content">
         <pageheader :title="title" :title1="title1" />
@@ -82,7 +80,7 @@
 </template>
 
 <script>
-import GTable from '../../Shared/Table.vue';
+import GTable from "../../Shared/Table.vue";
 
 export default {
   components: {
@@ -95,30 +93,30 @@ export default {
       totalRows: 0,
       currentPage: 1,
       perPage: 25,
-      searchQuery: '',
-      sortDirection: 'asc',
+      searchQuery: "",
+      sortDirection: "asc",
       filter: null,
       filterOn: [],
       items: [],
-      title: 'Product Add',
-      title1: 'Create new product',
-      Category: ['Choose Category', 'Computers'],
-      SubCategory: ['Choose Sub Category', 'Fruits'],
-      Brand: ['Choose Brand', 'Brand'],
-      Unit: ['Choose Unit', 'Unit'],
-      Tax: ['Choose Tax', '2%'],
-      Percentage: ['Percentage', '10%', '20%'],
-      Closed: ['Closed', 'Open'],
+      title: "Product Add",
+      title1: "Create new product",
+      Category: ["Choose Category", "Computers"],
+      SubCategory: ["Choose Sub Category", "Fruits"],
+      Brand: ["Choose Brand", "Brand"],
+      Unit: ["Choose Unit", "Unit"],
+      Tax: ["Choose Tax", "2%"],
+      Percentage: ["Percentage", "10%", "20%"],
+      Closed: ["Closed", "Open"],
     };
   },
   computed: {
     tableColumns() {
       return [
-        { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'arabicName', label: this.$t('kitchenType'), sortable: true },
-        { key: 'space', label: this.$t('space'), sortable: true },
-        { key: 'notes', label: this.$t('notes'), sortable: true },
-        { key: 'actions' },
+        { key: "code", label: this.$t("code"), sortable: true },
+        { key: "arabicName", label: this.$t("kitchenType"), sortable: true },
+        { key: "space", label: this.$t("space"), sortable: true },
+        { key: "notes", label: this.$t("notes"), sortable: true },
+        { key: "actions" },
       ];
     },
   },
@@ -127,7 +125,7 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'kitchensTypes' }).then((data) => {
+      this.get({ url: "kitchensTypes" }).then((data) => {
         this.items = data;
       });
     },
@@ -137,25 +135,25 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'editkitchenType',
+        name: "editkitchenType",
         params: { id: item.id },
       });
     },
     remove(item) {
       this.confirmAction(
         {
-          text: this.$t('areYouSureYouWantToDelete'),
+          text: this.$t("areYouSureYouWantToDelete"),
         },
         () => {
           // then delete
-          this.delete({ url: 'kitchensTypes', id: item.id }).then(() => {
-            this.doneAlert({ text: this.$t('deletedSuccessfully') });
+          this.delete({ url: "kitchensTypes", id: item.id }).then(() => {
+            this.doneAlert({ text: this.$t("deletedSuccessfully") });
             this.getItems();
           });
         }
       );
     },
   },
-  name: 'Nationalities',
+  name: "Nationalities",
 };
 </script>

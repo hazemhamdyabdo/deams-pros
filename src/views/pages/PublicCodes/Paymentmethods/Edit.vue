@@ -40,7 +40,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <!-- accountNumber -->
+                <!-- bank -->
                 <b-col md="4">
                   <gfield
                     label="arabicName"

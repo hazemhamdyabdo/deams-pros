@@ -102,7 +102,7 @@ export default [
     {
       path: "/addNationality",
       // same name with addBuilding route
-      name: "addBuilding",
+      name: "addNationality",
       component: () => import("@/views/pages/PublicCodes/nationalities/Edit.vue"),
       meta: {
         headerClass: "header",
@@ -111,7 +111,7 @@ export default [
     },
     {
       path: "/editNationality/:id",
-      name: "editBuilding",
+      name: "editNationality",
       // same component with addNationality
       component: () => import("@/views/pages/PublicCodes/nationalities/Edit.vue"),
       meta: {

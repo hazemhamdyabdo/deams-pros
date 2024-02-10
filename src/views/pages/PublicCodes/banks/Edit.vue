@@ -6,7 +6,7 @@
         <!-- /add -->
         <div class="card">
           <div class="card-body">
-            <gform class="was-validated" @submit="save()">
+            <gform @submit="save()">
               <b-row>
                 <b-col md="4">
                   <gfield
@@ -19,19 +19,13 @@
                 </b-col>
                 <b-col md="4">
                   <gfield
-                    :label-text="$t('arabicName')"
+                    label-text="arabicName"
                     ref="arabicName"
                     name="arabicName"
                     id="arabicName"
-                    class="form-control"
                     v-model="selectedItem.arabicName"
                     rules="required"
-                    
                   />
-
-                  <div class="invalid-feedback">
-                    {{ $t('NameIsRequired') }}
-                  </div>
                 </b-col>
                 <b-col md="4">
                   <gfield

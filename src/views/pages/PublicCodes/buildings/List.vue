@@ -90,7 +90,6 @@ export default {
   data() {
     return {
       selectedItem: {
-        Code: "",
       },
       paymentMethods: [],
       totalRows: 0,
@@ -122,15 +121,9 @@ export default {
           label: this.$t("englishName"),
           sortable: true,
         },
-        {
-          key: "status",
-          field: "status",
-          label: this.$t("status"),
-          sortable: true,
-        },
         { key: "notes", label: this.$t("notes"), sortable: true },
         { key: "actions" },
-      ];
+      ];SS
     },
   },
   mounted() {
@@ -139,7 +132,6 @@ export default {
   methods: {
     getItems() {
       this.get({ url: "Buildings" }).then((data) => {
-        // this.items = this.getItemsBasedOnCurrentBranch(data);
         this.items = data;
       });
     },

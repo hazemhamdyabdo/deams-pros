@@ -12,7 +12,7 @@
         <!-- Search -->
         <b-col cols="12" md="4">
           <div
-            v-if="!searchInput.visiable"
+            v-if="searchInput.visiable"
             class="d-flex align-items-center justify-content-end"
           >
             <b-form-input
@@ -20,18 +20,20 @@
               class="d-inline-block"
               :clearable="true"
               :placeholder="$t('search')"
+              @input="updateSearch"
             />
           </div>
         </b-col>
 
         <b-col
           cols="12"
-          md="4"
-          class="list-buttons d-flex align-items-center justify-content-end mb-2 mb-md-0"
+          md="8"
+          class="list-buttons d-flex align-items-center justify-content-end mb-5 mb-md-3"
         >
           <b-button
             variant="primary"
             data-action-type="new"
+            size="lg"
             v-if="createButton.visiable"
             v-permission="createButton.permission"
             @click="
@@ -40,12 +42,12 @@
               }
             "
           >
-            {{ createButton.text ? $t(createButton.text) : $t('new') }}
+            {{ createButton.text ? $t(createButton.text) : $t("new") }}
           </b-button>
           <vue-excel-xlsx
             v-if="excelButton.visiable"
             :data="items"
-            :columns="columns"
+            :columns="localColumns"
             :filename="this.$route.name"
             :sheetname="'xlsxSheet'"
             class="btn btn-relief-success ml-1 p-0 ptn-sm"
@@ -71,12 +73,12 @@
       <div class="pagi">
         <!-- page length -->
         <b-form-group
+          class="entries"
           :label="$t('entries')"
           label-cols="6"
-          label-align="left"
-          label-size="sm"
+          label-align="6"
+          label-size="lg"
           label-for="sortBySelect"
-          class="text-nowrap mb-md-0 ml-5 pl-20 w-fit"
         >
           <b-form-select
             id="perPageSelect"
@@ -101,8 +103,7 @@
             hide-ellipsis="true"
             pills
             v-model="currentPage"
-            :total-rows="totalRows || items.length"
-            limit="10"
+            :total-rows="filteredData.length"
             :per-page="perPage"
             aria-controls="mainTable"
             prev-class="prev-item"
@@ -130,25 +131,22 @@
         <b-table
           v-bind="$attrs"
           ref="gtable"
-          :items="items"
-          :fields="columns"
+          :items="paginatedData"
+          :fields="localColumns"
           primary-key="id"
           id="mainTable"
           show-empty
           striped
           hover
           responsive
-          class="position-relative"
-          :per-page="perPage"
+          class="position-relative table"
           filter-debounce="700"
-          :current-page="currentPage"
           :sort-by="sortBy"
           :sort-desc="isSortDirDesc"
           :sort-direction="sortDirection"
-          :filter="searchQuery"
-          :filter-included-fields="filterOn"
-          :busy="isBusy"
+          :filter-case-sensitive="false"
           @filtered="onFiltered"
+          :busy="isBusy"
           :empty-text="$t('noMatchingRecordsFound')"
         >
           <template #head(actions)>
@@ -163,13 +161,14 @@
           </template>
 
           <template
-            v-for="(field, i) in columns"
+            v-for="(field, i) in localColumns"
             v-slot:[`cell(${field.key})`]="{ value }"
           >
             <span v-if="field.isLocale" :key="field.key">
               {{ field.isLocale ? $t(value) : value }}
             </span>
             <span v-else-if="field.type === 'number'" :key="i">
+              <!-- {{ value | fraction("number", currentBranch.decimalDigits) }} -->
               {{ value }}
             </span>
             <span v-else :key="i + 1" v-html="value"> </span>
@@ -228,8 +227,8 @@
               </b-button>
             </div>
           </template>
-          <template v-for="field in columns" #[`foot(${field.key})`]>
-            {{ typeof field.footer === 'function' ? field.footer() : '' }}
+          <template v-for="field in localColumns" #[`foot(${field.key})`]>
+            {{ typeof field.footer === "function" ? field.footer() : "" }}
           </template>
         </b-table>
       </b-col>
@@ -269,15 +268,13 @@ export default {
       default: () => [3, 5, 10, 25, 50],
     },
   },
-  emits: ['on-edit', 'on-delete', 'on-view', 'on-create'],
+  emits: ["on-edit", "on-delete", "on-view", "on-create"],
   setup(props, context) {
     let { attrs } = context;
 
     const {
-      perPage,
       sortDirection,
       isSortDirDesc,
-      currentPage,
       sortBy,
       createLabel,
       editButton,
@@ -290,52 +287,48 @@ export default {
       rowClass,
     } = attrs;
 
-    setTimeout(() => {
-      console.log(attrs.currentPage);
-    }, 1000);
     const defaults = {
-      perPage: perPage ?? 10,
-      sortDirection: sortDirection || 'asc',
-      isSortDirDesc: isSortDirDesc || '',
-      currentPage: currentPage || 1,
-      sortBy: sortBy || '',
-      createLabel: createLabel || '',
+      sortDirection: sortDirection || "asc",
+      isSortDirDesc: isSortDirDesc || "",
+      sortBy: sortBy || "",
+      createLabel: createLabel || "",
       noAction: noAction || false,
       editButton: editButton || {
         visiable: true,
-        icon: 'EditIcon',
-        text: '',
-        handler: '',
+        icon: "EditIcon",
+        text: "",
+        handler: "",
       },
       deleteButton: deleteButton || {
         visiable: true,
-        icon: '',
-        text: '',
-        handler: '',
+        icon: "",
+        text: "",
+        handler: "",
       },
       createButton: createButton || {
         visiable: true,
-        icon: '',
-        text: '',
-        handler: '',
+        icon: "",
+        text: "",
+        handler: "",
       },
       excelButton: excelButton || {
         visiable: true,
-        icon: '',
-        text: '',
-        handler: '',
+        icon: "",
+        text: "",
+        handler: "",
       },
       pdfButton: pdfButton || {
         visiable: true,
-        icon: '',
-        text: '',
-        handler: '',
+        icon: "",
+        text: "",
+        handler: "",
       },
+      localTotalRows: props.totalRows,
       searchInput: searchInput || {
         visiable: true,
-        icon: '',
-        text: '',
-        handler: '',
+        icon: "",
+        text: "",
+        handler: "",
       },
       slots: context.slots,
       rowClass,
@@ -355,54 +348,69 @@ export default {
     return {
       currentPage: 1,
       perPage: 5,
-      item: '',
-      searchQuery: '',
+      item: "",
+      searchQuery: "",
       filterOn: [],
       itemsArray: [],
-      template: '',
+      template: "",
       hideActions: false,
     };
   },
-  mounted() {
-    this.columns.forEach((res) => {
-      res.field = res.key;
+  created() {
+    this.showRestOfData();
+
+    this.localColumns?.forEach((res) => {
+      res.field = res?.key;
     });
   },
+  watch: {
+    currentPage(val, oldVal) {
+      console.log("currentPage", { val, oldVal });
+    },
+  },
   computed: {
+    localItems() {
+      return this.items.slice();
+    },
+    localColumns() {
+      return this.columns || [];
+    },
+
     filteredData() {
       const query = this.searchQuery.toLowerCase();
-      return this.items.filter((item) => {
-        return Object.keys(item).some((key) => {
-          return item[key].toString().toLowerCase().includes(query);
+      return this.localItems?.filter((item) => {
+        return Object.keys(item)?.some((key) => {
+          return item[key]?.toString().toLowerCase().includes(query);
         });
       });
     },
-
     totalPages() {
       return Math.ceil(this.filteredData.length / this.perPage);
     },
     paginatedData() {
-      console.log(this.currentPage, 'ex');
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
-      return this.filteredData.slice(start, end);
+      const test = this.filteredData.slice(start, end);
+      console.log(test);
+      return test;
     },
   },
   methods: {
     showRestOfData: function () {
       const startIndex = (this.currentPage - 1) * this.perPage;
-      const remainingData = this.filteredData.slice(startIndex);
+      const remainingData = this.filteredData?.slice(startIndex);
       const extraPages = Math.ceil(remainingData.length / this.perPage);
       if (extraPages > 1) {
         for (let i = 2; i <= extraPages; i++) {
-          this.$emit('page-change', i + this.currentPage - 1, this.perPage);
+          this.$emit("page-change", i + this.currentPage - 1, this.perPage);
         }
       }
     },
     updateSearch() {
+      console.log("updated");
       this.currentPage = 1;
       this.showRestOfData();
-      this.$emit('search-change', this.searchQuery);
+      this.$emit("search-change", this.searchQuery);
     },
     nexPage() {
       this.currentPage = this.currentPage + 1;
@@ -411,23 +419,23 @@ export default {
       this.hideActions = true;
     },
     pdfExport(name) {
-      html2canvas(document.getElementById('mainTable')).then(function (canvas) {
-        var imgData = canvas.toDataURL('image/png');
+      html2canvas(document.getElementById("mainTable")).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/png");
         var imgWidth = 210;
         var pageHeight = 295;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
         var heightLeft = imgHeight;
 
-        var doc = new jsPDF('p', 'mm');
+        var doc = new jsPDF("p", "mm");
         var position = 0;
 
-        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
 
         while (heightLeft >= 0) {
           position = heightLeft - imgHeight;
           doc.addPage();
-          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
         }
         doc.save(`${name}.pdf`);
@@ -444,9 +452,14 @@ export default {
       this.$refs.gtable.refresh();
     },
     onFiltered(filteredItems) {
-      console.log(filteredItems, 'filtered');
-      // this.totalRows = filteredItems.length;
-      this.currentPage = 1;
+      console.log({
+        localeRows: this.localTotalRows,
+        items: filteredItems,
+        rows: this.totalRows,
+      });
+      this.localItems;
+      this.localTotalRows = filteredItems.length;
+      // this.currentPage = 1; (1)
     },
   },
 };
@@ -472,5 +485,17 @@ export default {
 .pagi {
   display: flex;
   justify-content: space-between;
+  justify-items: center;
+}
+
+.table {
+  font-size: 1.2rem;
+}
+
+.entries {
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

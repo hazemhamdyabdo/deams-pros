@@ -100,15 +100,6 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
-      title: "Product Add",
-      title1: "Create new product",
-      Category: ["Choose Category", "Computers"],
-      SubCategory: ["Choose Sub Category", "Fruits"],
-      Brand: ["Choose Brand", "Brand"],
-      Unit: ["Choose Unit", "Unit"],
-      Tax: ["Choose Tax", "2%"],
-      Percentage: ["Percentage", "10%", "20%"],
-      Closed: ["Closed", "Open"],
     };
   },
   computed: {
@@ -127,7 +118,6 @@ export default {
   methods: {
     getItems() {
       this.get({ url: "Nationalities" }).then((data) => {
-        // this.items = this.getItemsBasedOnCurrentBranch(data);
         this.items = data;
       });
     },

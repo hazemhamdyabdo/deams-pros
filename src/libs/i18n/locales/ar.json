@@ -48,6 +48,7 @@
   "paymentMethods": "طرق الدفع",
   "addPaymentMethod": "أنشاء طريقة دفع",
   "banks": "البنوك",
-  "addBnak": "أنشاء بنك"
+  "addBnak": "أنشاء بنك",
+  "entries": "عدد الصفوف"
 
 }

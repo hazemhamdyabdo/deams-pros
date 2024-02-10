@@ -127,7 +127,6 @@ export default {
   methods: {
     getItems() {
       this.get({ url: "RentTypes" }).then((data) => {
-        // this.items = this.getItemsBasedOnCurrentBranch(data);
         this.items = data;
       });
     },

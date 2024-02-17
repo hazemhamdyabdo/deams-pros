@@ -2,7 +2,7 @@ export default [
     {
       path: "",
       name: "home",
-      component: () => import("@/views/pages/dashboard/indexpage.vue"),
+      component: () => import("@/views/pages/dashboard/Edit.vue"),
       meta: {
         headerClass: "header",
         sidebarClass: "",
@@ -123,7 +123,7 @@ export default [
       path: "/paymentMehtod",
       name: "PaymentMehtod",
       component: () =>
-        import("@/views/pages/PublicCodes/paymentmethods/List.vue"),
+        import("@/views/pages/PublicCodes/Paymentmethods/List.vue"),
       meta: {
         headerClass: "header",
         sidebarClass: "",
@@ -133,7 +133,7 @@ export default [
       path: "/addPaymentmethod",
       name: "addPaymentmethod",
       component: () =>
-        import("@/views/pages/PublicCodes/paymentmethods/Edit.vue"),
+        import("@/views/pages/PublicCodes/Paymentmethods/Edit.vue"),
       meta: {
         headerClass: "header",
         sidebarClass: "",
@@ -144,7 +144,7 @@ export default [
       name: "editPaymentMethod",
       // same component with editPaymintMethod
       component: () =>
-        import("@/views/pages/PublicCodes/paymentmethods/Edit.vue"),
+        import("@/views/pages/PublicCodes/Paymentmethods/Edit.vue"),
       meta: {
         headerClass: "header",
         sidebarClass: "",
@@ -177,5 +177,5 @@ export default [
         headerClass: "header",
         sidebarClass: "",
       },
-    },
+    }
   ];

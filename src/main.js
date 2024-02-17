@@ -52,7 +52,7 @@ import PageHeader from "./components/pageheader/pageheader.vue";
 import PageaddHeader from "./components/pageheader/pageaddheader.vue";
 import breadcrumb from "./components/pageheader/breadcrumb.vue";
 /*********Dashboard**********/
-import DashboardPage from "./views/pages/dashboard/indexpage.vue";
+import DashboardPage from "./views/pages/dashboard/Edit.vue";
 
 /*********Modal component**********/
 

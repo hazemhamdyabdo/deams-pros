@@ -120,6 +120,13 @@ export default {
         ).addClass("active");
       }
     });
+		/*
+			<li class="sidebar-icons">
+				<a href="https://themeforest.net/item/dreamspos-pos-inventory-management-admin-dashboard-template/38834413" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left">
+					<img src=${images3} class="feather-five" alt="">
+				</a>
+			</li>
+		*/
     var customize_link = `<div class="customizer-links"> 
 			<ul class="sticky-sidebar">
 				<li class="sidebar-icons">
@@ -130,11 +137,6 @@ export default {
 				<li class="sidebar-icons">
 					<a href="#" class="navigation-add" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left">
 						<img src=${images2} class="feather-five" alt="">
-					</a>
-				</li>
-				<li class="sidebar-icons">
-					<a href="https://themeforest.net/item/dreamspos-pos-inventory-management-admin-dashboard-template/38834413" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left">
-						<img src=${images3} class="feather-five" alt="">
 					</a>
 				</li>
 			</ul>
@@ -404,4 +406,21 @@ export default {
 .was-validated .form-control:valid {
   border-color: #fe9f43 !important;
 }
+
+.router-link-exact-active,
+.sidebar .sidebar-menu > ul > li > a:active {
+  color: #FF9F43 !important;
+  background-color: rgba(254, 159, 67, 0.08) !important;
+}
+
+.router-link-exact-active span {
+  color: #FF9900 !important;
+}
+
+@media (max-width: 768px) {
+	.sticky-sidebar {
+		display: none;
+	}
+}
+
 </style>

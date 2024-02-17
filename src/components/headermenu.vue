@@ -1,7 +1,7 @@
 <template>
   <!-- Header Menu -->
   <ul class="nav user-menu">
-    <!-- Search -->
+    <!-- Search
     <li class="nav-item nav-searchinputs">
       <div class="top-nav-search">
         <a href="javascript:void(0);" class="responsive-search">
@@ -16,7 +16,7 @@
           </div>
         </form>
       </div>
-    </li>
+    </li> -->
     <!-- /Search -->
 
     <!-- Flag -->
@@ -52,14 +52,14 @@
         <vue-feather type="maximize"></vue-feather>
       </a>
     </li>
-    <li class="nav-item nav-item-box">
+    <!-- <li class="nav-item nav-item-box">
       <router-link to="email">
         <vue-feather type="mail"></vue-feather>
         <span class="badge rounded-pill">1</span>
       </router-link>
-    </li>
+    </li> -->
     <!-- Notifications -->
-    <li class="nav-item dropdown nav-item-box">
+    <!-- <li class="nav-item dropdown nav-item-box">
       <a
         href="javascript:void(0);"
         class="dropdown-toggle nav-link"
@@ -102,13 +102,13 @@
           <router-link to="activities">View all Notifications</router-link>
         </div>
       </div>
-    </li>
+    </li> -->
     <!-- /Notifications -->
-    <li class="nav-item nav-item-box">
+    <!-- <li class="nav-item nav-item-box">
       <router-link to="generalsettings"
         ><vue-feather type="settings"></vue-feather
       ></router-link>
-    </li>
+    </li> -->
     <li class="nav-item dropdown has-arrow main-drop">
       <a
         href="javascript:void(0);"
@@ -117,11 +117,11 @@
       >
         <span class="user-info">
           <span class="user-letter">
-            <img src="../assets/img/profiles/avator1.jpg" alt="" class="img-fluid" />
+            <img src="../assets/img/profiles/brand.png" alt="" class="rounded img-fluid" style="height: 42px;"/>
           </span>
           <span class="user-detail">
-            <span class="user-name">John Smilga</span>
-            <span class="user-role">Super Admin</span>
+            <span class="user-name">ساكن</span>
+            <span class="user-role">مسئول الإدارة</span>
           </span>
         </span>
       </a>
@@ -129,12 +129,12 @@
         <div class="profilename">
           <div class="profileset">
             <span class="user-img"
-              ><img src="../assets/img/profiles/avator1.jpg" alt="" />
+              ><img src="../assets/img/profiles/brand.png" alt="" />
               <span class="status online"></span
             ></span>
             <div class="profilesets">
-              <h6>John Smilga</h6>
-              <h5>Super Admin</h5>
+              <h6>ساكن</h6>
+              <h5>مسئول الإدارة</h5>
             </div>
           </div>
           <hr class="m-0" />

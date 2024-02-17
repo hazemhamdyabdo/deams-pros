@@ -28,12 +28,12 @@
         <b-col
           cols="12"
           md="8"
-          class="list-buttons d-flex align-items-center justify-content-end mb-5 mb-md-3"
+          class="d-flex align-items-center justify-content-end list-buttons mb-2"
         >
           <b-button
             variant="primary"
             data-action-type="new"
-            size="lg"
+            size="md"
             v-if="createButton.visiable"
             v-permission="createButton.permission"
             @click="
@@ -42,6 +42,11 @@
               }
             "
           >
+            <vue-feather
+                type="plus"
+                size="13"
+                class="mx-1"
+              />
             {{ createButton.text ? $t(createButton.text) : $t("new") }}
           </b-button>
           <vue-excel-xlsx
@@ -486,16 +491,17 @@ export default {
   display: flex;
   justify-content: space-between;
   justify-items: center;
-}
-
-.table {
-  font-size: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .entries {
-  width: 15rem;
+  width: 13rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.entries label {
+  font-size: 14px;
 }
 </style>

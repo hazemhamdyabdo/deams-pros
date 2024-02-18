@@ -49,6 +49,17 @@
   "addPaymentMethod": "أنشاء طريقة دفع",
   "banks": "البنوك",
   "addBnak": "أنشاء بنك",
-  "entries": "عدد الصفوف"
+  "entries": "عدد الصفوف",
+  "roomStatus": "حالات الغرف",
+  "buildingName": "اسم المبنى",
+  "FloorInService": "فى الخدمة",
+  "floors": "الطوابق",
+  "floorNumber":  "رقم الطابق",
+  "loungesTypes": "أنواع الصالات",
+  "status": "الحالة",
+  "inService": "فى الخدمة",
+  "roomTypes": "أنواع الغرف"
+  
+
 
 }

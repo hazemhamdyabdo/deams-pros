@@ -177,5 +177,32 @@ export default [
         headerClass: "header",
         sidebarClass: "",
       },
+    },
+    {
+      path: "/room",
+      name: "room",
+      component: () => import("@/views/pages/PublicCodes/rooms/List.vue"),
+      meta: {
+        headerClass: "header",
+        sidebarClass: "",
+      },
+    },
+    {
+      path: "/addRoom",
+      name: "addRoom",
+      component: () => import("@/views/pages/PublicCodes/rooms/Edit.vue"),
+      meta: {
+        headerClass: "header",
+        sidebarClass: "",
+      },
+    },
+    {
+      path: "/editRoom/:id",
+      name: "editRoom",
+      component: () => import("@/views/pages/PublicCodes/rooms/Edit.vue"),
+      meta: {
+        headerClass: "header",
+        sidebarClass: "",
+      },
     }
   ];

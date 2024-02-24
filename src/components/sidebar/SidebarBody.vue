@@ -85,6 +85,18 @@
           <span>{{ $t("kitchensTypes") }}</span></router-link
         >
       </li>
+      <li>
+        <router-link
+          :class="
+            currentPath == 'room' || currentPath == 'room'
+              ? 'active'
+              : 'notactive'
+          "
+          :to="{ name: 'room' }"
+          ><vue-feather type="tablet"/>
+          <span>{{ $t("rooms") }}</span></router-link
+        >
+      </li>
     </ul>
   </li>
 </template>

@@ -90,13 +90,13 @@
   "rooms": "الغرف",
   "addRoom": "إنشاء غرفة",
   "editRoom": "تعديل غرفة",
-  "previewRooms": "استعراض الغرف التي تم تعريفها",
+  "previewRooms": "استعراض وإدارة الغرف التي تم تعريفها",
   "roomNumber": "رقم الغرفة",
   "roomArea": "مساحة الغرفة",
   "roomType": "نوع الغرفة",
   "roomStatus": "حالة الغرفة",
   "bathroomCount": "عدد دورات المياة",
-  "bedsCount": "عدد الأسرة",
+  "bedsCount": "عدد السرائر",
   "roomContainsTV": "هل الغرفة تحتوي علي تلفاز",
   "roomContainsLandline": "هل الغرفة تحتوي علي هاتف",
   "roomContainsKitchen": "هل الغرفة تحتوي علي مطبخ",
@@ -107,5 +107,7 @@
   "clean": "نظيفة",
   "notClean": "غير نظيفة",
   "kitchen": "المطبخ",
-  "lounge": "الصالة"
+  "lounge": "الصالة",
+  "edit": "تعديل",
+  "delete": "حذف"
 }

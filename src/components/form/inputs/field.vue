@@ -134,6 +134,10 @@ export default {
     label: {
       type: String,
     },
+    filterFn: {
+      type: Function,
+      default: () => true
+    },
     options: {
       type: [Array, String],
       default: () => [],
@@ -266,7 +270,7 @@ export default {
         id: item.id,
         text: item[this.label],
         ...item,
-      }));
+      })).filter(this.selectData.length > 0 ? this.filterFn : () => true);
     },
   },
   methods: {

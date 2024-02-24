@@ -8719,4 +8719,21 @@ span.select2-container.select2-container--default.select2-container--open {
   top: 50%;
   left: 10px;
 }
+
+.tooltip {
+	font-family: 'Changa';
+  font-size: 13px;
+  padding: 7px;
+}
+
+.form-control{
+  font-size: 14px !important;
+  padding: 9px;
+}
+
+.text-danger {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
 /*# sourceMappingURL=style.css.map */

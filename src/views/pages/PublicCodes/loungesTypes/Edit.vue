@@ -47,6 +47,22 @@
                     label-text="space"
                   />
                 </b-col>
+                <b-col md="2">
+                  <label
+                    style="font-size: 14px; margin-bottom: 7px"
+                    for="general"
+                  >
+                    {{ $t('general') }}
+                  </label>
+                  <b-form-group>
+                    <b-form-checkbox
+                      v-model="selectedItem.isShared"
+                      class="mr-0 mt-50"
+                      name="is-rtl"
+                      inline
+                    />
+                  </b-form-group>
+                </b-col>
               </b-row>
               <b-row>
                 <b-col md="12">

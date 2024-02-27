@@ -39,13 +39,20 @@
               </b-row>
               <b-row>
                 <b-col md="4">
-                  <gfield
-                    id="space"
-                    v-model="selectedItem.space"
-                    name="space"
-                    ref="space"
-                    label-text="space"
-                  />
+                  <label
+                    style="font-size: 14px; margin-bottom: 7px"
+                    for="general"
+                  >
+                    {{ $t('general') }}
+                  </label>
+                  <b-form-group>
+                    <b-form-checkbox
+                      v-model="selectedItem.isShared"
+                      class="mr-0 mt-50"
+                      name="is-rtl"
+                      inline
+                    />
+                  </b-form-group>
                 </b-col>
               </b-row>
               <b-row>
@@ -100,8 +107,8 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: 'rentTypes',
-      title1: 'addRentType',
+      title: '',
+      title1: '',
       id: 0,
     };
   },

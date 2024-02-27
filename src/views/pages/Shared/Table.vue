@@ -265,7 +265,7 @@ export default {
     },
     perPageOptions: {
       type: Array,
-      default: () => [3, 5, 10, 25, 50],
+      default: () => [15, 25, 50 ,500],
     },
   },
   emits: ["on-edit", "on-delete", "on-view", "on-create"],
@@ -347,7 +347,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      perPage: 5,
+      perPage: 15,
       item: "",
       searchQuery: "",
       filterOn: [],

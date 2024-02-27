@@ -106,7 +106,7 @@ export default {
     tableColumns() {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'arabicName', label: this.$t('rentType'), sortable: true },
+        { key: 'arabicName', label: this.$t('lounge type'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },
       ];

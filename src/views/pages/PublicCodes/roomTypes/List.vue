@@ -19,7 +19,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addLoungesTypes' });
+                  $router.push({ name: 'addRoomTypes' });
                 }
               "
             >
@@ -106,7 +106,7 @@ export default {
     tableColumns() {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'arabicName', label: this.$t('rentType'), sortable: true },
+        { key: 'arabicName', label: this.$t('room type'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },
       ];
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'LoungesTypes' }).then((data) => {
+      this.get({ url: 'RoomTypes' }).then((data) => {
         this.items = data;
       });
     },
@@ -127,7 +127,7 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'editLoungesTypes',
+        name: 'ediRoomTypes',
         params: { id: item.id },
       });
     },

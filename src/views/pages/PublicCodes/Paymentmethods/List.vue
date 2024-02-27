@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="guardians-table"
+              ref="paymentMethod-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -90,7 +90,6 @@ export default {
   data() {
     return {
       selectedItem: {
-        Code: "",
       },
       totalRows: 0,
       currentPage: 1,
@@ -105,8 +104,8 @@ export default {
   computed: {
     tableColumns() {
       return [
-        { key: "code", label: this.$t("Code"), sortable: true },
-        { key: "arabicName", label: this.$t("paymentMethod"), sortable: true },
+        { key: "code", label: this.$t("code"), sortable: true },
+        { key: "arabicName", label: this.$t("paymentWay"), sortable: true },
         { key: "notes", label: this.$t("notes"), sortable: true },
         { key: "actions" },
       ];
@@ -160,6 +159,5 @@ export default {
       );
     },
   },
-  name: "addproduct",
 };
 </script>

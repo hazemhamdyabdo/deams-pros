@@ -58,7 +58,12 @@
   "loungesTypes": "أنواع الصالات",
   "status": "الحالة",
   "inService": "فى الخدمة",
-  "roomTypes": "أنواع الغرف"
+  "roomTypes": "أنواع الغرف",
+  "paymentWay": "طريقة الدفع",
+  "room status": "حالة الغرفة",
+  "floor": "الطابق",
+  "lounge type": "نوع الصالة",
+  "room type": "نوع الغرفة"
   
 
 

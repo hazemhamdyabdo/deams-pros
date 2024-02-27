@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="guardians-table"
+              ref="Buliding-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -89,8 +89,7 @@ export default {
   },
   data() {
     return {
-      selectedItem: {
-      },
+      selectedItem: {},
       paymentMethods: [],
       totalRows: 0,
       currentPage: 1,
@@ -100,30 +99,16 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
-      title: "Product Add",
-      title1: "Create new product",
-      Category: ["Choose Category", "Computers"],
-      SubCategory: ["Choose Sub Category", "Fruits"],
-      Brand: ["Choose Brand", "Brand"],
-      Unit: ["Choose Unit", "Unit"],
-      Tax: ["Choose Tax", "2%"],
-      Percentage: ["Percentage", "10%", "20%"],
-      Closed: ["Closed", "Open"],
     };
   },
   computed: {
     tableColumns() {
       return [
-        { key: "code", label: this.$t("Code"), sortable: true },
-        { key: "arabicName", label: this.$t("bankName"), sortable: true },
-        {
-          key: "englishName",
-          label: this.$t("englishName"),
-          sortable: true,
-        },
+        { key: "code", label: this.$t("code"), sortable: true },
+        { key: "arabicName", label: this.$t("name"), sortable: true },
         { key: "notes", label: this.$t("notes"), sortable: true },
         { key: "actions" },
-      ];SS
+      ];
     },
   },
   mounted() {

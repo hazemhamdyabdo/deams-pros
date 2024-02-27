@@ -6,7 +6,7 @@
         <!-- /add -->
         <div class="card">
           <div class="card-body">
-            <gform class="was-validated" @submit="save()">
+            <gform @submit="save()">
               <b-row>
                 <b-col md="4">
                   <gfield
@@ -54,7 +54,7 @@
                   <!-- code  -->
                   <gfield
                     id="floorNumber"
-                    v-model="selectedItem.floorNumber"
+                    v-model="selectedItem.arrangement"
                     name="floorNumber"
                     ref="floorNumber"
                     label-text="floorNumber"
@@ -78,7 +78,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col md="4">
+                <!-- <b-col md="4">
                   <label
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
@@ -93,7 +93,7 @@
                       inline
                     />
                   </b-form-group>
-                </b-col>
+                </b-col> -->
               </b-row>
               <b-row>
                 <b-col md="12">

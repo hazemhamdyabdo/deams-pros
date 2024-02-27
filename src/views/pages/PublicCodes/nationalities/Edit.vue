@@ -2,11 +2,11 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title=$t(title) :title1=$t(title1) />
+        <pageheader :title="$t(title)" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
-            <gform class="was-validated" @submit="save()">
+            <gform @submit="save()">
               <b-row>
                 <b-col md="4">
                   <gfield
@@ -107,13 +107,9 @@ export default {
   },
   data() {
     return {
-      selectedItem: {
-        code: '',
-        arabicName: '',
-      },
+      selectedItem: {},
       items: [],
-      title: 'nationalties',
-      title1: 'addNationalty',
+      title: 'addNationalty',
       id: 0,
     };
   },

@@ -6,7 +6,7 @@ import { domain, baseReportURL } from '@/libs/acl/config';
 export default {
   data() {
     return {
-      perPageOptions: [15, 25, 50, 100, 'الكل'],
+      perPageOptions: [15, 25, 50, 100, 500],
       baseUrl: domain,
       baseReportURL: baseReportURL,
       currentUrl: window.location.href,

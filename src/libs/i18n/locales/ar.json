@@ -122,5 +122,7 @@
   "lounge type": "نوع الصالة",
   "backToList": "عودة الي القائمة",
   "room type": "نوع الغرفة",
-  "floor": "الطابق"
+  "floor": "الطابق",
+  "KitchensTypes": "أنواع المطابخ",
+  "roomStatuses": "حالات الغرف"
 }

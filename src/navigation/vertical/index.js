@@ -10,19 +10,19 @@ export default [
                 isFav: false,
             },
             {
-                title: 'building',
+                title: 'buildings',
                 route: 'building',
                 permission: 'viewBuliding',
                 isFav: false,
             },
             {
-                title: 'kitchenType',
+                title: 'KitchensTypes',
                 route: 'kitchenType',
                 permission: 'viewKitchenType',
                 isFav: false,
             },
             {
-                title: 'nationality',
+                title: 'Nationalities',
                 route: 'nationality',
                 permission: 'viewNationality',
                 isFav: false,
@@ -34,13 +34,13 @@ export default [
                 isFav: false,
             },
             {
-                title: 'rentType',
+                title: 'RentTypes',
                 route: 'rentType',
                 permission: 'viewRentType',
                 isFav: false,
             },
             {
-                title: 'roomStatus',
+                title: 'roomStatuses',
                 route: 'roomStatus',
                 permission: 'viewRoomStatus',
                 isFav: false,

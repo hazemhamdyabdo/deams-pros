@@ -10,7 +10,7 @@
               <b-row>
                 <b-col md="4">
                   <gfield
-                    label-text="Code"
+                    label-text="code"
                     ref="code"
                     name="code"
                     id="code"

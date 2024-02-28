@@ -1,11 +1,10 @@
 <template>
   <ul>
     <li class="submenu-open">
-      <h6 class="submenu-hdr">Main</h6>
       <ul>
         <li>
           <router-link class="home" :to="{ name: 'home' }"
-            ><vue-feather type="grid"></vue-feather><span> Dashboard</span>
+            ><vue-feather type="grid"></vue-feather><span> {{ $t('dashboard') }}</span>
           </router-link>
         </li>
       </ul>
@@ -30,7 +29,7 @@
           aria-expanded="false"
           aria-controls="sidebarTransfer"
         >
-          <vue-feather :type="item.icon ?? 'shuffle'"></vue-feather>
+          <vue-feather :type="item.icon ?? 'server'"></vue-feather>
           <span>{{ $t(`${item.title}`) }}</span>
           <span class="menu-arrow"></span>
         </a>
@@ -40,7 +39,7 @@
               :class="{ active: isActive(`${child.route}`) }"
               :to="{ name: `${child.route}` }"
             >
-              <vue-feather :type="child.icon ?? 'plus-square'"></vue-feather>
+              <vue-feather :type="child.icon ?? 'star'"></vue-feather>
 
               {{ $t(`${child.title}`) }}
             </router-link>

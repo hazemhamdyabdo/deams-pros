@@ -2,7 +2,7 @@ export default [
   {
     path: "",
     name: "home",
-    component: () => import("@/views/pages/dashboard/indexpage.vue"),
+    component: () => import("@/views/pages/dashboard/Edit.vue"),
     meta: {
       headerClass: "header",
       sidebarClass: "",
@@ -287,5 +287,31 @@ export default [
       sidebarClass: "",
     },
   },
-  
+  {
+    path: "/rooms",
+    name: "rooms",
+    component: () => import("@/views/pages/PublicCodes/rooms/List.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/addRoom",
+    name: "addRoom",
+    component: () => import("@/views/pages/PublicCodes/rooms/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/editRoom/:id",
+    name: "editRoom",
+    component: () => import("@/views/pages/PublicCodes/rooms/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  }
 ];

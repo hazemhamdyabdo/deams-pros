@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import { Field, useField } from "vee-validate";
+import { defineRule, Field, useField } from "vee-validate";
 
 export default {
   components: {
@@ -333,4 +333,15 @@ export default {
     },
   },
 };
+
+defineRule('numeric', (value)=> {
+  if (value) {
+    const regex = /^[0-9]+$/;
+    const isNumeric = regex.test(value);
+    const hasLength = value.toString().trim().length > 0;
+
+    return isNumeric && hasLength;
+  }
+  return true;
+})
 </script>

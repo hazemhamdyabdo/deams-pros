@@ -2,10 +2,10 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title=$t(title) :title1=$t(title1) />
+        <pageheader :title="$t(title1)" />
         <div class="card">
           <div class="card-body">
-            <gform class="was-validated" @submit="save()">
+            <gform @submit="save()">
               <b-row>
                 <b-col md="4">
                   <gfield
@@ -52,7 +52,7 @@
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
                   >
-                    {{ $t('general') }}
+                    {{ $t("general") }}
                   </label>
                   <b-form-group>
                     <b-form-checkbox
@@ -71,7 +71,7 @@
                       style="font-size: 14px; margin-bottom: 7px"
                       for="customer"
                     >
-                      {{ $t('notes') }}
+                      {{ $t("notes") }}
                     </label>
                     <b-form-textarea
                       id="textarea"
@@ -92,7 +92,7 @@
                     variant="primary"
                     data-action-type="save"
                   >
-                    {{ $t('save') }}
+                    {{ $t("save") }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -116,8 +116,7 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: 'kichensType',
-      title1: 'addKitchenType',
+      title1: "addKitchenType",
       id: 0,
     };
   },
@@ -135,25 +134,25 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'KitchensTypes',
+          url: "KitchensTypes",
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
-          this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'kitchenType' });
+          this.doneAlert({ text: this.$t("updatedSuccessfully") });
+          this.$router.push({ name: "kitchenType" });
         });
       } else {
         this.create({
-          url: 'KitchensTypes',
+          url: "KitchensTypes",
           data: this.selectedItem,
         }).then(() => {
-          this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'kitchenType' });
+          this.doneAlert({ text: this.$t("savedSuccessfully") });
+          this.$router.push({ name: "kitchenType" });
         });
       }
     },
     getSelected() {
-      this.get({ url: 'KitchensTypes', id: this.id }).then((data) => {
+      this.get({ url: "KitchensTypes", id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },

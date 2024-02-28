@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="guardians-table"
+              ref="nationalities-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"

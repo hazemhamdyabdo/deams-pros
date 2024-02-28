@@ -101,7 +101,6 @@
   "roomContainsLandline": "هل الغرفة تحتوي علي هاتف",
   "roomContainsKitchen": "هل الغرفة تحتوي علي مطبخ",
   "roomContainsLounge": "هل الغرفة تحتوي علي صالة",
-  "floor": "الطابق",
   "landlineConversion": "تحويلة الهاتف",
   "outOfService": "خارج الخدمة",
   "clean": "نظيفة",
@@ -109,5 +108,18 @@
   "kitchen": "المطبخ",
   "lounge": "الصالة",
   "edit": "تعديل",
-  "delete": "حذف"
+  "delete": "حذف",
+  "buildingName": "اسم المبنى",
+  "FloorInService": "فى الخدمة",
+  "floors": "الطوابق",
+  "floorNumber":  "رقم الطابق",
+  "loungesTypes": "أنواع الصالات",
+  "status": "الحالة",
+  "inService": "فى الخدمة",
+  "roomTypes": "أنواع الغرف",
+  "paymentWay": "طريقة الدفع",
+  "room status": "حالة الغرفة",
+  "floor": "الطابق",
+  "lounge type": "نوع الصالة",
+  "room type": "نوع الغرفة"
 }

@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" />
+        <pageheader :title="$t(title)" :title1="$t(title1)" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -22,11 +22,9 @@
                   <gfield
                     id="arabicName"
                     rules="required"
-                    ref="arabicName"
                     v-model="selectedItem.arabicName"
                     label-text="arabicName"
-                    name="arabicName"
-                    required
+                    ref="arabicName"
                   />
                 </b-col>
                 <b-col md="4">
@@ -40,7 +38,47 @@
                 </b-col>
               </b-row>
               <b-row>
+                <b-col md="4">
+                  <gfield
+                    label="arabicName"
+                    :dir="'rtl'"
+                    field="select"
+                    :options="Buildings"
+                    ref="buildingName"
+                    v-model="selectedItem.buildingId"
+                    label-text="buildingName"
+                  />
+                </b-col>
+                <!-- code  -->
+                <b-col md="4">
+                  <!-- code  -->
+                  <gfield
+                    id="floorNumber"
+                    v-model="selectedItem.arrangement"
+                    name="floorNumber"
+                    ref="floorNumber"
+                    label-text="floorNumber"
+                  />
+                </b-col>
                 <b-col md="2">
+                  <label
+                    style="font-size: 14px; margin-bottom: 7px"
+                    for="buidingInService"
+                  >
+                    {{ $t('FloorInService') }}
+                  </label>
+                  <b-form-group>
+                    <b-form-checkbox
+                      v-model="selectedItem.status"
+                      class="mr-0 mt-50"
+                      name="is-rtl"
+                      inline
+                    />
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <!-- <b-col md="4">
                   <label
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
@@ -55,7 +93,7 @@
                       inline
                     />
                   </b-form-group>
-                </b-col>
+                </b-col> -->
               </b-row>
               <b-row>
                 <b-col md="12">
@@ -108,18 +146,26 @@ export default {
   data() {
     return {
       selectedItem: {},
+      Buildings: [],
       items: [],
-      title: 'addNationalty',
+      title: 'rentTypes',
+      title1: 'addRentType',
       id: 0,
     };
   },
   mounted() {
     this.id = this.$route.params.id;
+    this.getBuildings();
     if (this.id > 0) {
       this.getSelected();
     }
   },
   methods: {
+    getBuildings() {
+      this.get({ url: 'Buildings' }).then((data) => {
+        this.Buildings = data;
+      });
+    },
     save() {
       this.selectedItem.branchId = this.branchId;
       if (!this.selectedItem.englishName) {
@@ -127,25 +173,25 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'Nationalities',
+          url: 'Floors',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'nationality' });
+          this.$router.push({ name: 'floor' });
         });
       } else {
         this.create({
-          url: 'Nationalities',
+          url: 'Floors',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'nationality' });
+          this.$router.push({ name: 'floor' });
         });
       }
     },
     getSelected() {
-      this.get({ url: 'Nationalities', id: this.id }).then((data) => {
+      this.get({ url: 'Floors', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },

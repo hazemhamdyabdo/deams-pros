@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import { Field, useField } from "vee-validate";
+import { defineRule, Field, useField } from "vee-validate";
 
 export default {
   components: {
@@ -133,6 +133,10 @@ export default {
   props: {
     label: {
       type: String,
+    },
+    filterFn: {
+      type: Function,
+      default: () => true
     },
     options: {
       type: [Array, String],
@@ -266,7 +270,7 @@ export default {
         id: item.id,
         text: item[this.label],
         ...item,
-      }));
+      })).filter(this.selectData.length > 0 ? this.filterFn : () => true);
     },
   },
   methods: {
@@ -329,4 +333,15 @@ export default {
     },
   },
 };
+
+defineRule('numeric', (value)=> {
+  if (value) {
+    const regex = /^[0-9]+$/;
+    const isNumeric = regex.test(value);
+    const hasLength = value.toString().trim().length > 0;
+
+    return isNumeric && hasLength;
+  }
+  return true;
+})
 </script>

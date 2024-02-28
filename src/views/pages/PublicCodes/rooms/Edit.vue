@@ -119,9 +119,8 @@
                 <gfield
                   id="bathroomCount"
                   v-model="selectedItem.bathroomsCount"
-                  type="number"
                   label-text="bathroomCount"
-                  ref="bathroomCount"
+                  rules="numeric"
                 />
               </b-col>
 
@@ -130,9 +129,8 @@
                 <gfield
                   id="bedsCount"
                   v-model="selectedItem.bedsCount"
-                  type="number"
                   label-text="bedsCount"
-                  ref="bedsCount"
+                  rules="numeric"
                 />
               </b-col>
               
@@ -312,6 +310,18 @@
             <b-row>
               <b-col cols="12" class="d-flex justify-content-end">
                 <b-button
+                  class="me-2"
+                  variant="outline-primary"
+                  @click="backToList()"
+                >
+                  <vue-feather
+                    type="log-out"
+                    size="12"
+                    class="mx-1"
+                  />
+                  {{ $t('backToList') }}
+                </b-button>
+                <b-button
                   type="submit"
                   variant="primary"
                   data-action-type="save"
@@ -362,7 +372,7 @@ data() {
       showLandlineConversion: false
     },
     title: 'rooms',
-    title1: 'addRoom',
+    title1: '',
     id: 0,
   };
 },
@@ -379,6 +389,7 @@ computed: {
 // mounted section
 mounted() {
   this.id = this.$route.params.id;
+  this.title1 = this.id > 0 ? this.$t('editRoom') : this.$t('addRoom')
   this.getLookups();
   if (this.id > 0) {
     this.getSelectedItem();
@@ -431,7 +442,7 @@ methods: {
   },
 
   backToList() {
-    this.$router.push({ name: 'room' });
+    this.$router.push({ name: 'rooms' });
   },
 
   kitchenChanged() {

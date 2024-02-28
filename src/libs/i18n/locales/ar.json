@@ -101,7 +101,6 @@
   "roomContainsLandline": "هل الغرفة تحتوي علي هاتف",
   "roomContainsKitchen": "هل الغرفة تحتوي علي مطبخ",
   "roomContainsLounge": "هل الغرفة تحتوي علي صالة",
-  "floor": "الطابق",
   "landlineConversion": "تحويلة الهاتف",
   "outOfService": "خارج الخدمة",
   "clean": "نظيفة",
@@ -121,5 +120,7 @@
   "paymentWay": "طريقة الدفع",
   "room status": "حالة الغرفة",
   "lounge type": "نوع الصالة",
-  "room type": "نوع الغرفة"
+  "backToList": "عودة الي القائمة",
+  "room type": "نوع الغرفة",
+  "floor": "الطابق"
 }

@@ -288,8 +288,8 @@ export default [
     },
   },
   {
-    path: "/room",
-    name: "room",
+    path: "/rooms",
+    name: "rooms",
     component: () => import("@/views/pages/PublicCodes/rooms/List.vue"),
     meta: {
       headerClass: "header",
@@ -313,5 +313,5 @@ export default [
       headerClass: "header",
       sidebarClass: "",
     },
-  },
+  }
 ];

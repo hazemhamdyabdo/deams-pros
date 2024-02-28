@@ -2,12 +2,12 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" />
+        <pageheader :title="title" :title1="title1" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="kitchensTypes-table"
+              ref="floor-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -19,7 +19,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addkitchenType' });
+                  $router.push({ name: 'addRoomTypes' });
                 }
               "
             >
@@ -88,7 +88,9 @@ export default {
   },
   data() {
     return {
-      selectedItem: {},
+      selectedItem: {
+        Code: '',
+      },
       paymentMethods: [],
       totalRows: 0,
       currentPage: 1,
@@ -98,15 +100,13 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
-      title: 'kitchensTypes',
     };
   },
   computed: {
     tableColumns() {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'arabicName', label: this.$t('arabicName'), sortable: true },
-        { key: 'space', label: this.$t('space'), sortable: true },
+        { key: 'arabicName', label: this.$t('room type'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },
       ];
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'kitchensTypes' }).then((data) => {
+      this.get({ url: 'RoomTypes' }).then((data) => {
         this.items = data;
       });
     },
@@ -127,7 +127,7 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'editkitchenType',
+        name: 'ediRoomTypes',
         params: { id: item.id },
       });
     },
@@ -138,7 +138,7 @@ export default {
         },
         () => {
           // then delete
-          this.delete({ url: 'kitchensTypes', id: item.id }).then(() => {
+          this.delete({ url: 'RoomTypes', id: item.id }).then(() => {
             this.doneAlert({ text: this.$t('deletedSuccessfully') });
             this.getItems();
           });
@@ -146,6 +146,6 @@ export default {
       );
     },
   },
-  name: 'kitchensTypes',
+  name: 'RentTypes',
 };
 </script>

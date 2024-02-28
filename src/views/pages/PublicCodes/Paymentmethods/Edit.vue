@@ -4,7 +4,7 @@
     <sidebar></sidebar>
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" :title1="$t(title1)" />
+        <pageheader :title="$t(title)" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -125,8 +125,7 @@ export default {
       selectedItem: {},
       banks: [],
       items: [],
-      title: 'paymentMethods',
-      title1: 'addPaymentMethod',
+      title: 'addPaymentMethod',
       id: 0,
     };
   },

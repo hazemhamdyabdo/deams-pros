@@ -6,7 +6,7 @@
         <!-- /add -->
         <div class="card">
           <div class="card-body">
-            <gform class="was-validated" @submit="save()">
+            <gform @submit="save()">
               <b-row>
                 <b-col md="4">
                   <gfield

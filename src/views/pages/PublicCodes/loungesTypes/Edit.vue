@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" />
+        <pageheader :title="$t(title)" :title1="$t(title1)" />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -22,11 +22,9 @@
                   <gfield
                     id="arabicName"
                     rules="required"
-                    ref="arabicName"
                     v-model="selectedItem.arabicName"
                     label-text="arabicName"
-                    name="arabicName"
-                    required
+                    ref="arabicName"
                   />
                 </b-col>
                 <b-col md="4">
@@ -40,6 +38,15 @@
                 </b-col>
               </b-row>
               <b-row>
+                <b-col md="4">
+                  <gfield
+                    id="space"
+                    v-model="selectedItem.space"
+                    name="space"
+                    ref="space"
+                    label-text="space"
+                  />
+                </b-col>
                 <b-col md="2">
                   <label
                     style="font-size: 14px; margin-bottom: 7px"
@@ -109,7 +116,8 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: 'addNationalty',
+      title: 'rentTypes',
+      title1: 'addRentType',
       id: 0,
     };
   },
@@ -127,25 +135,25 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'Nationalities',
+          url: 'LoungesTypes',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'nationality' });
+          this.$router.push({ name: 'loungesTypes' });
         });
       } else {
         this.create({
-          url: 'Nationalities',
+          url: 'LoungesTypes',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'nationality' });
+          this.$router.push({ name: 'loungesTypes' });
         });
       }
     },
     getSelected() {
-      this.get({ url: 'Nationalities', id: this.id }).then((data) => {
+      this.get({ url: 'LoungesTypes', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },

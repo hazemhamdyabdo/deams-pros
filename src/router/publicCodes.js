@@ -444,7 +444,4 @@ export default [
       },
     ],
   },
-  {
-    path: '/facilities'
-  }
 ];

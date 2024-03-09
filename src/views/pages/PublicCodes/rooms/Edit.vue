@@ -3,8 +3,6 @@
   <div class="page-wrapper">
     <div class="content">
       <pageheader 
-        :title=$t(title) 
-        :title1=$t(title1) 
       />
       <div class="card">
         <div class="card-body">
@@ -371,8 +369,6 @@ data() {
       showLounges: false,
       showLandlineConversion: false
     },
-    title: 'rooms',
-    title1: '',
     id: 0,
   };
 },
@@ -389,7 +385,6 @@ computed: {
 // mounted section
 mounted() {
   this.id = this.$route.params.id;
-  this.title1 = this.id > 0 ? this.$t('editRoom') : this.$t('addRoom')
   this.getLookups();
   if (this.id > 0) {
     this.getSelectedItem();

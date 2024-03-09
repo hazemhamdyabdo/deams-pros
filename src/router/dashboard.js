@@ -2,8 +2,8 @@ import publiccode from "./publicCodes";
 
 export default [
   {
-    path: "/index",
-    name: "index",
+    path: "/dashboard",
+    name: "dashboard",
     component: () => import("../views/pages/dashboard/index"),
     meta: {
       headerClass: "header",

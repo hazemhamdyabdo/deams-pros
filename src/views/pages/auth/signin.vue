@@ -79,7 +79,7 @@
                   </div>
                 </div>
                 <div class="form-login">
-                  <router-link class="btn btn-login" to="index">Sign In</router-link>
+                  <router-link class="btn btn-login" to="dashboard">Sign In</router-link>
                 </div>
               </Form>
               <div class="signinform text-center">

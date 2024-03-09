@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" :title1="$t(title1)" />
+        <pageheader />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -107,8 +107,6 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: 'rentTypes',
-      title1: 'addRentType',
       id: 0,
     };
   },

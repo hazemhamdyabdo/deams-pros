@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="title" :title1="title1" />
+        <pageheader />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -89,7 +89,6 @@ export default {
   data() {
     return {
       selectedItem: {
-        Code: '',
       },
       paymentMethods: [],
       totalRows: 0,

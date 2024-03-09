@@ -11,6 +11,24 @@ export default [
           Breadcrumb: 'Settings',
         },
       },
+      {
+        path: 'addFaciliti',
+        name: 'addFaciliti',
+        component: () => import('@/views/pages/Setting/faciliti/Edit.vue'),
+        meta: {
+          pageTitle: 'facility',
+          Breadcrumb: 'facility',
+        },
+      },
+      {
+        path: 'editFaciliti',
+        name: 'editFaciliti',
+        component: () => import('@/views/pages/Setting/faciliti/Edit.vue'),
+        meta: {
+          pageTitle: 'editFaciliti',
+          Breadcrumb: 'facility',
+        },
+      },
     ],
   },
 ];

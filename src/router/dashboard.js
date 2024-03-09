@@ -1,55 +1,54 @@
-import publiccode from "./publicCodes";
+import publiccode from './publicCodes';
+import setting from './settings';
 
 export default [
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: () => import("../views/pages/dashboard/index"),
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/pages/dashboard/index'),
     meta: {
-      headerClass: "header",
-      sidebarClass: "",
+      headerClass: 'header',
+      sidebarClass: '',
     },
-    children: [
-      ...publiccode,
-    ],
+    children: [...publiccode, ...setting],
   },
   {
-    path: "/index-one",
-    name: "index-one",
-    component: () => import("../views/pages/dashboard/index-one"),
+    path: '/index-one',
+    name: 'index-one',
+    component: () => import('../views/pages/dashboard/index-one'),
     meta: {
-      headerClass: "header header-one",
-      headerthreeClass: "sidebar new-header sidebar-one",
-      sidebarClass: "sidebar-one hide-sidebar",
+      headerClass: 'header header-one',
+      headerthreeClass: 'sidebar new-header sidebar-one',
+      sidebarClass: 'sidebar-one hide-sidebar',
     },
   },
   {
-    path: "/index-two",
-    name: "index-two",
-    component: () => import("../views/pages/dashboard/index-two"),
+    path: '/index-two',
+    name: 'index-two',
+    component: () => import('../views/pages/dashboard/index-two'),
     meta: {
-      headerClass: "header header-two",
-      divClass: "container",
+      headerClass: 'header header-two',
+      divClass: 'container',
     },
   },
   {
-    path: "/index-three",
-    name: "index-three",
-    component: () => import("../views/pages/dashboard/index-three"),
+    path: '/index-three',
+    name: 'index-three',
+    component: () => import('../views/pages/dashboard/index-three'),
     meta: {
-      headerClass: "header header-three",
-      headerthreeClass: "sidebar side-three new-header",
-      divClass: "container",
-      sidebarClass: "sidebar-three hide-sidebar",
+      headerClass: 'header header-three',
+      headerthreeClass: 'sidebar side-three new-header',
+      divClass: 'container',
+      sidebarClass: 'sidebar-three hide-sidebar',
     },
   },
   {
-    path: "/index-four",
-    name: "index-four",
-    component: () => import("../views/pages/dashboard/index-four"),
+    path: '/index-four',
+    name: 'index-four',
+    component: () => import('../views/pages/dashboard/index-four'),
     meta: {
-      headerClass: "header header-four",
-      hideClass: "v-cloak",
+      headerClass: 'header header-four',
+      hideClass: 'v-cloak',
     },
   },
 ];

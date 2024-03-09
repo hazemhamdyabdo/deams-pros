@@ -4,7 +4,8 @@
       <ul>
         <li>
           <router-link class="home" :to="{ name: 'home' }"
-            ><vue-feather type="grid"></vue-feather><span> {{ $t('dashboard') }}</span>
+            ><vue-feather type="grid"></vue-feather
+            ><span> {{ $t("dashboard") }}</span>
           </router-link>
         </li>
       </ul>
@@ -21,19 +22,19 @@
           {{ $t(`${item.title}`) }}
         </router-link>
       </li>
-      <li v-else class="submenu" :key="item.title">
+      <li v-else class="submenu" :key="item.children">
         <a
-          href="#sidebarTransfer"
+          :href="`#${item.title}`"
           data-bs-toggle="collapse"
           role="button"
           aria-expanded="false"
-          aria-controls="sidebarTransfer"
+          :aria-controls="`${item.title}`"
         >
           <vue-feather :type="item.icon ?? 'server'"></vue-feather>
           <span>{{ $t(`${item.title}`) }}</span>
           <span class="menu-arrow"></span>
         </a>
-        <ul class="collapse menu-dropdown" id="sidebarTransfer">
+        <ul class="collapse menu-dropdown" :id="item.title">
           <li v-for="child in item.children" :key="child.title">
             <router-link
               :class="{ active: isActive(`${child.route}`) }"
@@ -48,79 +49,6 @@
       </li>
     </template>
   </ul>
-  <!-- 
-    <li class="submenu">
-      <h6 class="submenu-hdr">Products</h6>
-      <ul>
-        <li>
-          <router-link
-            :class="
-              currentPath == 'productlist' || currentPath == 'editproduct'
-                ? 'active'
-                : 'notactive'
-            "
-            :to="{ name: 'productlist' }"
-            ><vue-feather type="box"></vue-feather
-            ><span>Products</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="
-              currentPath == 'addproduct' || currentPath == 'product-details'
-                ? 'active'
-                : 'notactive'
-            "
-            to="addproduct"
-            ><vue-feather type="plus-square"></vue-feather
-            ><span>Create Product</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="currentPath == 'categorylist' ? 'active' : 'notactive'"
-            to="categorylist"
-            ><vue-feather type="codepen"></vue-feather
-            ><span>Category</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="currentPath == 'brandlist' ? 'active' : 'notactive'"
-            to="brandlist"
-            ><vue-feather type="tag"></vue-feather
-            ><span>Brands</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="currentPath == 'subcategorylist' ? 'active' : 'notactive'"
-            to="subcategorylist"
-            ><vue-feather type="speaker"></vue-feather
-            ><span>Sub Category</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="currentPath == 'barcode' ? 'active' : 'notactive'"
-            to="barcode"
-            ><vue-feather type="align-justify"></vue-feather
-            ><span>Print Barcode</span></router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :class="currentPath == 'importproduct' ? 'active' : 'notactive'"
-            to="importproduct"
-            ><vue-feather type="minimize-2"></vue-feather
-            ><span>Import Products</span></router-link
-          >
-        </li>
-      </ul>
-    </li>
-
-
-   -->
 </template>
 
 <script>
@@ -136,6 +64,9 @@ export default {
   methods: {
     isActive(path) {
       return this.$route.name == path;
+    },
+    isFav(child) {
+      return (child.isFav = !child.isFav);
     },
   },
 };

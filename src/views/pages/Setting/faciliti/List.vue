@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="floor-table"
+              ref="faciliti-table"
               :items="items"
               :columns="tableColumns"
               :noAction="true"
@@ -18,7 +18,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addCity' });
+                  $router.push({ name: 'addFaciliti' });
                 }
               "
             >
@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    this.getItems();
+    // this.getItems();
   },
   methods: {
     getItems() {
@@ -123,7 +123,7 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: "editCity",
+        name: "editFaciliti",
         params: { id: item.id },
       });
     },

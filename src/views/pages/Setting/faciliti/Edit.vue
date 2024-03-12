@@ -157,6 +157,36 @@ export default {
     }
   },
   methods: {
+    onFileChanged(event) {
+      const file = event.target.files[0];
+      this.selectedItem.imageExtension = file.name.split(".").pop();
+      this.toBase64(file)
+        .then((file1) => {
+          this.selectedItem.base64logo = file1.split(",").pop();
+        })
+        .then(() => {
+          this.logoModel = {
+            extension: this.selectedItem.imageExtension,
+            base64Content: this.selectedItem.base64logo,
+          };
+
+          this.create({
+            url: "Schools/@current/logo",
+            data: this.logoModel,
+          }).then((data) => {
+            this.selectedItem.logoUrl = data;
+          });
+        });
+      this.url = URL.createObjectURL(file);
+    },
+    toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    },
     save() {
       this.selectedItem.branchId = this.branchId;
       if (!this.selectedItem.englishName) {

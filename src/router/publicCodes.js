@@ -340,5 +340,32 @@ export default [
       headerClass: "header",
       sidebarClass: "",
     },
+  },
+  {
+    path: "/source",
+    name: "sources",
+    component: () => import("@/views/pages/PublicCodes/sources/List.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/addSource",
+    name: "addSource",
+    component: () => import("@/views/pages/PublicCodes/sources/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/editSource/:id",
+    name: "editSource",
+    component: () => import("@/views/pages/PublicCodes/sources/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
   }
 ];

@@ -426,7 +426,7 @@ export default {
               maxWidth: 160,
               style: {
                 fontSize: '14px',
-                fontFamily: 'Tajawal'
+                fontFamily: 'Dubai'
               },
               offsetX: -20,
               offsetY: 0,
@@ -443,7 +443,7 @@ export default {
               maxHeight: 60,
               style: {
                 fontSize: '14px',
-                fontFamily: 'Tajawal',
+                fontFamily: 'Dubai',
               },
             },
           },
@@ -461,7 +461,7 @@ export default {
             },
             style: {
                 fontSize: '14px',
-                fontFamily: 'Tajawal'
+                fontFamily: 'Dubai'
               },
           },
         },
@@ -599,7 +599,7 @@ export default {
 }
 
 .apexcharts-legend-text {
-  font-family: 'Tajawal' !important;
+  font-family: 'Dubai' !important;
   padding-left: 5px;
   font-size: 16px !important;
 }
@@ -607,7 +607,7 @@ export default {
 .apexcharts-pie-label,
 .apexcharts-datalabel {
   font-size: 16px;
-  font-family: 'Tajawal' !important;
+  font-family: 'Dubai' !important;
   text-anchor: middle;
   fill: #414926;
 }

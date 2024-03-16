@@ -176,5 +176,9 @@
   "identityAttachmentMustBeInImageOrPdfFormat": "الصيغة المدعومة لمرفق الهوية jpg أو jpeg أو png أو pdf",
   "download": "تحميل",
   "downloadIdentityAttachment": "تحميل مرفق الهوية",
-  "removeIdentityAttachment": "حذف مرفق الهوية"
+  "removeIdentityAttachment": "حذف مرفق الهوية",
+  "addSource": "إضافة مصدر",
+  "editSource": "تعديل مصدر",
+  "sources": "المصادر",
+  "previewSources": "استعراض وإدارة المصادر التي تم تعريفها"
 }

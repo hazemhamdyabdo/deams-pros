@@ -69,28 +69,6 @@
                 :title="$t('guestData')"
               >
                 <b-row class="mt-1">
-
-                  <!-- guest data visualization  -->
-                  <b-col 
-                    md="12"
-                    class="mb-3"
-                  >
-                    <div class="d-flex flex-column justify-content align-items-center">
-                      <img 
-                        src="@/assets/img/custom/guest.png" 
-                        width="60" 
-                        alt="guest-img" 
-                        class="mb-1"
-                      />
-                      <label 
-                        style="font-size: 16px;"
-                      > {{ $t('guestData') }} </label>
-                      <label 
-                        style="font-size: 13px; color: #b5b5b5; text-align: center;"
-                      > {{ $t('guestDataHint') }} </label>
-                    </div>
-                  </b-col>
-
                   <!-- code  -->
                   <b-col 
                     v-if="_selectedItem.id > 0"
@@ -357,33 +335,7 @@
                 :title="$t('companionsData')"
               >
                 <!-- companions preview  -->
-                <b-row>
-
-                  <!-- companions data visualization -->
-                  <b-col 
-                    md="12"
-                    class="mb-3"
-                  >
-                    <div class="d-flex flex-column justify-content align-items-center">
-                      <img 
-                        src="@/assets/img/custom/family.png" 
-                        width="60" 
-                        alt="companions-img" 
-                        class="mb-1"
-                      />
-                      <label 
-                        style="font-size: 16px;"
-                      > 
-                        {{ $t('companionsData') }} </label>
-                      <label 
-                        style="font-size: 13px; color: #b5b5b5; text-align: center;"
-                      > 
-                        {{ $t('companionsDataHint') }}  </label>
-                    </div>
-                  </b-col>
-                </b-row>
-
-                <b-row class="mb-4">
+                <b-row class="mb-4 mt-2">
                   <!-- companion.companionName  -->
                   <b-col md="3">
                       <gfield

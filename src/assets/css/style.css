@@ -3,7 +3,7 @@
 /***** custom values *****/
 /***** Grid Values *****/
 /** Extends **/
-@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dubai:wght@400;500;600;700&display=swap");
 .css-equal-content,
 .css-equal-heights {
   display: flex;
@@ -642,7 +642,7 @@ h6 {
 }
 
 body {
-  font-family: "Tajawal", sans-serif;
+  font-family: "Dubai", sans-serif;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -10054,7 +10054,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .tooltip {
-  font-family: "Tajawal";
+  font-family: "Dubai";
   font-size: 13px;
   padding: 7px;
 }

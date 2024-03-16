@@ -68,6 +68,12 @@ export default [
                 route: 'rooms',
                 permission: 'viewRooms',
                 isFav: false,
+            },
+            {
+                title: 'guests',
+                route: 'guest',
+                permission: 'viewGuests',
+                isFav: false,
             }
         ]
     }

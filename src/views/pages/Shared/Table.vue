@@ -495,7 +495,7 @@ export default {
 }
 
 .entries {
-  width: 13rem;
+  width: 14rem;
   display: flex;
   justify-content: center;
   align-items: center;

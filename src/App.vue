@@ -371,7 +371,7 @@ export default {
 </script>
 <style>
 #body {
-	font-family: "Cairo", sans-serif !important;
+	font-family: "Tajawal", sans-serif !important;
 }
 .b-table-empty-slot,
 .b-table {

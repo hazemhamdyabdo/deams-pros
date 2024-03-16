@@ -313,5 +313,32 @@ export default [
       headerClass: "header",
       sidebarClass: "",
     },
+  },
+  {
+    path: "/guest",
+    name: "guest",
+    component: () => import("@/views/pages/PublicCodes/guests/List.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/addGuest",
+    name: "addGuest",
+    component: () => import("@/views/pages/PublicCodes/guests/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
+  },
+  {
+    path: "/editGuest/:id",
+    name: "editGuest",
+    component: () => import("@/views/pages/PublicCodes/guests/Edit.vue"),
+    meta: {
+      headerClass: "header",
+      sidebarClass: "",
+    },
   }
 ];

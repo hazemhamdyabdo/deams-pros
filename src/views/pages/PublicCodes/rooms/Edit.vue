@@ -319,7 +319,7 @@
                     size="12"
                     class="mx-1"
                   />
-                  {{ $t('backToList') }}
+                  {{ $t('backToPreview') }}
                 </b-button>
                 <b-button
                   type="submit"

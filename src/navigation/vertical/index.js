@@ -95,7 +95,8 @@ export default [
     ],
   },
   {
-    title: 'Settings',
+    title: 'settings',
+    icon:'settings',
     children: [
       {
         title: 'facility',

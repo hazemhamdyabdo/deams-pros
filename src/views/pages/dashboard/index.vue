@@ -5,7 +5,7 @@
     <layouts></layouts>
     <sidebar></sidebar>
 
-    <RouterView />
+    <router-view> </router-view>
   </div>
 </template>
 <script setup></script>

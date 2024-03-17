@@ -105,6 +105,7 @@
           :state="errors && errors.length > 0 ? false : null"
           v-b-tooltip.hover.v-danger
           :title="toolTipError && errors ? errors[0] || '' : ''"
+          :class="{ rtl: $i18n.locale === 'ar' }"
         >
           <template v-if="$attrs.field === 'select'" #no-options>
             {{ $t("Sorry, no matching options") }}
@@ -136,7 +137,7 @@ export default {
     },
     filterFn: {
       type: Function,
-      default: () => true
+      default: () => true,
     },
     options: {
       type: [Array, String],
@@ -266,11 +267,13 @@ export default {
   },
   computed: {
     testOptions() {
-      return this.selectData.map((item) => ({
-        id: item.id,
-        text: item[this.label],
-        ...item,
-      })).filter(this.selectData.length > 0 ? this.filterFn : () => true);
+      return this.selectData
+        .map((item) => ({
+          id: item.id,
+          text: item[this.label],
+          ...item,
+        }))
+        .filter(this.selectData.length > 0 ? this.filterFn : () => true);
     },
   },
   methods: {
@@ -331,10 +334,10 @@ export default {
       this.emitValue(v);
       this.updateAndValidate();
     },
-  },
+  },
 };
 
-defineRule('numeric', (value)=> {
+defineRule("numeric", (value) => {
   if (value) {
     const regex = /^[0-9]+$/;
     const isNumeric = regex.test(value);
@@ -357,3 +360,9 @@ defineRule('string', (value)=> {
   return true;
 })
 </script>
+
+<style scoped>
+.rtl {
+  direction: rtl;
+}
+</style>

@@ -381,6 +381,70 @@ export default [
     ],
   },
   {
+    path: "/guest",
+    children: [
+      {
+        path: '',
+        name: 'guest',
+        component: () => import('@/views/pages/PublicCodes/guests/List.vue'),
+        meta: {
+          pageTitle: 'guests',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addGuest',
+        name: 'addGuest',
+        component: () => import('@/views/pages/PublicCodes/guests/Edit.vue'),
+        meta: {
+          pageTitle: 'addGuest',
+          Breadcrumb: 'guests',
+        },
+      },
+      {
+        path: '/editGuest/:id',
+        name: 'editGuest',
+        component: () => import('@/views/pages/PublicCodes/guests/Edit.vue'),
+        meta: {
+          pageTitle: 'editGuest',
+          Breadcrumb: 'guests',
+        },
+      },
+    ],
+  },
+  {
+    path: "/source",
+    children: [
+      {
+        path: '',
+        name: 'sources',
+        component: () => import('@/views/pages/PublicCodes/sources/List.vue'),
+        meta: {
+          pageTitle: 'sources',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addSource',
+        name: 'addSource',
+        component: () => import('@/views/pages/PublicCodes/sources/Edit.vue'),
+        meta: {
+          pageTitle: 'addSource',
+          Breadcrumb: 'sources',
+        },
+      },
+      {
+        path: '/editSource/:id',
+        name: 'editSource',
+        component: () => import('@/views/pages/PublicCodes/sources/Edit.vue'),
+        meta: {
+          pageTitle: 'editSource',
+          Breadcrumb: 'sources',
+        },
+      },
+    ],
+  },
+  {
     path: '/cities',
     children: [
       {

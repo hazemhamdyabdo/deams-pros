@@ -347,6 +347,18 @@ defineRule("numeric", (value) => {
   }
   return true;
 });
+
+defineRule('string', (value)=> {
+  if (value) {
+    const regex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z\s]+$/;
+    const isString = regex.test(value);
+    const hasLength = value.toString().trim().length > 0;
+
+    return isString & hasLength;
+    
+  }
+  return true;
+})
 </script>
 
 <style scoped>

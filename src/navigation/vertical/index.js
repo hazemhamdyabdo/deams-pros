@@ -69,6 +69,18 @@ export default [
         isFav: false,
       },
       {
+          title: 'guests',
+          route: 'guest',
+          permission: 'viewGuests',
+          isFav: false,
+      },
+      {
+          title: 'sources',
+          route: 'sources',
+          permission: 'viewSources',
+          isFav: false,
+      },
+      {
         title: 'cities',
         route: 'cities',
         permission: 'viewCities',

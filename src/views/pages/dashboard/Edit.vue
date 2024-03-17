@@ -44,42 +44,100 @@
                   </a>
 
                   <div class="d-flex flex-wrap mb-4">
-                    <div class="d-flex me-2 mb-2">
-                      <label class="key" > {{ $t("approved") }} </label>
-                      <label class="value"> 14 </label>
+                    <div class="dash-widget me-2">
+                      <div class="dash-widgetimg">
+                        <span
+                          style="background: transparent"
+                        ><img src="@/assets/img/icons/ticket-purchase.svg" alt="img"/></span>
+                      </div>
+                      <div class="dash-widgetcontent">
+                        <h5>
+                          <vue3-autocounter
+                            class="counter"
+                            ref="counter"
+                            :startAmount="0"
+                            :delay="0"
+                            :endAmount="14"
+                            :duration="1"
+                            :autoinit="true"
+                          />
+                        </h5>
+                        <h6>{{ $t("approved") }}</h6>
+                      </div>
                     </div>
-                    <div class="d-flex mb-2">
-                      <label class="key" > {{ $t("notApproved") }} </label>
-                      <label class="value"> 5 </label>
+                    <div class="dash-widget">
+                      <div class="dash-widgetimg">
+                        <span
+                          style="background: transparent"
+                        ><img src="@/assets/img/icons/waiting-room.svg" alt="img" /></span>
+                      </div>
+                      <div class="dash-widgetcontent">
+                        <h5>
+                          <vue3-autocounter
+                            class="counter"
+                            ref="counter"
+                            :startAmount="0"
+                            :delay="0"
+                            :endAmount="5"
+                            :duration="1"
+                            :autoinit="true"
+                          />
+                        </h5>
+                        <h6>{{ $t("notApproved") }}</h6>
+                      </div>
                     </div>
                   </div>
 
                   <!-- room Service  -->
                   <div class="mb-4">
-                      <label 
-                        class="section-title mb-3"
-                        > 
-                          <vue-feather
-                            type="hard-drive"
-                            size="13"
-                            class="mx-1"
-                          ></vue-feather>
-                        {{ $t("roomService") }} 
-                      </label>
-                      <div class="d-flex flex-wrap">
-                        <div class="d-flex me-2 mb-2">
-                          <label class="key" > {{ $t("rented") }} </label>
-                          <label class="value"> 19 </label>
+                    <label 
+                      class="section-title mb-3"
+                      > 
+                        <vue-feather
+                          type="hard-drive"
+                          size="13"
+                          class="mx-1"
+                        ></vue-feather>
+                      {{ $t("roomService") }} 
+                    </label>
+                    
+                    <div class="d-flex flex-wrap">     
+                      <div class="dash-count me-2" style="max-width: 150px; background: rgba(72, 61, 139, 0.7);">
+                        <div class="dash-counts">
+                          <h4>14</h4>
+                          <h5> {{ $t('rented') }} </h5>
                         </div>
-                        <div class="d-flex me-2 mb-2">
-                          <label class="key" > {{ $t("empty") }} </label>
-                          <label class="value"> 12 </label>
-                        </div>
-                        <div class="d-flex mb-2">
-                          <label class="key" > {{ $t("suspended") }} </label>
-                          <label class="value"> 14 </label>
+                        <div class="dash-imgs">
+                          <span
+                            style="background: transparent"
+                          ><img src="@/assets/img/icons/door-close.svg" alt="img" /></span>
                         </div>
                       </div>
+
+                      <div class="dash-count me-2" style="max-width: 150px; background: rgba(107, 142, 35, 0.7)">
+                        <div class="dash-counts">
+                          <h4>12</h4>
+                          <h5> {{ $t('empty') }} </h5>
+                        </div>
+                        <div class="dash-imgs">
+                          <span
+                            style="background: transparent"
+                          ><img src="@/assets/img/icons/door-open.svg" alt="img" /></span>
+                        </div>
+                      </div>
+
+                      <div class="dash-count" style="max-width: 150px; background: rgba(205, 92, 92, 0.7);">
+                        <div class="dash-counts">
+                          <h4>19</h4>
+                          <h5> {{ $t('suspended') }} </h5>
+                        </div>
+                        <div class="dash-imgs">
+                          <span
+                            style="background: transparent"
+                          ><img src="@/assets/img/icons/door-hanger.svg" alt="img" /></span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </b-col>
 
@@ -104,18 +162,67 @@
                       :stroke="this.dashboard.net >= 0 ? 'green' : 'red'"
                       class="mx-3"
                     />
-                  <div>
-                    <div class="d-flex mb-2">
-                      <label class="key"  style="width: 150px;"> {{ $t("income") }} </label>
-                      <span class="value" style="width: 150px;"> 85200.00 </span>
+                  <div class="dash-widget">
+                    <div class="dash-widgetimg">
+                      <span
+                        style="background: rgba(0, 207, 232, 0.12);"
+                      ><img src="@/assets/img/icons/income.svg" alt="img" /></span>
                     </div>
-                    <div class="d-flex mb-2">
-                      <label class="key"  style="width: 150px;"> {{ $t("expense") }} </label>
-                      <span class="value" style="width: 150px;"> 35400.00 </span>
+                    <div class="dash-widgetcontent">
+                      <h5>
+                        <vue3-autocounter
+                          class="counter"
+                          ref="counter"
+                          :startAmount="0"
+                          :delay="0"
+                          :endAmount="85200.0"
+                          :duration="1"
+                          :autoinit="true"
+                        />
+                      </h5>
+                      <h6>{{ $t("income") }}</h6>
                     </div>
-                    <div class="d-flex">
-                      <label class="key"  style="width: 150px;"> {{ $t("net") }} </label>
-                      <span class="value" style="width: 150px;"> 49800.00 </span>
+                  </div>
+                  <div class="dash-widget">
+                    <div class="dash-widgetimg">
+                      <span
+                        style="background: rgba(234, 84, 85, 0.12);"
+                      ><img src="@/assets/img/icons/outgoing.svg" alt="img" /></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                      <h5>
+                        <vue3-autocounter
+                          class="counter"
+                          ref="counter"
+                          :startAmount="0"
+                          :delay="0"
+                          :endAmount="35400.0"
+                          :duration="1"
+                          :autoinit="true"
+                        />
+                      </h5>
+                      <h6>{{ $t("expense") }}</h6>
+                    </div>
+                  </div>
+                  <div class="dash-widget">
+                    <div class="dash-widgetimg">
+                      <span
+                      style="background: rgba(40, 199, 111, 0.12);"
+                      ><img src="@/assets/img/icons/money.svg" alt="img" /></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                      <h5>
+                        <vue3-autocounter
+                          class="counter"
+                          ref="counter"
+                          :startAmount="0"
+                          :delay="0"
+                          :endAmount="49800.0"
+                          :duration="1"
+                          :autoinit="true"
+                        />
+                      </h5>
+                      <h6>{{ $t("net") }}</h6>
                     </div>
                   </div>
                 </b-col>
@@ -319,7 +426,7 @@ export default {
               maxWidth: 160,
               style: {
                 fontSize: '14px',
-                fontFamily: 'Changa'
+                fontFamily: 'Dubai'
               },
               offsetX: -20,
               offsetY: 0,
@@ -336,7 +443,7 @@ export default {
               maxHeight: 60,
               style: {
                 fontSize: '14px',
-                fontFamily: 'Changa',
+                fontFamily: 'Dubai',
               },
             },
           },
@@ -354,7 +461,7 @@ export default {
             },
             style: {
                 fontSize: '14px',
-                fontFamily: 'Changa'
+                fontFamily: 'Dubai'
               },
           },
         },
@@ -484,37 +591,15 @@ export default {
 </script>
 
 <style>
-.dashboard .key {
-  font-size: 16px; 
-  color: #FFF; 
-  background-color: #6c757d; 
-  padding: 7px; 
-  text-align: center; 
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px; 
-  width: 100px;
-}
-
-.dashboard .value {
-  font-size: 16px; 
-  padding: 7px; 
-  text-align: center; 
-  border: 1px solid #6c757d; 
-  border-top-left-radius: 5px; 
-  border-bottom-left-radius: 5px; 
-  width: 50px;
-}
-
 .dashboard .section-title {
   font-size: 18px; 
   border-right: 5px solid #fe9f43;
   padding-right: 10px;
   font-weight: bold;
-  color: #1b2950;
 }
 
 .apexcharts-legend-text {
-  font-family: 'Changa' !important;
+  font-family: 'Dubai' !important;
   padding-left: 5px;
   font-size: 16px !important;
 }
@@ -522,7 +607,7 @@ export default {
 .apexcharts-pie-label,
 .apexcharts-datalabel {
   font-size: 16px;
-  font-family: 'Changa' !important;
+  font-family: 'Dubai' !important;
   text-anchor: middle;
   fill: #414926;
 }
@@ -530,5 +615,16 @@ export default {
 .dashboard .active-reservation {
   background-color: #6c757d;
   color: #FFF;
+}
+.dash-widget {
+  margin-bottom: 10px !important;
+  padding: 5px 10px !important;
+}
+.dash-count {
+  min-height: 73px !important;
+  padding: 5px 10px !important;
+}
+.dash-count .dash-imgs img{
+  height: 35px !important;
 }
 </style>

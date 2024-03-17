@@ -1,22 +1,54 @@
 <template>
   <!-- Header Menu -->
   <ul class="nav user-menu">
-    <!-- Search
+    <!-- Search -->
     <li class="nav-item nav-searchinputs">
       <div class="top-nav-search">
-        <a href="javascript:void(0);" class="responsive-search">
-          <i class="fa fa-search"></i>
-        </a>
-        <form action="#">
-          <div class="searchinputs">
-            <input type="text" placeholder="Search" />
-            <div class="search-addon">
-              <span><vue-feather type="search" class="feather-14"></vue-feather></span>
-            </div>
-          </div>
-        </form>
+        <div class="continer">
+          <!-- v-for="i in head"
+            :key="i" -->
+          <span
+            style="
+              display: flex;
+              align-items: center;
+              border-left: 2px solid #929090;
+              padding-left: 0.5rem;
+            "
+          >
+          </span>
+          <ul style="display: flex; align-items: center; color: #333">
+            <VueFeather type="home" />
+            <VueFeather
+              v-if="this.$route.meta.Breadcrumb"
+              type="chevron-left"
+            />
+            <a
+              to="/dashboard"
+              style="
+                color: #333;
+                font-size: 1.5rem;
+                pointer-events: none;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <!-- render if there any pernet tap -->
+              <h3 v-if="this.$route.meta.Breadcrumb">
+                {{ $t(this.$route.meta.Breadcrumb) }}
+              </h3>
+              <VueFeather
+                v-if="this.$route.meta.Breadcrumb"
+                type="chevron-left"
+              />
+              <!-- get the first route in path -->
+              <h3 v-if="this.$route.meta.Breadcrumb">
+                {{ $t(this.$route.meta.pageTitle) }}
+              </h3>
+            </a>
+          </ul>
+        </div>
       </div>
-    </li> -->
+    </li>
     <!-- /Search -->
 
     <!-- Flag -->
@@ -82,11 +114,15 @@
               <router-link to="activities">
                 <div class="media d-flex">
                   <span class="avatar flex-shrink-0">
-                    <img alt="" :src="require(`../assets/img/profiles/${item.img}`)" />
+                    <img
+                      alt=""
+                      :src="require(`../assets/img/profiles/${item.img}`)"
+                    />
                   </span>
                   <div class="media-body flex-grow-1">
                     <p class="noti-details">
-                      <span class="noti-title">{{ item.name }}</span> {{ item.task }}
+                      <span class="noti-title">{{ item.name }}</span>
+                      {{ item.task }}
                       <span class="noti-title">{{ item.booking }}</span>
                     </p>
                     <p class="noti-time">
@@ -161,9 +197,14 @@
 <script>
 import headernotification from "../assets/json/headernotification.json";
 export default {
+  /**
+   * ! changes in headermenu component, sidebarBody, router file (dashboard- publicCode), headerlogo and auth / signin
+   * ?? main js and package.json
+   */
   data() {
     return {
       headernotification: headernotification,
+      tap: "",
       languages: [
         {
           iso: "us",
@@ -188,6 +229,9 @@ export default {
       ],
     };
   },
+  computed: {
+  },
+
   methods: {
     setLanguage(locale, country, flag) {
       this.lan = locale;
@@ -208,7 +252,9 @@ export default {
         } else if (document.documentElement.mozRequestFullScreen) {
           document.documentElement.mozRequestFullScreen();
         } else if (document.documentElement.webkitRequestFullscreen) {
-          document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          document.documentElement.webkitRequestFullscreen(
+            Element.ALLOW_KEYBOARD_INPUT
+          );
         }
       } else {
         if (document.cancelFullScreen) {
@@ -223,3 +269,18 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.nav-searchinputs h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+}
+.continer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/*  */
+</style>

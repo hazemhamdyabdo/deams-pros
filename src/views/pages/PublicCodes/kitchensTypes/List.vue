@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="$t(title)" />
+        <pageheader/>
         <!-- /add -->
         <div class="card">
           <div class="card-body">

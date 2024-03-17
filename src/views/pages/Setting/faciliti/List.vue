@@ -10,7 +10,6 @@
               ref="floor-table"
               :items="items"
               :columns="tableColumns"
-              :is-busy="isTableBusy"
               :noAction="true"
               perPage="25"
               :totalRows="totalRows"
@@ -19,7 +18,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addRoomTypes' });
+                  $router.push({ name: 'addCity' });
                 }
               "
             >
@@ -78,9 +77,9 @@
     </div>
   </div>
 </template>
-
-<script>
-import GTable from '../../Shared/Table.vue';
+    
+    <script>
+import GTable from "../../Shared/Table.vue";
 
 export default {
   components: {
@@ -88,15 +87,12 @@ export default {
   },
   data() {
     return {
-      selectedItem: {
-        Code: '',
-      },
       paymentMethods: [],
       totalRows: 0,
       currentPage: 1,
       perPage: 25,
-      searchQuery: '',
-      sortDirection: 'asc',
+      searchQuery: "",
+      sortDirection: "asc",
       filter: null,
       filterOn: [],
       items: [],
@@ -105,10 +101,10 @@ export default {
   computed: {
     tableColumns() {
       return [
-        { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'arabicName', label: this.$t('room type'), sortable: true },
-        { key: 'notes', label: this.$t('notes'), sortable: true },
-        { key: 'actions' },
+        { key: "code", label: this.$t("code"), sortable: true },
+        { key: "arabicName", label: this.$t("facilityName"), sortable: true },
+        { key: "notes", label: this.$t("notes"), sortable: true },
+        { key: "actions" },
       ];
     },
   },
@@ -117,7 +113,7 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'RoomTypes' }).then((data) => {
+      this.get({ url: "Facilities" }).then((data) => {
         this.items = data;
       });
     },
@@ -127,25 +123,25 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'ediRoomTypes',
+        name: "editCity",
         params: { id: item.id },
       });
     },
     remove(item) {
       this.confirmAction(
         {
-          text: this.$t('areYouSureYouWantToDelete'),
+          text: this.$t("areYouSureYouWantToDelete"),
         },
         () => {
           // then delete
-          this.delete({ url: 'RoomTypes', id: item.id }).then(() => {
-            this.doneAlert({ text: this.$t('deletedSuccessfully') });
+          this.delete({ url: "Facilities", id: item.id }).then(() => {
+            this.doneAlert({ text: this.$t("deletedSuccessfully") });
             this.getItems();
           });
         }
       );
     },
   },
-  name: 'RentTypes',
 };
 </script>
+    

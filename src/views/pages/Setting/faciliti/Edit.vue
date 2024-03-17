@@ -8,6 +8,46 @@
           <div class="card-body">
             <gform @submit="save()">
               <b-row>
+                <b-col cols="12" class="d-flex justify-content-center mb-2">
+                  <!-- media -->
+                  <b-media no-body>
+                    <b-media-aside>
+                      <b-link>
+                        <b-img
+                          ref="previewEl"
+                          rounded
+                          height="80"
+                          width="80"
+                          :src="url"
+                        />
+                      </b-link>
+                      <!--/ avatar -->
+                    </b-media-aside>
+
+                    <b-media-body class="mt-75 ml-75">
+                      <!-- upload button -->
+                      <b-button
+                        variant="primary"
+                        size="sm"
+                        class="mb-75 mr-75"
+                        @click="$refs.imgupload.$el.click()"
+                      >
+                        {{ $t("change") }}
+                      </b-button>
+                      <b-form-file
+                        ref="imgupload"
+                        accept=".jpg, .png, .gif"
+                        :hidden="true"
+                        plain
+                        @change="onFileChanged"
+                      />
+                      <!--/ upload button -->
+                    </b-media-body>
+                  </b-media>
+                  <!--/ media -->
+                </b-col>
+              </b-row>
+              <b-row>
                 <b-col md="4">
                   <gfield
                     label-text="code"
@@ -43,7 +83,7 @@
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
                   >
-                    {{ $t('general') }}
+                    {{ $t("general") }}
                   </label>
                   <b-form-group>
                     <b-form-checkbox
@@ -62,7 +102,7 @@
                       style="font-size: 14px; margin-bottom: 7px"
                       for="customer"
                     >
-                      {{ $t('notes') }}
+                      {{ $t("notes") }}
                     </label>
                     <b-form-textarea
                       id="textarea"
@@ -83,7 +123,7 @@
                     variant="primary"
                     data-action-type="save"
                   >
-                    {{ $t('save') }}
+                    {{ $t("save") }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -94,7 +134,7 @@
     </div>
   </div>
 </template>
-<script>
+    <script>
 export default {
   components: {},
   props: {
@@ -107,8 +147,6 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: '',
-      title1: '',
       id: 0,
     };
   },
@@ -126,28 +164,29 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'RoomTypes',
+          url: "Cities",
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
-          this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.doneAlert({ text: this.$t("updatedSuccessfully") });
+          this.$router.push({ name: "cities" });
         });
       } else {
         this.create({
-          url: 'RoomTypes',
+          url: "Cities",
           data: this.selectedItem,
         }).then(() => {
-          this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.doneAlert({ text: this.$t("savedSuccessfully") });
+          this.$router.push({ name: "cities" });
         });
       }
     },
     getSelected() {
-      this.get({ url: 'RoomTypes', id: this.id }).then((data) => {
+      this.get({ url: "Cities", id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
   },
 };
 </script>
+    

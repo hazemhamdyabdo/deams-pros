@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader :title="title" :title1="title1" />
+        <pageheader />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -100,8 +100,6 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
-      title: "",
-      title1: "",
     };
   },
   computed: {

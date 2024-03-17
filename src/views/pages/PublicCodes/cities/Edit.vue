@@ -43,7 +43,7 @@
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
                   >
-                    {{ $t('general') }}
+                    {{ $t("general") }}
                   </label>
                   <b-form-group>
                     <b-form-checkbox
@@ -62,7 +62,7 @@
                       style="font-size: 14px; margin-bottom: 7px"
                       for="customer"
                     >
-                      {{ $t('notes') }}
+                      {{ $t("notes") }}
                     </label>
                     <b-form-textarea
                       id="textarea"
@@ -83,7 +83,7 @@
                     variant="primary"
                     data-action-type="save"
                   >
-                    {{ $t('save') }}
+                    {{ $t("save") }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -94,7 +94,7 @@
     </div>
   </div>
 </template>
-<script>
+  <script>
 export default {
   components: {},
   props: {
@@ -107,8 +107,6 @@ export default {
     return {
       selectedItem: {},
       items: [],
-      title: '',
-      title1: '',
       id: 0,
     };
   },
@@ -126,28 +124,29 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'RoomTypes',
+          url: "Cities",
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
-          this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.doneAlert({ text: this.$t("updatedSuccessfully") });
+          this.$router.push({ name: "cities" });
         });
       } else {
         this.create({
-          url: 'RoomTypes',
+          url: "Cities",
           data: this.selectedItem,
         }).then(() => {
-          this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.doneAlert({ text: this.$t("savedSuccessfully") });
+          this.$router.push({ name: "cities" });
         });
       }
     },
     getSelected() {
-      this.get({ url: 'RoomTypes', id: this.id }).then((data) => {
+      this.get({ url: "Cities", id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
   },
 };
 </script>
+  

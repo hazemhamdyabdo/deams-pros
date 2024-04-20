@@ -31,8 +31,11 @@ export default {
     }),
   },
   mounted() {
-    console.log(store);
+    console.log('app.vue');
     // Sidebar Visible
+
+	console.log(this.profile);
+	if (this.profile.userId || this.profile.isAdmin) this.Startup();
 
     $(".open-layout").on("click", function (s) {
       s.preventDefault();
@@ -366,6 +369,15 @@ export default {
     ...mapMutations({
       setCompany: "app/setCompany",
     }),
+	Startup() {
+		console.log('558');
+      this.get({ url: "aggregates/StartUp" })
+        .then((data) => {
+          this.setBranches(data.branches);
+          this.setCompany(data.currentCompany);
+          this.mainCompany = data.currentCompany;
+          // this.setCompany(data.currentCompany);
+        })},
   },
 };
 </script>

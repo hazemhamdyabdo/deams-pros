@@ -18,10 +18,11 @@
               </div>
               <Form
                 class="login"
-                @submit="onSubmit"
                 :validation-schema="schema"
                 v-slot="{ errors }"
               >
+                <!-- @submit="onSubmit" -->
+
                 <div class="form-login">
                   <label>Email</label>
                   <div class="form-addons">
@@ -65,7 +66,9 @@
                         'fa-eye-slash': !showPassword,
                       }"
                     ></span>
-                    <div class="invalid-feedback">{{ errors.password }}</div>
+                    <div class="invalid-feedback">
+                      {{ errors.password }}
+                    </div>
                     <div class="emailshow text-danger" id="password"></div>
                   </div>
                 </div>
@@ -79,9 +82,39 @@
                   </div>
                 </div>
                 <div class="form-login">
-                  <router-link class="btn btn-login" to="dashboard">Sign In</router-link>
+                  <router-link class="btn btn-login" to="dashboard"
+                    >Sign In</router-link
+                  >
                 </div>
               </Form>
+              <gform @submit="onSubmit">
+                <b-row>
+                  <b-col md="8">
+                    <gfield
+                      v-model="userName"
+                      placeholder=""
+                      label-text="userName"
+                      id="login-email"
+                      name="UserName"
+                    >
+                    </gfield>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col md="8">
+                    <gfield
+                      label-text="Password"
+                      v-model="password"
+                      name="login-password"
+                      placeholder=""
+                    >
+                    </gfield>
+                  </b-col>
+                </b-row>
+                <div class="form-login">
+                  <button class="btn btn-login" to="dashboard">Sign In</button>
+                </div>
+              </gform>
               <div class="signinform text-center">
                 <h4>
                   Don’t have an account?
@@ -127,11 +160,11 @@
   <!-- /Main Wrapper -->
 </template>
 <script>
-import { ref } from "vue";
-import { useStore } from "vuex";
+/**
+ * @TODO: 1-datepacker: g-datepicker
+ */
 import { Form, Field } from "vee-validate";
-import { router } from "../../../router";
-import VueRouter from "vue-router";
+import { mapActions } from "vuex";
 import * as Yup from "yup";
 export default {
   components: {
@@ -142,6 +175,10 @@ export default {
     return {
       showPassword: false,
       password: null,
+      userName: null,
+      updatedUserName: null,
+      checkSympole: null,
+      prodctionUrl: null,
     };
   },
   computed: {
@@ -150,9 +187,53 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      loginApi: "auth/login",
+    }),
+    beforeLoginValidation() {
+      this.checkSympole = this.userName?.indexOf("\\");
+      // this.prodctionUrl = document.location.host.indexOf("eduprosys.net"); // ! idk
+      if (this.checkSympole === -1) {
+        // change not
+        this.doneAlert({
+          title: this.$t("notAllowToAddThisSyempol"),
+          type: "error",
+        });
+        return false;
+      }
+      return true;
+    },
+    checkUserName() {
+      const check = this.userName?.indexOf("\\");
+      // const prodction = document.location.host.indexOf("eduprosys.net"); // ! idk
+      const hostName = document.location.host.split(".");
+      if (check === -1) {
+        this.updatedUserName = `${hostName[0]}\\${this.userName}`;
+      } else if (check === -1) {
+        // change not
+        this.doneAlert({
+          title: this.$t("notAllowToAddThisSyempol"),
+          type: "error",
+        });
+      } else {
+        this.updatedUserName = this.userName;
+      }
+    },
     toggleShow() {
       this.showPassword = !this.showPassword;
     },
+    async onSubmit() {
+      if (!this.beforeLoginValidation()) return;
+      this.checkUserName();
+      const body = {
+        userName: this.updatedUserName,
+        password: this.password,
+      };
+      await this.loginApi(body);
+    },
+  },
+  mounted() {
+    this.checkSympole = this.userName?.indexOf("\\");
   },
   setup() {
     let users = localStorage.getItem("storedData");
@@ -167,30 +248,16 @@ export default {
       localStorage.setItem("storedData", jsonData);
     }
     const schema = Yup.object().shape({
-      email: Yup.string().required("Email is required").email("Email is invalid"),
+      email: Yup.string()
+        .required("Email is required")
+        .email("Email is invalid"),
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     });
-    const onSubmit = (values) => {
-      document.getElementById("email").innerHTML = "";
-      document.getElementById("password").innerHTML = "";
-      let data = localStorage.getItem("storedData");
-      var Pdata = JSON.parse(data);
-      const Eresult = Pdata.find(({ email }) => email === values.email);
-      if (Eresult) {
-        if (Eresult.password === values.password) {
-          router.push("/index");
-        } else {
-          document.getElementById("password").innerHTML = "Incorrect password";
-        }
-      } else {
-        document.getElementById("email").innerHTML = "Email is not valid";
-      }
-    };
+
     return {
       schema,
-      onSubmit,
     };
   },
 };

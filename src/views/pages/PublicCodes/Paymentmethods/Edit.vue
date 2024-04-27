@@ -53,6 +53,7 @@
                     v-model="selectedItem.bankId"
                     name="bankName"
                     label-text="bankName"
+                    rules="required"
                   />
                 </b-col>
                 <!-- iban  -->

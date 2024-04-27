@@ -174,7 +174,7 @@ export default [
         component: () =>
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
-          pageTitle: 'addPaymentMethod',
+          pageTitle: 'editPaymentMethod',
           Breadcrumb: 'paymentMethod',
         },
       },

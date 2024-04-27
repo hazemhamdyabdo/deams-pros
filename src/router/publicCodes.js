@@ -330,8 +330,8 @@ export default [
       },
       {
         path: '/roomTypes',
-        name: 'roomTypes',
-        component: () => import('@/views/pages/PublicCodes/roomTypes/List.vue'),
+        name: 'addRoomTypes',
+        component: () => import('@/views/pages/PublicCodes/roomTypes/Edit.vue'),
         meta: {
           pageTitle: 'addRoomType',
           Breadcrumb: 'roomTypes',

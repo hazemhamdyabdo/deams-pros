@@ -7,6 +7,21 @@
       <div class="card">
         <div class="card-body">
           <gform @submit="save()">
+
+            <!-- isOutOfService -->
+            <b-row class="mb-4">
+              <b-col md="3">
+                <b-form-checkbox
+                  v-model="selectedItem.isOutOfService"
+                  name="check-button"
+                  switch
+                  inline
+                >
+                  {{ $t('outOfService') }}
+                </b-form-checkbox>
+              </b-col>
+            </b-row>
+            
             <b-row>
               <!-- code  -->
               <b-col 
@@ -256,25 +271,6 @@
                   <b-form-checkbox
                     id="roomContainsTV"
                     v-model="selectedItem.isContainTV"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
-                    inline
-                  />
-                </b-form-group>
-              </b-col>
-
-              <!-- isOutOfService  -->
-              <b-col md="3">
-                <label
-                  style="font-size: 14px; margin-bottom: 10px"
-                  for="outOfService"
-                >
-                  {{ $t('outOfService') }}
-                </label>
-                <b-form-group>
-                  <b-form-checkbox
-                    id="outOfService"
-                    v-model="selectedItem.isOutOfService"
                     class="mr-0 mt-50"
                     name="is-rtl"
                     inline

@@ -48,6 +48,7 @@
                     ref="buildingName"
                     v-model="selectedItem.buildingId"
                     label-text="buildingName"
+                    rules="required"
                   />
                 </b-col>
                 <!-- arrangement  -->

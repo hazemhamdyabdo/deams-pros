@@ -2,8 +2,12 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader />
-        <!-- /add -->
+        <!-- header  -->
+        <pageheader 
+          :title="$t(title)" 
+          :title1="$t(description)" 
+        />
+        
         <div class="card">
           <div class="card-body">
             <g-table
@@ -99,6 +103,8 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
+      title: "loungesTypes",
+      description: "previewLoungesTypes",
     };
   },
   computed: {

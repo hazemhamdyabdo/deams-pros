@@ -2,7 +2,12 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader />
+        <!-- header  -->
+        <pageheader 
+          :title="$t(title)" 
+          :title1="$t(description)" 
+        />
+
         <!-- /add -->
         <div class="card">
           <div class="card-body">
@@ -99,6 +104,8 @@ export default {
       filter: null,
       filterOn: [],
       items: [],
+      title: "floors",
+      description: "previewFloors",
     };
   },
   computed: {

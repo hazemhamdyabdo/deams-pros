@@ -524,19 +524,8 @@
             <b-row>
               <b-col cols="12" class="d-flex justify-content-end">
                 <b-button
-                  variant="outline-primary"
-                  class="me-2"
-                  @click="backToList()"
-                >
-                  <vue-feather
-                    type="log-out"
-                    size="12"
-                    class="mx-1"
-                  />
-                  {{ $t('backToPreview') }}
-                </b-button>
-                <b-button
                   type="submit"
+                  class="me-2"
                   variant="primary"
                   data-action-type="save"
                 >
@@ -546,6 +535,17 @@
                     class="mx-1"
                   />
                   {{ $t('save') }}
+                </b-button>
+                <b-button
+                  variant="outline-primary"
+                  @click="backToList()"
+                >
+                  <vue-feather
+                    type="log-out"
+                    size="12"
+                    class="mx-1"
+                  />
+                  {{ $t('backToPreview') }}
                 </b-button>
               </b-col>
             </b-row>

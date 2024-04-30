@@ -92,6 +92,12 @@ export default [
         permission: 'viewCountries',
         isFav: false,
       },
+      {
+        title: 'discounts',
+        route: 'discounts',
+        permission: 'viewDiscounts',
+        isFav: false,
+      },
     ],
   },
   {

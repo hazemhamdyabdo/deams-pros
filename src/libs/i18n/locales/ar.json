@@ -221,5 +221,15 @@
   "previewLoungesTypes": "استعراض وإدارة أنواع الصالات التي تم تعريفها",
   "previewRoomsTypes": "استعراض وإدارة أنواع الغرف التي تم تعريفها",
   "previewCities": "استعراض وإدارة المدن التي تم تعريفها",
-  "previewCountries": "استعراض وإدارة الدول التي تم تعريفها"
+  "previewCountries": "استعراض وإدارة الدول التي تم تعريفها",
+  "discounts": "الخصومات",
+  "discount": "الخصم",
+  "previewDiscounts": "استعراض وإدارة الخصومات التي تم تعريفها",
+  "addDiscount": "إضافة خصم",
+  "editDiscount": "تعديل خصم",
+  "discountTypeAr": "نوع الخصم عربي",
+  "discountTypeEn": "نوع الخصم إنجليزي",
+  "discountRatio": "نسبة الخصم",
+  "active": "نشط",
+  "notActive": "غير نشط"
 }

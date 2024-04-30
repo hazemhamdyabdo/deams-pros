@@ -339,7 +339,7 @@ export default {
 
 defineRule("numeric", (value) => {
   if (value) {
-    const regex = /^[0-9]+$/;
+    const regex = /^\d*\.?\d+$/;
     const isNumeric = regex.test(value);
     const hasLength = value.toString().trim().length > 0;
 

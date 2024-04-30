@@ -508,4 +508,36 @@ export default [
       },
     ],
   },
+  {
+    path: '/discounts',
+    children: [
+      {
+        path: '',
+        name: 'discounts',
+        component: () => import('@/views/pages/PublicCodes/discounts/List.vue'),
+        meta: {
+          pageTitle: 'discounts',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addDiscount',
+        name: 'addDiscount',
+        component: () => import('@/views/pages/PublicCodes/discounts/Edit.vue'),
+        meta: {
+          pageTitle: 'addDiscount',
+          Breadcrumb: 'discounts',
+        },
+      },
+      {
+        path: '/editDiscount/:id',
+        name: 'editDiscount',
+        component: () => import('@/views/pages/PublicCodes/discounts/Edit.vue'),
+        meta: {
+          pageTitle: 'editDiscount',
+          Breadcrumb: 'discounts',
+        },
+      },
+    ],
+  },
 ];

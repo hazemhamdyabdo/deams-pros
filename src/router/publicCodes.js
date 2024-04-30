@@ -540,4 +540,36 @@ export default [
       },
     ],
   },
+  {
+    path: '/expenses',
+    children: [
+      {
+        path: '',
+        name: 'expenses',
+        component: () => import('@/views/pages/PublicCodes/expenses/List.vue'),
+        meta: {
+          pageTitle: 'expenses',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addExpense',
+        name: 'addExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'addExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+      {
+        path: '/editExpense/:id',
+        name: 'editExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'editExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+    ],
+  },
 ];

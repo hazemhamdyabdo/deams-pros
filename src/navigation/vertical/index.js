@@ -98,6 +98,12 @@ export default [
         permission: 'viewDiscounts',
         isFav: false,
       },
+      {
+        title: 'expenses',
+        route: 'expenses',
+        permission: 'viewExpenses',
+        isFav: false,
+      },
     ],
   },
   {

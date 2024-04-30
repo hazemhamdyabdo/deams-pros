@@ -104,6 +104,12 @@ export default [
         permission: 'viewExpenses',
         isFav: false,
       },
+      {
+        title: 'suppliers',
+        route: 'suppliers',
+        permission: 'viewSuppliers',
+        isFav: false,
+      },
     ],
   },
   {

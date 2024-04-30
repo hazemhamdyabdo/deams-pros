@@ -572,4 +572,36 @@ export default [
       },
     ],
   },
+  {
+    path: '/suppliers',
+    children: [
+      {
+        path: '',
+        name: 'suppliers',
+        component: () => import('@/views/pages/PublicCodes/suppliers/List.vue'),
+        meta: {
+          pageTitle: 'suppliers',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addSupplier',
+        name: 'addSupplier',
+        component: () => import('@/views/pages/PublicCodes/suppliers/Edit.vue'),
+        meta: {
+          pageTitle: 'addSupplier',
+          Breadcrumb: 'suppliers',
+        },
+      },
+      {
+        path: '/editSupplier/:id',
+        name: 'editSupplier',
+        component: () => import('@/views/pages/PublicCodes/suppliers/Edit.vue'),
+        meta: {
+          pageTitle: 'editSupplier',
+          Breadcrumb: 'suppliers',
+        },
+      },
+    ],
+  },
 ];

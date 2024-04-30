@@ -235,5 +235,11 @@
   "expenses": "المصروفات",
   "addExpense": "إضافة مصروف",
   "editExpense": "تعديل مصروف",
-  "previewExpenses": "استعراض وإدارة المصروفات التي تم تعريفها"
+  "previewExpenses": "استعراض وإدارة المصروفات التي تم تعريفها",
+  "suppliers": "الموردين",
+  "supplier": "المورد",
+  "addSupplier": "إضافة مورد",
+  "editSupplier": "تعديل مورد",
+  "previewSuppliers": "استعراض وإدارة الموردين الذين تم تعريفهم",
+  "taxNumber": "الرقم الضريبي"
 }

@@ -231,5 +231,9 @@
   "discountTypeEn": "نوع الخصم إنجليزي",
   "discountRatio": "نسبة الخصم",
   "active": "نشط",
-  "notActive": "غير نشط"
+  "notActive": "غير نشط",
+  "expenses": "المصروفات",
+  "addExpense": "إضافة مصروف",
+  "editExpense": "تعديل مصروف",
+  "previewExpenses": "استعراض وإدارة المصروفات التي تم تعريفها"
 }

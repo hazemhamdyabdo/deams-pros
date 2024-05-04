@@ -23,23 +23,10 @@
 
                 <!-- transaction Date -->
                 <b-col md="3">  
-                  <div class="form-group">
-                    <label style="font-size: 15px; font-weight: 500px; margin-bottom: 7px;"> {{ $t('transactionDate') }}</label>
-                    <div class="input-groupicon">
-                      <datepicker
-                        style="font-weight: normal;"
-                        v-model="selectedItem.transactionDate"
-                        class="picker"
-                        name="birthDateAd"
-                        id="birthDateAd"
-                        :editable="true"
-                        :clearable="false"
-                      />
-                      <a class="addonset">
-                        <img src="@/assets/img/icons/calendars.svg" alt="img" />
-                      </a>
-                    </div>
-                  </div> 
+                  <VueDatePicker
+                    label="transactionDate"
+                    v-model="selectedItem.transactionDate"
+                  />
                 </b-col>
 
                 <!-- transaction Time  -->
@@ -153,8 +140,11 @@
 </template>
 
 <script>
+import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
 export default {
-  components: {},
+  components: {
+    VueDatePicker,
+  },
   props: {
     id: {
       type: [Number, String],
@@ -206,7 +196,6 @@ export default {
     },
     onLoad() {
       this.id = this.$route.params.id;
-      this.selectedItem.transactionDate = new Date();
       this.selectedItem.transactionTime = this.getTime();
       this.selectedItem.voucherValue = 0;
     },

@@ -496,4 +496,8 @@ export default {
 .entries label {
   font-size: 14px;
 }
+
+.active>.page-link {
+  border-color: #FF9900 !important;
+}
 </style>

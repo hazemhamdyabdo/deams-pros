@@ -2,60 +2,11 @@
   <div class="main-wrapper">
   <div class="page-wrapper">
     <div class="content">
-      <pageheader 
-        :title=$t(_title) 
-        :title1=$t(_title1) 
-      />
       <div class="card">
         <div class="card-body">
           <gform 
             class="guest-data" 
             @submit="save()">
-
-            <!-- hint and icons  -->
-           <!-- <b-row>
-              <b-col 
-                xs="6"
-                class="mb-3 mt-3"
-              >
-                <div class="d-flex flex-column justify-content align-items-center">
-                  <img 
-                    src="@/assets/img/custom/guest.png" 
-                    width="60" 
-                    alt="guest-img" 
-                    class="mb-1"
-                  />
-                  <label 
-                    style="font-size: 16px;"
-                  > {{ $t('guestData') }} </label>
-                  <label 
-                    style="font-size: 13px; color: #b5b5b5; text-align: center;"
-                  > {{ $t('guestDataHint') }} </label>
-                </div>
-              </b-col>
-
-              <b-col 
-                xs="6"
-                class="mb-3 mt-3"
-              >
-                <div class="d-flex flex-column justify-content align-items-center">
-                  <img 
-                    src="@/assets/img/custom/family.png" 
-                    width="60" 
-                    alt="companions-img" 
-                    class="mb-1"
-                  />
-                  <label 
-                    style="font-size: 16px;"
-                  > 
-                    {{ $t('companionsData') }} </label>
-                  <label 
-                    style="font-size: 13px; color: #b5b5b5; text-align: center;"
-                  > 
-                    {{ $t('companionsDataHint') }}  </label>
-                </div>
-              </b-col>
-           </b-row> -->
 
            <!-- data tab -->
             <b-tabs
@@ -462,7 +413,7 @@
                   <b-col cols="12">
                     <b-button
                       v-if="_helper.operationsVisibility.showReset"
-                      variant="outline-success"
+                      variant="secondary"
                       class="mt-2"
                       @click="reset()"
                     >
@@ -476,7 +427,7 @@
 
                     <b-button
                       v-if="_helper.operationsVisibility.showEdit"
-                      variant="outline-success"
+                      variant="secondary"
                       class="mt-2"
                       @click="updateCompanion()"
                     >
@@ -490,13 +441,13 @@
 
                     <b-button
                       v-if="_helper.operationsVisibility.showAdd"
-                      variant="outline-success"
+                      variant="secondary"
                       class="mt-2"
                       @click="addCompanionToList()"
                     >
                       <vue-feather
-                        type="plus"
-                        size="12"
+                        type="plus-circle"
+                        size="14"
                         class="mx-1"
                       />
                       {{ $t('addToCompanionList') }}
@@ -573,19 +524,8 @@
             <b-row>
               <b-col cols="12" class="d-flex justify-content-end">
                 <b-button
-                  variant="outline-primary"
-                  class="me-2"
-                  @click="backToList()"
-                >
-                  <vue-feather
-                    type="log-out"
-                    size="12"
-                    class="mx-1"
-                  />
-                  {{ $t('backToPreview') }}
-                </b-button>
-                <b-button
                   type="submit"
+                  class="me-2"
                   variant="primary"
                   data-action-type="save"
                 >
@@ -595,6 +535,17 @@
                     class="mx-1"
                   />
                   {{ $t('save') }}
+                </b-button>
+                <b-button
+                  variant="outline-primary"
+                  @click="backToList()"
+                >
+                  <vue-feather
+                    type="log-out"
+                    size="12"
+                    class="mx-1"
+                  />
+                  {{ $t('backToPreview') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -772,6 +723,9 @@ export default {
 
         case 'visitor':
           return this.$t('visaNumber')
+
+        case 'passport':
+        return this.$t('passportNumber')
           
         default:
           return this.$t('nationalIdentityNumber')
@@ -785,6 +739,9 @@ export default {
 
         case 'visitor':
           return this.$t('visaNumberForCompanion')
+
+        case 'passport':
+          return this.$t('passportNumber')
           
         default:
           return this.$t('nationalIdentityNumberForCompanion')

@@ -174,7 +174,7 @@ export default [
         component: () =>
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
-          pageTitle: 'addPaymentMethod',
+          pageTitle: 'editPaymentMethod',
           Breadcrumb: 'paymentMethod',
         },
       },
@@ -330,8 +330,8 @@ export default [
       },
       {
         path: '/roomTypes',
-        name: 'roomTypes',
-        component: () => import('@/views/pages/PublicCodes/roomTypes/List.vue'),
+        name: 'addRoomTypes',
+        component: () => import('@/views/pages/PublicCodes/roomTypes/Edit.vue'),
         meta: {
           pageTitle: 'addRoomType',
           Breadcrumb: 'roomTypes',

@@ -10,16 +10,19 @@
           <div class="card-body">
             <gform @submit="save()">
               <b-row>
-                <b-col md="4">
+                <b-col 
+                  v-if="selectedItem.id > 0"
+                  md="3"  
+                >
                   <gfield
-                    label-text="Code"
+                    label-text="code"
                     ref="code"
                     name="code"
                     id="code"
                     v-model="selectedItem.code"
                   />
                 </b-col>
-                <b-col md="4">
+                <b-col md="3">
                   <!-- arabicName  -->
                   <gfield
                     id="arabicName"
@@ -29,7 +32,7 @@
                     ref="arabicName"
                   />
                 </b-col>
-                <b-col md="4">
+                <b-col md="3">
                   <gfield
                     id="englishName"
                     ref="englishName"
@@ -38,10 +41,8 @@
                     label-text="englishName"
                   />
                 </b-col>
-              </b-row>
-              <b-row>
                 <!-- bank -->
-                <b-col md="4">
+                <b-col md="3">
                   <gfield
                     label="arabicName"
                     :dir="'rtl'"
@@ -52,10 +53,11 @@
                     v-model="selectedItem.bankId"
                     name="bankName"
                     label-text="bankName"
+                    rules="required"
                   />
                 </b-col>
                 <!-- iban  -->
-                <b-col md="4">
+                <b-col md="3">
                   <label
                     style="font-size: 14px; margin-bottom: 7px"
                     for="general"
@@ -94,13 +96,28 @@
               <b-row>
                 <b-col cols="12" class="d-flex justify-content-end">
                   <b-button
-                    v-permission="$route.meta.permission"
-                    class="mx-2"
                     type="submit"
+                    class="me-2"
                     variant="primary"
                     data-action-type="save"
                   >
+                    <vue-feather
+                      type="check-circle"
+                      size="12"
+                      class="mx-1"
+                    />
                     {{ $t('save') }}
+                  </b-button>
+                  <b-button
+                    variant="outline-primary"
+                    @click="backToList()"
+                  >
+                    <vue-feather
+                      type="log-out"
+                      size="12"
+                      class="mx-1"
+                    />
+                    {{ $t('backToPreview') }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -169,6 +186,9 @@ export default {
       this.get({ url: 'PaymentMethods', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
+    },
+    backToList() {
+      this.$router.push({ name: 'PaymentMehtod' });
     },
   },
 };

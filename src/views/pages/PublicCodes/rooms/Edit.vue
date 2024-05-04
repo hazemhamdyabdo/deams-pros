@@ -7,6 +7,21 @@
       <div class="card">
         <div class="card-body">
           <gform @submit="save()">
+
+            <!-- isOutOfService -->
+            <b-row class="mb-4">
+              <b-col md="3">
+                <b-form-checkbox
+                  v-model="selectedItem.isOutOfService"
+                  name="check-button"
+                  switch
+                  inline
+                >
+                  {{ $t('outOfService') }}
+                </b-form-checkbox>
+              </b-col>
+            </b-row>
+            
             <b-row>
               <!-- code  -->
               <b-col 
@@ -262,25 +277,6 @@
                   />
                 </b-form-group>
               </b-col>
-
-              <!-- isOutOfService  -->
-              <b-col md="3">
-                <label
-                  style="font-size: 14px; margin-bottom: 10px"
-                  for="outOfService"
-                >
-                  {{ $t('outOfService') }}
-                </label>
-                <b-form-group>
-                  <b-form-checkbox
-                    id="outOfService"
-                    v-model="selectedItem.isOutOfService"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
-                    inline
-                  />
-                </b-form-group>
-              </b-col>
             </b-row>
 
             <!-- notes  -->
@@ -308,19 +304,8 @@
             <b-row>
               <b-col cols="12" class="d-flex justify-content-end">
                 <b-button
-                  class="me-2"
-                  variant="outline-primary"
-                  @click="backToList()"
-                >
-                  <vue-feather
-                    type="log-out"
-                    size="12"
-                    class="mx-1"
-                  />
-                  {{ $t('backToPreview') }}
-                </b-button>
-                <b-button
                   type="submit"
+                  class="me-2"
                   variant="primary"
                   data-action-type="save"
                 >
@@ -330,6 +315,17 @@
                     class="mx-1"
                   />
                   {{ $t('save') }}
+                </b-button>
+                <b-button
+                  variant="outline-primary"
+                  @click="backToList()"
+                >
+                  <vue-feather
+                    type="log-out"
+                    size="12"
+                    class="mx-1"
+                  />
+                  {{ $t('backToPreview') }}
                 </b-button>
               </b-col>
             </b-row>

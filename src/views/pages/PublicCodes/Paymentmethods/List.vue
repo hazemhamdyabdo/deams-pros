@@ -131,7 +131,6 @@ export default {
     getItems() {
       this.get({ url: "PaymentMethods" }).then((data) => {
         this.items = data;
-        console.log(this.items);
       });
     },
     onFiltered(filteredItems) {
@@ -139,7 +138,6 @@ export default {
       this.currentPage = 1;
     },
     editPaymentMethod(item) {
-      console.log(item);
       this.$router.push({
         name: "editPaymentMethod",
         params: { id: item.id },

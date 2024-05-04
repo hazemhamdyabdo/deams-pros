@@ -31,10 +31,7 @@ export default {
     }),
   },
   mounted() {
-    console.log('app.vue');
     // Sidebar Visible
-
-	console.log(this.profile);
 	if (this.profile.userId || this.profile.isAdmin) this.Startup();
 
     $(".open-layout").on("click", function (s) {
@@ -106,7 +103,6 @@ export default {
     $("ul.tabs li").click(function () {
       var $this = $(this);
       var $theTab = $(this).attr("id");
-      console.log($theTab);
       if ($this.hasClass("active")) {
         // do nothing
       } else {
@@ -362,6 +358,15 @@ export default {
       });
     }
   },
+  watch: {
+    profile(newVal) {
+      if (newVal.isAdmin || this.profile.userId) this.Startup();
+    //   window.localStorage.USERID = this.profile.userId;
+    //   window.localStorage.USERNAME = this.profile.userName;
+    //   this.selectedItem.phone = this.profile.phone;
+    //   this.selectedItem.email = this.profile.email;
+    },
+  },
   methods: {
     ...mapActions({
       setBranches: "app/setBranches",
@@ -370,7 +375,6 @@ export default {
       setCompany: "app/setCompany",
     }),
 	Startup() {
-		console.log('558');
       this.get({ url: "aggregates/StartUp" })
         .then((data) => {
           this.setBranches(data.branches);

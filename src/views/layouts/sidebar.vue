@@ -3,13 +3,7 @@
   <div class="sidebar" id="sidebar" :class="$route.meta.sidebarClass">
     <div class="slimScrollDiv">
       <div class="sidebar-inner slimscroll">
-        <perfect-scrollbar
-          class="scroll-area"
-          :settings="settings"
-          @ps-scroll-y="scrollHanle"
-        >
-          <TheSidebar />
-        </perfect-scrollbar>
+        <TheSidebar />
       </div>
     </div>
   </div>
@@ -17,8 +11,6 @@
 </template>
 <script>
 import TheSidebar from "@/components/sidebar/TheSidebar.vue";
-import { PerfectScrollbar } from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
 
 export default {
   data() {
@@ -135,7 +127,6 @@ export default {
     },
   },
   components: {
-    PerfectScrollbar,
     TheSidebar,
   },
 

@@ -1,11 +1,7 @@
 <template>
   <!-- Sidebar -->
   <div class="sidebar sidebar-four" id="sidebar">
-    <perfect-scrollbar
-      class="scroll-area"
-      :settings="settings"
-      @ps-scroll-y="scrollHanle"
-    >
+ 
       <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu sidebar-menu-three">
           <aside id="aside" class="ui-aside">
@@ -383,13 +379,10 @@
           </div>
         </div>
       </div>
-    </perfect-scrollbar>
   </div>
   <!-- /Sidebar -->
 </template>
 <script>
-import { PerfectScrollbar } from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
 export default {
   data() {
     return {
@@ -416,9 +409,6 @@ export default {
   },
   methods: {
     scrollHanle(evt) {},
-  },
-  components: {
-    PerfectScrollbar,
   },
 };
 </script>

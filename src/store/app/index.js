@@ -56,7 +56,7 @@ export default {
     },
     setCompany(state, company) {
       state.currentCompany = company;
-      window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
+    //  window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
     },
   },
   actions: {
@@ -124,7 +124,7 @@ export default {
       };
       state.branchId = state.currentBranch.id;
       window.localStorage.setItem(BRANCH_ID, state.currentBranch.id);
-      window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
+      // window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
     },
     getAll({ commit }, { endpoints, callback }) {
       commit("TOGGLE_OVERLAY", true);

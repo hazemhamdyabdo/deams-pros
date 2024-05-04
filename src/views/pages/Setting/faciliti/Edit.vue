@@ -139,15 +139,13 @@
                       />
                     </b-col>
                     <b-col md="4">
-                      {{ selectedItem.fiscalYearEnd }}
-                      <g-picker
-                        label-text="endOfFiscalYear"
-                        v-model="selectedItem.fiscalYearEnd"
-                        rules="required|numeric"
-                        :min="selectedItem.fiscalYearStart"
+                      <VueDatePicker
+                        label="statrtOfFiscalYear"
+                        v-model="selectedItem.fiscalYearStart"
+                        rquired
                       />
                     </b-col>
-                    <b-col md="4">
+                    <!-- <b-col md="4">
                       <gfield
                         label-text="statrtOfFiscalYear"
                         name="statrtOfFiscalYear"
@@ -155,19 +153,17 @@
                         v-model="selectedItem.fiscalYearStart"
                         rules="required|numeric"
                       />
-                    </b-col>
+                    </b-col>  -->
                   </b-row>
                   <b-row>
-                    <!-- <b-col md="4">
-                      <g-picker
-                        label-text="endOfFiscalYear"
-                        name="endOfFiscalYear"
-                        type="number"
+                    <b-col md="4">
+                      <VueDatePicker
+                        label="endOfFiscalYear"
                         v-model="selectedItem.fiscalYearEnd"
-                        rules="required|numeric"
+                        :min="selectedItem.fiscalYearStart"
                       />
-                    </b-col> -->
-                    
+                    </b-col>
+
                     <b-col md="4">
                       <gfield
                         id="neighborhood"
@@ -315,9 +311,12 @@
     </div>
   </div>
 </template>
-    <script>
+ <script>
+import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
 export default {
-  components: {},
+  components: {
+    VueDatePicker,
+  },
   props: {
     id: {
       type: [Number, String],
@@ -326,7 +325,10 @@ export default {
   },
   data() {
     return {
-      selectedItem: {},
+      selectedItem: {
+        fiscalYearStart: "",
+        logoUrl: "",
+      },
       items: [],
       countries: [],
       cities: [],
@@ -354,7 +356,6 @@ export default {
       });
     },
     onFileChanged(event) {
-      console.log("sss");
       const file = event.target.files[0];
       this.selectedItem.imageExtension = file.name.split(".").pop();
       this.toBase64(file)

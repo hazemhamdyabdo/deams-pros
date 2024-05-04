@@ -16,80 +16,9 @@
                 <h3>Sign In</h3>
                 <h4>Please login to your account</h4>
               </div>
-              <Form
-                class="login"
-                :validation-schema="schema"
-                v-slot="{ errors }"
-              >
-                <!-- @submit="onSubmit" -->
-
-                <div class="form-login">
-                  <label>Email</label>
-                  <div class="form-addons">
-                    <Field
-                      name="email"
-                      type="text"
-                      value="admin@dreamguystech.com"
-                      class="form-control"
-                      :class="{ 'is-invalid': errors.email }"
-                    />
-
-                    <div class="invalid-feedback">{{ errors.email }}</div>
-                    <div class="emailshow text-danger" id="email"></div>
-                    <img src="../../../assets/img/icons/mail.svg" alt="img" />
-                  </div>
-                </div>
-                <div class="form-login">
-                  <label>Password</label>
-                  <div class="pass-group">
-                    <Field
-                      v-if="showPassword"
-                      name="password"
-                      type="text"
-                      value="123456"
-                      class="form-control pass-input"
-                      :class="{ 'is-invalid': errors.password }"
-                    />
-                    <Field
-                      v-else
-                      name="password"
-                      type="password"
-                      value="123456"
-                      class="form-control pass-input"
-                      :class="{ 'is-invalid': errors.password }"
-                    />
-                    <span
-                      @click="toggleShow"
-                      class="fas toggle-password"
-                      :class="{
-                        'fa-eye': showPassword,
-                        'fa-eye-slash': !showPassword,
-                      }"
-                    ></span>
-                    <div class="invalid-feedback">
-                      {{ errors.password }}
-                    </div>
-                    <div class="emailshow text-danger" id="password"></div>
-                  </div>
-                </div>
-                <div class="form-login">
-                  <div class="alreadyuser">
-                    <h4>
-                      <router-link to="forgetpassword" class="hover-a"
-                        >Forgot Password?</router-link
-                      >
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-login">
-                  <router-link class="btn btn-login" to="dashboard"
-                    >Sign In</router-link
-                  >
-                </div>
-              </Form>
               <gform @submit="onSubmit">
                 <b-row>
-                  <b-col md="8">
+                  <b-col md="12">
                     <gfield
                       v-model="userName"
                       placeholder=""
@@ -101,15 +30,25 @@
                   </b-col>
                 </b-row>
                 <b-row>
-                  <b-col md="8">
+                  <b-col md="12">
                     <gfield
                       label-text="Password"
+                      type="password"
                       v-model="password"
                       name="login-password"
                       placeholder=""
                     >
                     </gfield>
                   </b-col>
+                  <div class="form-login">
+                    <div class="alreadyuser">
+                      <h4>
+                        <router-link to="forgetpassword" class="hover-a">
+                          ?Forgot Password
+                        </router-link>
+                      </h4>
+                    </div>
+                  </div>
                 </b-row>
                 <div class="form-login">
                   <button class="btn btn-login" to="dashboard">Sign In</button>
@@ -160,9 +99,6 @@
   <!-- /Main Wrapper -->
 </template>
 <script>
-/**
- * @TODO: 1-datepacker: g-datepicker
- */
 import { Form, Field } from "vee-validate";
 import { mapActions } from "vuex";
 import * as Yup from "yup";
@@ -248,9 +184,7 @@ export default {
       localStorage.setItem("storedData", jsonData);
     }
     const schema = Yup.object().shape({
-      email: Yup.string()
-        .required("Email is required")
-        .email("Email is invalid"),
+      email: Yup.string().required("Email is required").email("Email is invalid"),
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),

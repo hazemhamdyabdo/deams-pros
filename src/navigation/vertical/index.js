@@ -110,6 +110,12 @@ export default [
         permission: 'viewSuppliers',
         isFav: false,
       },
+      {
+        title: 'paymentVouchers',
+        route: 'paymentVouchers',
+        permission: 'viewPaymentVouchers',
+        isFav: false,
+      },
     ],
   },
   {

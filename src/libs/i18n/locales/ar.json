@@ -13,7 +13,7 @@
   "NameIsRequired": "الاسم مطلوب",
   "Banks": "البنوك",
   "new": "إضافة",
-  "paymentMethod": "طرق الدفع",
+  "paymentMethod": "طريقة الدفع",
   "New Expense": "إضافة مصـروف",
   "Close": "إغلاق",
   "save": "حفظ",
@@ -241,5 +241,17 @@
   "addSupplier": "إضافة مورد",
   "editSupplier": "تعديل مورد",
   "previewSuppliers": "استعراض وإدارة الموردين الذين تم تعريفهم",
-  "taxNumber": "الرقم الضريبي"
+  "taxNumber": "الرقم الضريبي",
+  "paymentVouchers": "سندات الصرف",
+  "addPaymentVoucher": "إضافة سند صرف",
+  "editPaymentVoucher": "تعديل سند صرف",
+  "previewPaymentVouchers": "استعراض وإدارة سندات الصرف التي تم تعريفها",
+  "transactionDate": "تاريخ الحركة",
+  "transactionTime": "توقيت الحركة",
+  "taxStatus": "الموقف من الضريبة",
+  "taxable": "خاضع للضريبة",
+  "nonTaxable": "فير خاضع للضريبة",
+  "voucherValue": "قيمة السند",
+  "taxValue": "قيمة الضريبة",
+  "orignalPrice": "أصل المبلغ"
 }

@@ -92,6 +92,30 @@ export default [
         permission: 'viewCountries',
         isFav: false,
       },
+      {
+        title: 'discounts',
+        route: 'discounts',
+        permission: 'viewDiscounts',
+        isFav: false,
+      },
+      {
+        title: 'expenses',
+        route: 'expenses',
+        permission: 'viewExpenses',
+        isFav: false,
+      },
+      {
+        title: 'suppliers',
+        route: 'suppliers',
+        permission: 'viewSuppliers',
+        isFav: false,
+      },
+      {
+        title: 'paymentVouchers',
+        route: 'paymentVouchers',
+        permission: 'viewPaymentVouchers',
+        isFav: false,
+      },
     ],
   },
   {

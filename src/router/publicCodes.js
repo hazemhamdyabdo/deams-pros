@@ -153,7 +153,7 @@ export default [
         component: () =>
           import('@/views/pages/PublicCodes/Paymentmethods/List.vue'),
         meta: {
-          pageTitle: 'paymentMethod',
+          pageTitle: 'paymentMethods',
           Breadcrumb: 'publicCodes',
         },
       },
@@ -164,7 +164,7 @@ export default [
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
           pageTitle: 'addPaymentMethod',
-          Breadcrumb: 'paymentMethod',
+          Breadcrumb: 'paymentMethods',
         },
       },
       {
@@ -175,7 +175,7 @@ export default [
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
           pageTitle: 'editPaymentMethod',
-          Breadcrumb: 'paymentMethod',
+          Breadcrumb: 'paymentMethods',
         },
       },
     ],
@@ -504,6 +504,166 @@ export default [
         meta: {
           pageTitle: 'editCountry',
           Breadcrumb: 'countries',
+        },
+      },
+    ],
+  },
+  {
+    path: '/discounts',
+    children: [
+      {
+        path: '',
+        name: 'discounts',
+        component: () => import('@/views/pages/PublicCodes/discounts/List.vue'),
+        meta: {
+          pageTitle: 'discounts',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addDiscount',
+        name: 'addDiscount',
+        component: () => import('@/views/pages/PublicCodes/discounts/Edit.vue'),
+        meta: {
+          pageTitle: 'addDiscount',
+          Breadcrumb: 'discounts',
+        },
+      },
+      {
+        path: '/editDiscount/:id',
+        name: 'editDiscount',
+        component: () => import('@/views/pages/PublicCodes/discounts/Edit.vue'),
+        meta: {
+          pageTitle: 'editDiscount',
+          Breadcrumb: 'discounts',
+        },
+      },
+    ],
+  },
+  {
+    path: '/expenses',
+    children: [
+      {
+        path: '',
+        name: 'expenses',
+        component: () => import('@/views/pages/PublicCodes/expenses/List.vue'),
+        meta: {
+          pageTitle: 'expenses',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addExpense',
+        name: 'addExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'addExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+      {
+        path: '/editExpense/:id',
+        name: 'editExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'editExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+    ],
+  },
+  {
+    path: '/suppliers',
+    children: [
+      {
+        path: '',
+        name: 'suppliers',
+        component: () => import('@/views/pages/PublicCodes/suppliers/List.vue'),
+        meta: {
+          pageTitle: 'suppliers',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addSupplier',
+        name: 'addSupplier',
+        component: () => import('@/views/pages/PublicCodes/suppliers/Edit.vue'),
+        meta: {
+          pageTitle: 'addSupplier',
+          Breadcrumb: 'suppliers',
+        },
+      },
+      {
+        path: '/editSupplier/:id',
+        name: 'editSupplier',
+        component: () => import('@/views/pages/PublicCodes/suppliers/Edit.vue'),
+        meta: {
+          pageTitle: 'editSupplier',
+          Breadcrumb: 'suppliers',
+        },
+      },
+    ],
+  },
+  {
+    path: '/expenses',
+    children: [
+      {
+        path: '',
+        name: 'expenses',
+        component: () => import('@/views/pages/PublicCodes/expenses/List.vue'),
+        meta: {
+          pageTitle: 'expenses',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addExpense',
+        name: 'addExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'addExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+      {
+        path: '/editExpense/:id',
+        name: 'editExpense',
+        component: () => import('@/views/pages/PublicCodes/expenses/Edit.vue'),
+        meta: {
+          pageTitle: 'editExpense',
+          Breadcrumb: 'expenses',
+        },
+      },
+    ],
+  },
+  {
+    path: '/paymentVouchers',
+    children: [
+      {
+        path: '',
+        name: 'paymentVouchers',
+        component: () => import('@/views/pages/PublicCodes/paymentVouchers/List.vue'),
+        meta: {
+          pageTitle: 'paymentVouchers',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addPaymentVoucher',
+        name: 'addPaymentVoucher',
+        component: () => import('@/views/pages/PublicCodes/paymentVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'addPaymentVoucher',
+          Breadcrumb: 'paymentVouchers',
+        },
+      },
+      {
+        path: '/editPaymentVoucher/:id',
+        name: 'editPaymentVoucher',
+        component: () => import('@/views/pages/PublicCodes/paymentVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'editPaymentVoucher',
+          Breadcrumb: 'paymentVouchers',
         },
       },
     ],

@@ -52,43 +52,23 @@
                   />
                 </b-col>
 
-                <!-- expense  -->
+                <!-- guest  -->
                 <b-col md="3">
                   <gfield
                     label="arabicName"           
                     field="select" 
-                    id="expenseId"
-                    name="expenseId"
-                    label-text="expense"
+                    id="guestId"
+                    name="guestId"
+                    label-text="guest"
                     rules="required"
-                    v-model="selectedItem.expenseId"
-                    :options="lookup.expenses"
+                    v-model="selectedItem.guestId"
+                    :options="lookup.guests"
                     :dir="'rtl'"
                   />
                 </b-col>
 
-                <!-- isTaxable  -->
-              <b-col md="3">
-                <label
-                  style="font-size: 14px; margin-bottom: 10px"
-                  for="roomContainsKitchen"
-                >
-                  {{ $t('taxable') }}
-                </label>
-                <b-form-group>
-                  <b-form-checkbox
-                    id="isTaxable"
-                    v-model="selectedItem.isTaxable"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
-                    inline
-                    @change="toggleVisibilty();"
-                  />
-                </b-form-group>
-              </b-col>
-
-              <!-- voucherValue -->
-              <b-col md="3">
+                <!-- voucher Value -->
+                <b-col md="3">
                   <gfield
                     id="voucherValue"
                     name="voucherValue"
@@ -98,49 +78,7 @@
                   />
                 </b-col>
 
-                <!-- taxValue -->
-                <b-col 
-                  v-if="visibility.tax"
-                  md="3"
-                >
-                  <gfield
-                    id="taxValue"
-                    name="taxValue"
-                    v-model="selectedItem.taxValue"
-                    label-text="taxValue"
-                    disabled
-                  />
-                </b-col>
-
-                <!-- afterTaxValue -->
-                <b-col 
-                  v-if="visibility.afterTax"
-                  md="3"
-                >
-                  <gfield
-                    id="afterTaxValue"
-                    name="afterTaxValue"
-                    v-model="selectedItem.afterTaxValue"
-                    label-text="orignalPrice"
-                    disabled
-                  />
-                </b-col>
-
-                <!-- supplier  -->
-                <b-col md="3">
-                  <gfield
-                    label="arabicName"           
-                    field="select" 
-                    id="supplierId"
-                    name="supplierId"
-                    label-text="supplier"
-                    v-model="selectedItem.supplierId"
-                    :options="lookup.suppliers"
-                    :dir="'rtl'"
-                  />
-                </b-col>
-
-                <!-- paymentMethod  -->
+                <!-- payment Method  -->
                 <b-col md="3">
                   <gfield
                     label="arabicName"           
@@ -177,7 +115,7 @@
                 </b-col>
               </b-row>
 
-              <!-- opertaions -->
+              <!-- opertation -->
               <b-row>
                 <b-col cols="12" class="d-flex justify-content-end">
                   <b-button
@@ -227,13 +165,8 @@ export default {
     return {
       selectedItem: {},
       lookup: {
-        expenses: [],
-        suppliers: [],
+        guests: [],
         paymentMethods: []
-      },
-      visibility: {
-        tax: false,
-        afterTax: false
       },
       items: [],
       id: 0,
@@ -246,12 +179,6 @@ export default {
       this.getSelected();
     }
   },
-  watch: {
-    // calculate tax Value
-    'selectedItem.voucherValue' (voucherValue){
-      this.calculatedTax(voucherValue);
-    }
-  },
   methods: {
     save() {
       this.selectedItem.branchId = this.branchId;
@@ -260,7 +187,7 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: "PaymentVouchers",
+          url: "CollectionVouchers",
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
@@ -269,7 +196,7 @@ export default {
         });
       } else {
         this.create({
-          url: "PaymentVouchers",
+          url: "CollectionVouchers",
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t("savedSuccessfully") });
@@ -283,42 +210,21 @@ export default {
       this.selectedItem.transactionTime = this.getTime();
       this.selectedItem.voucherValue = 0;
     },
-    calculatedTax(voucherValue) {
-      if (!this.selectedItem.isTaxable) {
-        this.selectedItem.taxValue = 0;
-        this.selectedItem.afterTaxValue = 0;
-      } else {
-        this.selectedItem.afterTaxValue = (voucherValue / 1.15).toFixed(2);
-        this.selectedItem.taxValue = (voucherValue - this.selectedItem.afterTaxValue).toFixed(2);
-      }
-    },
     getSelected() {
-      this.get({ url: "PaymentVouchers", id: this.id }).then((data) => {
+      this.get({ url: "CollectionVouchers", id: this.id }).then((data) => {
         this.selectedItem = data;
         this.selectedItem.transactionDate = new Date (this.selectedItem.transactionDate);
-        if (this.selectedItem.isTaxable) {
-          this.visibility.tax = true;
-          this.visibility.afterTax = true;
-        }
       });
     },
     backToList() {
-      this.$router.push({ name: 'paymentVouchers' });
-    },
-    toggleVisibilty() {
-      this.visibility.tax = !this.visibility.tax;
-      this.visibility.afterTax = !this.visibility.afterTax;
-      this.calculatedTax(this.selectedItem.voucherValue);
+      this.$router.push({ name: 'collectionVouchers' });
     },
     getLookups() {
-      this.get({ url: 'Suppliers' }).then((data) => {
-        this.lookup.suppliers = data;
+      this.get({ url: 'Guests' }).then((data) => {
+        this.lookup.guests = data;
       });
       this.get({ url: 'PaymentMethods' }).then((data) => {
         this.lookup.paymentMethods = data;
-      });
-      this.get({ url: 'Expenses' }).then((data) => {
-        this.lookup.expenses = data;
       });
     }
   }

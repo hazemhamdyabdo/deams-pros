@@ -1,87 +1,39 @@
 <template>
-  <b-form-group :label="$t($attrs['label-text'])">
-    <ValidationProvider
-      ref="fieldValidator"
-      v-slot="{ errors }"
-      :rules="rules || ''"
-      :vid="$attrs.name || ''"
-      mode="eager"
-    >
-      <div class="q-mb-md">
-        <!-- <b-input-group> -->
-          <!-- <b-form-input
-            :value="inputValue"
-            type="text"
-            placeholder="YYYY-MM-DD"
-            readonly
-          ></b-form-input> -->
-          <!-- <b-input-group-append> -->
-            <!-- <label class="block text-gray-600 text-sm font-bold mb-2" for="date">Select Date</label> -->
-          <v-date-picker
-          :locale="isRight ? 'ar-EG' : 'en-us'"
-          :right="isRight"
-          :value="inputValue"
-          @context="onContext"
-              @input="
-                (v) => {
-                  onContext({ selectedYMD: v });
-                }
-              "
-          >
-            <template v-slot="{ inputValue, inputEvents }">
-              <input
-                class="form-control rounded"
-                :value="inputValue"
-                v-on="inputEvents"
-                placeholder="YYYY-MM-DD"
-              />
-            </template>
-          </v-date-picker>
-            <!-- <b-form-datepicker
-              v-if="!disabled"
-              ref="picker"
-              :value="inputValue"
-              button-only
-              :right="isRight"
-              size="sm"
-              :locale="isRight ? 'ar-EG' : 'en-us'"
-              variant="primary"
-              selected-variant="primary"
-              aria-controls="example-input"
-              @context="onContext"
-              @input="
-                (v) => {
-                  onContext({ selectedYMD: v });
-                }
-              "
-            ></b-form-datepicker> -->
-          <!-- </b-input-group-append> -->
-        <!-- </b-input-group> -->
-        <small
-          :class="{ 'd-none': !$attrs['label-text'] }"
-          class="text-danger"
-          >{{ errors[0] }}</small
-        >
-      </div>
-    </ValidationProvider>
-  </b-form-group>
+  <label> {{ $t($attrs["label-text"]) }}</label>
+  <datepicker
+    v-model="inputValue"
+    :required="rules ? true : false"
+    aria-labels="date"
+    :min-date="min"
+    :locale="locale"
+    :dir="dir"
+    :format="format"
+    :enable-time-picker="disableTime"
+    @update:model-value="handleDate"
+    :disabled="disabled"
+  />
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate';
-
+import "@vuepic/vue-datepicker/dist/main.css";
 export default {
-  components: {
-    ValidationProvider,
-  },
   props: {
     dir: {
       type: String,
+      default: "rtl",
     },
-    value: {
+    disableTime: {
+      type: Boolean,
+      default: false,
+    },
+    locale: {
+      type: String,
+      default: "ar-EG",
+    },
+    modelValue: {
       type: String,
       required: false,
-      default: '',
+      default: "",
     },
     disabled: {
       type: Boolean,
@@ -89,60 +41,62 @@ export default {
     },
     rules: {
       type: String,
-      default: '',
+      default: "",
+    },
+    min: {
+      type: Date,
+      default: new Date(),
     },
   },
-  emits: ['update:value'],
+  emits: ["update:modelValue"],
   data() {
     return {
-      inputValue: '',
-      fiscalYearStart: '',
-      fiscalYearEnd: ''
+      inputValue: "",
+      fiscalYearStart: "",
+      fiscalYearEnd: "",
+      date: new Date(),
     };
   },
-  watch: {
-    value(newVale) {
-      this.inputValue = this.getDate(newVale);
-      // if (this.$attrs.name === 'fromDate') {
-      //   this.inputValue = this.getDate(this.currentYear.startDate );
-      // }
-      // if (this.$attrs.name === 'toDate') {
-      //   this.inputValue = this.getDate(this.currentYear.endDate);
-      // }
-      if (this.$attrs.name === 'fromDate') {
-        this.inputValue = this.getDate(this.fiscalYearStart);
-      }
-      if (this.$attrs.name === 'toDate') {
-        this.inputValue = this.getDate(this.fiscalYearEnd);
-      }
-      this.changeValue(this.inputValue);
-    },
-  },
   beforeMount() {
-    this.fiscalYearStart = JSON.stringify(this.currentYear) !== '{}' ? this.currentYear.startDate : this.company.fiscalYearStart;
-    this.fiscalYearEnd = JSON.stringify(this.currentYear) !== '{}' ? this.currentYear.endDate : this.company.fiscalYearEnd;
+    this.fiscalYearStart =
+      JSON.stringify(this.currentYear) !== "{}"
+        ? this.currentYear.startDate
+        : this.company.fiscalYearStart;
+    this.fiscalYearEnd =
+      JSON.stringify(this.currentYear) !== "{}"
+        ? this.currentYear.endDate
+        : this.company.fiscalYearEnd;
   },
   mounted() {
     this.inputValue = this.getDate(this.value);
-    if (this.$attrs.name === 'fromDate') {
+    if (this.$attrs.name === "fromDate") {
       this.inputValue = this.getDate(this.fiscalYearStart);
     }
-    if (this.$attrs.name === 'toDate') {
+    if (this.$attrs.name === "toDate") {
       this.inputValue = this.getDate(this.fiscalYearEnd);
     }
-    this.changeValue(this.inputValue);
+    this.format(this.inputValue);
   },
   methods: {
-    onContext(ctx) {
-      this.inputValue = this.getDate(ctx.selectedYMD);
-      this.$emit('update:value', this.inputValue);
-      this.$emit('change', this.inputValue);
+    format(val = this.date) {
+      const date = new Date(val);
+      // Get day, month, and year
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+      const year = date.getFullYear();
+
+      // Construct formatted date string
+      return `${day}/${month}/${year}`;
     },
-    changeValue(val) {
-      val = val || ''
-      val = val.replace(' ', 'T')
-      this.$emit('update:value', val);
-      this.$emit('change', val);
+    handleDate(val) {
+      val = this.format(val) || "";
+      this.$emit("update:modelValue", val);
+    },
+  },
+  watch: {
+    inputValue(newVale) {
+      const formattedDate = this.getDate(newVale);
+      this.$emit("update:modelValue", formattedDate);
     },
   },
 };

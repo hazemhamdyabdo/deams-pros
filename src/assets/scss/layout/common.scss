@@ -40,7 +40,6 @@ a:hover{
 .form-group{
     input[type=text]{
         &:focus{
-            border-color:$__primarycolor;
             background: $__white;
         }
     }

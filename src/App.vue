@@ -31,8 +31,8 @@ export default {
     }),
   },
   mounted() {
-    console.log(store);
     // Sidebar Visible
+	if (this.profile.userId || this.profile.isAdmin) this.Startup();
 
     $(".open-layout").on("click", function (s) {
       s.preventDefault();
@@ -103,7 +103,6 @@ export default {
     $("ul.tabs li").click(function () {
       var $this = $(this);
       var $theTab = $(this).attr("id");
-      console.log($theTab);
       if ($this.hasClass("active")) {
         // do nothing
       } else {
@@ -359,6 +358,15 @@ export default {
       });
     }
   },
+  watch: {
+    profile(newVal) {
+      if (newVal.isAdmin || this.profile.userId) this.Startup();
+    //   window.localStorage.USERID = this.profile.userId;
+    //   window.localStorage.USERNAME = this.profile.userName;
+    //   this.selectedItem.phone = this.profile.phone;
+    //   this.selectedItem.email = this.profile.email;
+    },
+  },
   methods: {
     ...mapActions({
       setBranches: "app/setBranches",
@@ -366,6 +374,14 @@ export default {
     ...mapMutations({
       setCompany: "app/setCompany",
     }),
+	Startup() {
+      this.get({ url: "aggregates/StartUp" })
+        .then((data) => {
+          this.setBranches(data.branches);
+          this.setCompany(data.currentCompany);
+          this.mainCompany = data.currentCompany;
+          // this.setCompany(data.currentCompany);
+        })},
   },
 };
 </script>

@@ -1,4 +1,4 @@
-import $axios from "../axios";
+import service from "../axios";
 
 export default {
   app: {
@@ -8,24 +8,24 @@ export default {
           query += `/${val}`;
           return query;
         }, "");
-        return $axios.post(url);
+        return service.post(url);
       }
-      return $axios.get(`${url}${id ? `/${id}` : ""}`);
+      return service.get(`${url}${id ? `/${id}` : ""}`);
     },
-    create: (url, data) => $axios.post(url, data),
+    create: (url, data) => service.post(url, data),
     update: (url, id, data) => {
       if (Array.isArray(id)) {
         url += id.reduce((query, val) => {
           query += `/${val}`;
           return query;
         }, "");
-        return $axios.post(url, data);
+        return service.post(url, data);
       }
       if (id) {
-        return $axios.put(`${url}/${id}`, data);
+        return service.put(`${url}/${id}`, data);
       }
       if (!id) {
-        return $axios.put(`${url}`, data);
+        return service.put(`${url}`, data);
       }
     },
     delete: (url, id) => {
@@ -34,9 +34,9 @@ export default {
           query += `/${val}`;
           return query;
         }, "");
-        return $axios.post(url);
+        return service.post(url);
       }
-      return $axios.delete(`${url}/${id}`);
+      return service.delete(`${url}/${id}`);
     },
   },
 };

@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     handleChange(newValue) {
-      console.log(newValue)
       this.selectedValue = newValue;
       this.$emit('input', newValue);
     },

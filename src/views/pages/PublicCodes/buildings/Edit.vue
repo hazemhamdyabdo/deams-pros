@@ -151,8 +151,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.params.id);
-    console.log(this.id);
     this.id = this.$route.params.id;
     if (this.id > 0) {
       this.getSelected();

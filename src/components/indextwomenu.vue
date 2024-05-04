@@ -3,11 +3,7 @@
   <div class="sidebar sidebar-two" id="sidebar">
     <div class="slimScrollDiv">
       <div class="sidebar-inner slimscroll">
-        <perfect-scrollbar
-          class="scroll-area"
-          :settings="settings"
-          @ps-scroll-y="scrollHanle"
-        >
+      
           <div id="sidebar-menu" class="sidebar-menu">
             <ul>
               <li class="submenu-open">
@@ -1078,15 +1074,13 @@
               </li>
             </ul>
           </div>
-        </perfect-scrollbar>
       </div>
     </div>
   </div>
   <!-- /Sidebar -->
 </template>
 <script>
-import { PerfectScrollbar } from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+
 export default {
   data() {
     return {
@@ -1097,9 +1091,6 @@ export default {
   },
   methods: {
     scrollHanle(evt) {},
-  },
-  components: {
-    PerfectScrollbar,
   },
 };
 </script>

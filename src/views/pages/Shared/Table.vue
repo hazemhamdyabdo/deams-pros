@@ -370,7 +370,6 @@ export default {
   },
   watch: {
     currentPage(val, oldVal) {
-      console.log("currentPage", { val, oldVal });
     },
   },
   computed: {
@@ -396,7 +395,6 @@ export default {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
       const test = this.filteredData.slice(start, end);
-      console.log(test);
       return test;
     },
   },
@@ -412,7 +410,6 @@ export default {
       }
     },
     updateSearch() {
-      console.log("updated");
       this.currentPage = 1;
       this.showRestOfData();
       this.$emit("search-change", this.searchQuery);
@@ -457,11 +454,6 @@ export default {
       this.$refs.gtable.refresh();
     },
     onFiltered(filteredItems) {
-      console.log({
-        localeRows: this.localTotalRows,
-        items: filteredItems,
-        rows: this.totalRows,
-      });
       this.localItems;
       this.localTotalRows = filteredItems.length;
       // this.currentPage = 1; (1)

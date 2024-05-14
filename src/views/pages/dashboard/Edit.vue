@@ -606,10 +606,10 @@ export default {
 
 .apexcharts-pie-label,
 .apexcharts-datalabel {
-  font-size: 16px;
+  font-size: 13px;
   font-family: 'Dubai' !important;
   text-anchor: middle;
-  fill: #414926;
+  fill: #000000;
 }
 
 .dashboard .active-reservation {

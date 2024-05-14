@@ -62,8 +62,32 @@ const identityTypes = [
   }
 ];
 
+const messageTypes = [
+  {
+    id: 'newReservation',
+    arabicName: 'حجز جديد',
+    englishName: 'new Reservation'
+  },
+  {
+    id: 'confirmReservation',
+    arabicName: 'تأكيد حجز',
+    englishName: 'confirm Reservation'
+  },
+  {
+    id: 'confirmArrive',
+    arabicName: 'تأكيد الوصول',
+    englishName: 'confirm Arrive'
+  },
+  {
+    id: 'confirmLeave',
+    arabicName: 'تأكيد الخروج',
+    englishName: 'confirm Leave'
+  }
+];
+
 export {
   genders,
   guestTypes,
-  identityTypes
+  identityTypes,
+  messageTypes
 }

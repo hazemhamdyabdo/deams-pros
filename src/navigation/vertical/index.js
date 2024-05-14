@@ -122,6 +122,12 @@ export default [
         permission: 'viewCollectionVouchers',
         isFav: false,
       },
+      {
+        title: 'messages',
+        route: 'messages',
+        permission: 'viewMessages',
+        isFav: false,
+      },
     ],
   },
   {

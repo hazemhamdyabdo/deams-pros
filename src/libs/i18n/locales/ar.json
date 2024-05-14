@@ -127,6 +127,7 @@
   "floor": "الطابق",
   "KitchensTypes": "أنواع المطابخ",
   "guests": "النزلاء",
+  "guest": "النزيل",
   "addGuest": "إضافة نزيل",
   "editGuest": "تعديل نزيل",
   "previewGuests": "استعراض وإدارة النزلاء الذين تم تعريفهم",
@@ -268,8 +269,13 @@
   "transactionTime": "توقيت الحركة",
   "taxStatus": "الموقف من الضريبة",
   "taxable": "خاضع للضريبة",
-  "nonTaxable": "فير خاضع للضريبة",
+  "nonTaxable": "غير خاضع للضريبة",
   "voucherValue": "قيمة السند",
   "taxValue": "قيمة الضريبة",
-  "orignalPrice": "أصل المبلغ"
+  "orignalPrice": "أصل المبلغ",
+  "collectionVouchers": "سندات القبض",
+  "addCollectionVoucher": "إضافة سند القبض",
+  "editCollectionVoucher": "تعديل سند القبض",
+  "previewCollectionVouchers": "استعراض وإدارة سندات القبض التي تم تعريفها",
+  "print": "طباعة"
 }

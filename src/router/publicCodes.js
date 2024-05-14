@@ -668,4 +668,36 @@ export default [
       },
     ],
   },
+  {
+    path: '/collectionVouchers',
+    children: [
+      {
+        path: '',
+        name: 'collectionVouchers',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/List.vue'),
+        meta: {
+          pageTitle: 'collectionVouchers',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addCollectionVoucher',
+        name: 'addCollectionVoucher',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'addCollectionVoucher',
+          Breadcrumb: 'collectionVouchers',
+        },
+      },
+      {
+        path: '/editCollectionVoucher/:id',
+        name: 'editCollectionVoucher',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'editCollectionVoucher',
+          Breadcrumb: 'collectionVouchers',
+        },
+      },
+    ],
+  },
 ];

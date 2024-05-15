@@ -10074,4 +10074,14 @@ span.select2-container.select2-container--default.select2-container--open {
 button {
   font-weight: bold !important;
 }
+
+.textarea-counter-value {
+  background-color: #ff9f43;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: 0 0 5px 5px;
+  margin-right: 1rem;
+  float: left;
+}
 /*# sourceMappingURL=style.css.map */

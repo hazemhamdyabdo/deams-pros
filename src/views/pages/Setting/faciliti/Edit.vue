@@ -8,7 +8,10 @@
           <div class="card-body">
             <gform @submit="save()">
               <b-row>
-                <b-col cols="12" class="d-flex justify-content-center mb-2">
+                <b-col 
+                cols="12" 
+                class="d-flex justify-content-center mb-2"
+                >
                   <!-- media -->
                   <b-media no-body>
                     <b-media-aside>
@@ -18,7 +21,7 @@
                           rounded
                           height="80"
                           width="80"
-                          src=""
+                          :src="url"
                           style="margin: 1rem"
                         />
                       </b-link>
@@ -26,20 +29,19 @@
                     </b-media-aside>
 
                     <b-media-body class="mt-75 ml-75">
-                      <!-- upload button -->
                       <b-button
                         variant="primary"
                         size="sm"
                         class="mb-75 mr-75"
-                        @click="$refs.imgupload.click()"
+                        @click="openFilePicker"
                       >
                         {{ $t("change") }}
                       </b-button>
-                      <b-form-file
+                      <input
                         ref="imgupload"
+                        type="file"
                         accept=".jpg, .png, .gif"
-                        :hidden="true"
-                        plain
+                        style="display: none"
                         @change="onFileChanged"
                       />
                       <!--/ upload button -->
@@ -311,7 +313,7 @@
     </div>
   </div>
 </template>
- <script>
+<script>
 import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
 export default {
   components: {
@@ -341,10 +343,25 @@ export default {
     if (this.id > 0) {
       this.getSelected();
     }
+    this.getData();
     this.getCities();
     this.getCountries();
   },
   methods: {
+    getData() {
+      this.get({ url: "Facilities/@current" }).then((data) => {
+        this.selectedItem = data;
+        this.url = this.selectedItem.logoUrl
+          ? `${this.domain}${this.selectedItem.logoUrl}`
+          : "default_image.jpg";
+        this.selectedItem.fiscalYearStart = this.getDate(data.fiscalYearStart);
+        this.selectedItem.fiscalYearEnd = this.getDate(data.fiscalYearEnd);
+      });
+    },
+    openFilePicker() {
+      console.log("file");
+      this.$refs.imgupload.click();
+    },
     getCities() {
       this.get({ url: "Cities" }).then((data) => {
         this.cities = data;
@@ -356,6 +373,7 @@ export default {
       });
     },
     onFileChanged(event) {
+      console.log("daaa");
       const file = event.target.files[0];
       this.selectedItem.imageExtension = file.name.split(".").pop();
       this.toBase64(file)
@@ -369,7 +387,7 @@ export default {
           };
 
           this.create({
-            url: "Schools/@current/logo",
+            url: "Facilities/@current/logo",
             data: this.logoModel,
           }).then((data) => {
             this.selectedItem.logoUrl = data;
@@ -434,4 +452,3 @@ export default {
   z-index: 1000;
 }
 </style>
-    

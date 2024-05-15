@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    // this.getItems();
+     this.getItems();
   },
   methods: {
     getItems() {

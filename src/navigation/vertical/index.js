@@ -123,8 +123,8 @@ export default [
     icon:'settings',
     children: [
       {
-        title: 'facility',
-        route: 'facility',
+        title: 'editFaciliti',
+        route: 'editFaciliti',
         permission: 'viewfacility',
         isFav: false,
       },

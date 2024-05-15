@@ -164,7 +164,7 @@ export default [
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
           pageTitle: 'addPaymentMethod',
-          Breadcrumb: 'paymentMethods',
+          Breadcrumb: 'PaymentMehtod',
         },
       },
       {
@@ -175,7 +175,7 @@ export default [
           import('@/views/pages/PublicCodes/Paymentmethods/Edit.vue'),
         meta: {
           pageTitle: 'editPaymentMethod',
-          Breadcrumb: 'paymentMethods',
+          Breadcrumb: 'PaymentMehtod',
         },
       },
     ],

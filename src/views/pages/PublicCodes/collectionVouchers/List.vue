@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="paymentVouchers-table"
+              ref="collectionVouchers-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -22,7 +22,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addPaymentVoucher' });
+                  $router.push({ name: 'addCollectionVoucher' });
                 }
               "
             >
@@ -93,8 +93,8 @@ export default {
       currentPage: 1,
       perPage: 15,
       items: [],
-      title: "paymentVouchers",
-      description: "previewPaymentVouchers",
+      title: "collectionVouchers",
+      description: "previewCollectionVouchers",
     };
   },
   computed: {
@@ -102,8 +102,7 @@ export default {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
         { key: 'transactionDate', label: this.$t('transactionDate'), sortable: true },
-        { key: 'expenseNameAr', label: this.$t('expense'), sortable: true },
-        { key: 'taxStatus', label: this.$t('taxStatus'), sortable: true },
+        { key: 'guestNameAr', label: this.$t('guest'), sortable: true },
         { key: 'paymentMethodNameAr', label: this.$t('paymentMethod'), sortable: true },
         { key: 'voucherValue', label: this.$t('voucherValue'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
@@ -116,10 +115,9 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'PaymentVouchers' }).then((data) => {
+      this.get({ url: 'CollectionVouchers' }).then((data) => {
         this.items = data;
         data.forEach(x => {
-          x.taxStatus = this.$t(x.taxStatus)
           x.transactionDate = this.getDate(x.transactionDate);
         });
       });
@@ -130,7 +128,7 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'editPaymentVoucher',
+        name: 'editCollectionVoucher',
         params: { id: item.id },
       });
     },
@@ -140,8 +138,7 @@ export default {
           text: this.$t('areYouSureYouWantToDelete'),
         },
         () => {
-          // then delete
-          this.delete({ url: 'PaymentVouchers', id: item.id }).then(() => {
+          this.delete({ url: 'CollectionVouchers', id: item.id }).then(() => {
             this.doneAlert({ text: this.$t('deletedSuccessfully') });
             this.getItems();
           });
@@ -150,7 +147,7 @@ export default {
     },
     print(item) {
       const printedItem = { id: item.id };
-      const reportName = 'PaymentVoucherById-ar'
+      const reportName = 'CollectionVoucherById-ar'
       this.printReport(reportName, printedItem);
     }
   }

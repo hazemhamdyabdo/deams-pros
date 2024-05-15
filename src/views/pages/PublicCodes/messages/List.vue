@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-body">
             <g-table
-              ref="paymentVouchers-table"
+              ref="messages-table"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -22,7 +22,7 @@
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
-                  $router.push({ name: 'addPaymentVoucher' });
+                  $router.push({ name: 'addMessage' });
                 }
               "
             >
@@ -39,6 +39,7 @@
                     <vue-feather
                       type="edit"
                       size="14"
+                      class="mx-1 clickable"
                     ></vue-feather>
                   </b-button>
                   <b-button
@@ -53,22 +54,9 @@
                       type="trash"
                       stroke="red"
                       size="14"
+                      class="mx-1 danger clickable"
                     ></vue-feather>
                   </b-button>
-                  <!-- <b-button
-                    data-action-type="print"
-                    v-b-tooltip.hover.top="$t('print')"
-                    variant="flat-success"
-                    class="btn-icon"
-                    size="sm"
-                    @click="print(item)"
-                  >
-                    <vue-feather
-                      type="printer"
-                      stroke="green"
-                      size="14"
-                    ></vue-feather>
-                  </b-button> -->
                 </div>
               </template>
             </g-table>
@@ -80,6 +68,7 @@
 </template>
 
 <script>
+import { messageTypes } from '@/libs/acl/Lookups';
 import GTable from '../../Shared/Table.vue';
 
 export default {
@@ -93,19 +82,15 @@ export default {
       currentPage: 1,
       perPage: 15,
       items: [],
-      title: "paymentVouchers",
-      description: "previewPaymentVouchers",
+      title: "messages",
+      description: "previewMessages",
     };
   },
   computed: {
     tableColumns() {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
-        { key: 'transactionDate', label: this.$t('transactionDate'), sortable: true },
-        { key: 'expenseNameAr', label: this.$t('expense'), sortable: true },
-        { key: 'taxStatus', label: this.$t('taxStatus'), sortable: true },
-        { key: 'paymentMethodNameAr', label: this.$t('paymentMethod'), sortable: true },
-        { key: 'voucherValue', label: this.$t('voucherValue'), sortable: true },
+        { key: 'messageTypeName', label: this.$t('messageType'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },
       ];
@@ -116,11 +101,10 @@ export default {
   },
   methods: {
     getItems() {
-      this.get({ url: 'PaymentVouchers' }).then((data) => {
+      this.get({ url: 'Messages' }).then((data) => {
         this.items = data;
-        data.forEach(x => {
-          x.taxStatus = this.$t(x.taxStatus)
-          x.transactionDate = this.getDate(x.transactionDate);
+        this.items.forEach(element => {
+          element.messageTypeName = messageTypes.find((el) => el.id === element.messageTypeId).arabicName
         });
       });
     },
@@ -130,7 +114,7 @@ export default {
     },
     edit(item) {
       this.$router.push({
-        name: 'editPaymentVoucher',
+        name: 'editMessage',
         params: { id: item.id },
       });
     },
@@ -141,18 +125,13 @@ export default {
         },
         () => {
           // then delete
-          this.delete({ url: 'PaymentVouchers', id: item.id }).then(() => {
+          this.delete({ url: 'Messages', id: item.id }).then(() => {
             this.doneAlert({ text: this.$t('deletedSuccessfully') });
             this.getItems();
           });
         }
       );
     },
-    print(item) {
-      const printedItem = { id: item.id };
-      const reportName = 'PaymentVoucherById-ar'
-      this.printReport(reportName, printedItem);
-    }
   }
 };
 </script>

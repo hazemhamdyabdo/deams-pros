@@ -69,31 +69,10 @@
 
                   <!-- birthDate  -->
                   <b-col md="3">  
-                    <div class="form-group">
-                      <label style="font-size: 15px; font-weight: 500px; margin-bottom: 7px;"> {{ $t('birthDateAd') }}</label>
-                      <div class="input-groupicon">
-                        <datepicker
-                          style="font-weight: normal;"
-                          v-model="_selectedItem.birthDateAd"
-                          class="picker"
-                          :placeholder="$t('pressToChooseDate')"
-                          name="birthDateAd"
-                          id="birthDateAd"
-                          :editable="true"
-                          :clearable="false"
-                        />
-                        <a class="addonset">
-                          <img src="@/assets/img/icons/calendars.svg" alt="img" />
-                        </a>
-                      </div>
-                      <label 
-                        v-if="!_selectedItem.birthDateAd"
-                        style="font-size: 11px; font-weight: bold; margin-top: 4px;"
-                        class="text-danger mb-3"
-                      > 
-                        {{ $t('birthDateAdRequired') }} 
-                      </label>
-                    </div> 
+                    <VueDatePicker
+                      label="birthDateAd"
+                      v-model="_selectedItem.birthDateAd"
+                    />
                   </b-col>
 
                   <!-- hijriBirthDate  -->
@@ -320,31 +299,10 @@
 
                   <!-- companion.birthDate  -->
                   <b-col md="3">
-                    <div class="form-group">
-                      <label style="font-size: 15px; font-weight: 500;"> {{ $t('companionBirthdateAd') }}</label>
-                      <div class="input-groupicon">
-                        <datepicker
-                          style="font-weight: normal;"
-                          v-model="_companion.birthDateAd"
-                          class="picker"
-                          name="companionbirthDateAd"
-                          :placeholder="$t('pressToChooseDate')"
-                          id="companionbirthDateAd"
-                          :editable="true"
-                          :clearable="false"
-                        />
-                        <a class="addonset">
-                          <img src="../../../../assets/img/icons/calendars.svg" alt="img" />
-                        </a>
-                      </div>
-                      <label 
-                        v-if="_helper.companionValidator.showForBirthDateAd"
-                        style="font-size: 11px; font-weight: bold;"
-                        class="text-danger mb-3"
-                      > 
-                        {{ $t('required') }} 
-                      </label>
-                    </div> 
+                    <VueDatePicker
+                      label="companionBirthdateAd"
+                      v-model="_companion.birthDateAd"
+                    />
                   </b-col>
 
                   <!-- companion.birthDateHijri  -->
@@ -571,8 +529,14 @@ import
   isNumericOnly
 } from '@/mixin/publicMethods';
 import saveAs from 'file-saver';
+import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
 
 export default {
+  // components
+  components: {
+    VueDatePicker,
+  },
+
   // props section
   props: {
     id: {
@@ -781,7 +745,11 @@ export default {
   mounted() {
     this._id = this.$route.params.id;
     this._title1 = this._id > 0 ? 'editGuest' : 'addGuest';
-    
+    this._selectedItem.birthDateAd = this.getDate();
+    this._selectedItem.birthDateHijri = this.adDateToHijriDate();
+    this._companion.birthDateAd = this.getDate();
+    this._companion.birthDateHijri = this.adDateToHijriDate();
+
     this.getLookups();
     if (this._id > 0) {
       this.getSelectedItem();
@@ -1040,7 +1008,7 @@ export default {
       }
     },
 
-    adDateToHijriDate(adDate) {
+    adDateToHijriDate(adDate = new Date()) {
        return new Intl.DateTimeFormat('ar-TN-u-ca-islamic', 
         {
           day: 'numeric', 

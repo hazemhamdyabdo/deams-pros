@@ -668,4 +668,68 @@ export default [
       },
     ],
   },
+  {
+    path: '/collectionVouchers',
+    children: [
+      {
+        path: '',
+        name: 'collectionVouchers',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/List.vue'),
+        meta: {
+          pageTitle: 'collectionVouchers',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addCollectionVoucher',
+        name: 'addCollectionVoucher',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'addCollectionVoucher',
+          Breadcrumb: 'collectionVouchers',
+        },
+      },
+      {
+        path: '/editCollectionVoucher/:id',
+        name: 'editCollectionVoucher',
+        component: () => import('@/views/pages/PublicCodes/collectionVouchers/Edit.vue'),
+        meta: {
+          pageTitle: 'editCollectionVoucher',
+          Breadcrumb: 'collectionVouchers',
+        },
+      },
+    ],
+  },
+  {
+    path: '/messages',
+    children: [
+      {
+        path: '',
+        name: 'messages',
+        component: () => import('@/views/pages/PublicCodes/messages/List.vue'),
+        meta: {
+          pageTitle: 'messages',
+          Breadcrumb: 'publicCodes',
+        },
+      },
+      {
+        path: '/addMessage',
+        name: 'addMessage',
+        component: () => import('@/views/pages/PublicCodes/messages/Edit.vue'),
+        meta: {
+          pageTitle: 'addMessage',
+          Breadcrumb: 'messages',
+        },
+      },
+      {
+        path: '/editMessage/:id',
+        name: 'editMessage',
+        component: () => import('@/views/pages/PublicCodes/messages/Edit.vue'),
+        meta: {
+          pageTitle: 'editMessage',
+          Breadcrumb: 'messages',
+        },
+      },
+    ],
+  },
 ];

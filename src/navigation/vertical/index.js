@@ -116,6 +116,18 @@ export default [
         permission: 'viewPaymentVouchers',
         isFav: false,
       },
+      {
+        title: 'collectionVouchers',
+        route: 'collectionVouchers',
+        permission: 'viewCollectionVouchers',
+        isFav: false,
+      },
+      {
+        title: 'messages',
+        route: 'messages',
+        permission: 'viewMessages',
+        isFav: false,
+      },
     ],
   },
   {

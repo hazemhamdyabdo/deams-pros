@@ -40,7 +40,7 @@ export default {
     },
     TOGGLE_OVERLAY(state, val) {
       // state.shallShowOverlay = val !== undefined ? val : !state.shallShowOverlay;
-      state.overlay = val !== undefined ? val : !state.overlay;
+      // state.overlay = val !== undefined ? val : !state.overlay;
     },
     setCurrentYear(state, year) {
       state.currentYear = year;
@@ -56,7 +56,7 @@ export default {
     },
     setCompany(state, company) {
       state.currentCompany = company;
-    //  window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
+      //  window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
     },
   },
   actions: {
@@ -152,7 +152,8 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch((error) => {
-            reject(error);
+            console.error(error);
+            // reject(error);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -170,7 +171,8 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-            reject(response);
+            console.error(response);
+            // reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -188,7 +190,8 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-            reject(response);
+            console.error(response);
+            // reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -206,7 +209,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-            reject(response);
+            // reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {

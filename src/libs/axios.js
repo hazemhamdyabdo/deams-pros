@@ -80,7 +80,7 @@ axiosIns.interceptors.response.use(undefined, (error) => {
       },
     });
   }
-  return Promise.reject(error);
+  // return Promise.reject(error);
 });
 
 export default axiosIns;

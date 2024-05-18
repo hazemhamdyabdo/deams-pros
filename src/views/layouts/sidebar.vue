@@ -1,13 +1,12 @@
 <template>
   <!-- Sidebar -->
-  <div class="sidebar" id="sidebar" :class="$route.meta.sidebarClass">
+  <div class="sidebar" id="sidebar" :class="$route.meta.sidebarClass"  style="overflow-y: scroll;">
     <div class="slimScrollDiv">
-      <div class="sidebar-inner slimscroll">
+      <div class="sidebar-inner slimscroll" >
         <TheSidebar />
       </div>
     </div>
   </div>
-  <!-- /Sidebar -->
 </template>
 <script>
 import TheSidebar from "@/components/sidebar/TheSidebar.vue";

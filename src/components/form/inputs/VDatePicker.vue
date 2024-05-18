@@ -28,6 +28,7 @@
   </template>
 
   <script>
+  
   export default {
     props: {
       modelValue: {
@@ -64,13 +65,20 @@
         const newDate = this.getDate(newVal);
         this.$emit("update:modelValue", newDate);
       },
+      modelValue(newVal) {
+        this.selectedDate = newVal
+          ? new Date(newVal)
+          : new Date();
+      },
     },
   };
   </script >
-  <style  >
+  <style>
+
   .v-overlay__content:has(> .v-date-picker) {
     min-width: auto !important;
   }
+  
   .v-picker-title {
     padding: 0 !important;
   }

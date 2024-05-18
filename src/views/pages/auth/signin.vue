@@ -7,10 +7,10 @@
           <div class="login-content">
             <div class="login-userset">
               <div class="login-logo logo-normal">
-                <img src="../../../assets/img/logo.png" alt="img" />
+                <img src="../../../assets/img/27.png" alt="img" />
               </div>
               <router-link to="/index" class="login-logo logo-white">
-                <img src="../../../assets/img/logo-white.png" alt="" />
+                <img src="../../../assets/img/27.png" alt="" />
               </router-link>
               <div class="login-userheading">
                 <h3>Sign In</h3>
@@ -60,7 +60,7 @@
                   <router-link to="signup" class="hover-a">Sign Up</router-link>
                 </h4>
               </div>
-              <div class="form-setlogin">
+              <!-- <div class="form-setlogin">
                 <h4>Or sign up with</h4>
               </div>
               <div class="form-sociallink">
@@ -86,11 +86,12 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="login-img">
-            <img src="../../../assets/img/login.jpg" alt="img" />
+            <!-- <img src="../../../assets/img/login.jpg" alt="img" /> -->
+            <img src="../../../assets/img/signin-ill.jpg" alt="img" />
           </div>
         </div>
       </div>

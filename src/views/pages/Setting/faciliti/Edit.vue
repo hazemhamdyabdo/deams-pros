@@ -13,26 +13,25 @@
                 class="d-flex justify-content-center mb-2"
                 >
                   <!-- media -->
-                  <b-media no-body>
-                    <b-media-aside>
+                  <b-media no-body style="display: flex; gap: .6rem;">
+                    <b-media-aside height="40">
                       <b-link>
                         <b-img
                           ref="previewEl"
                           rounded
-                          height="80"
-                          width="80"
+                          height="40"
+                          width="70"
                           :src="url"
-                          style="margin: 1rem"
                         />
                       </b-link>
                       <!--/ avatar -->
                     </b-media-aside>
 
-                    <b-media-body class="mt-75 ml-75">
+                    <b-media-body class=" ml-75 mt-2">
                       <b-button
                         variant="primary"
+                        style="padding: 2px 16px;"
                         size="sm"
-                        class="mb-75 mr-75"
                         @click="openFilePicker"
                       >
                         {{ $t("change") }}

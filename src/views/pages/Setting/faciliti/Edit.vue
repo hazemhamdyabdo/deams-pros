@@ -8,10 +8,7 @@
           <div class="card-body">
             <gform @submit="save()">
               <b-row>
-                <b-col 
-                cols="12" 
-                class="d-flex justify-content-center mb-2"
-                >
+                <b-col cols="12" class="d-flex justify-content-center mb-2">
                   <!-- media -->
                   <b-media no-body style="display: flex; gap: .6rem;">
                     <b-media-aside height="40">
@@ -109,24 +106,26 @@
                         label-text="countryName"
                       />
                     </b-col>
+
                     <!-- numberOfUnits  -->
                     <b-col md="4">
                       <gfield
                         label-text="numberOfUnits"
                         name="numberOfUnits"
                         type="number"
-                        v-model="selectedItem.NumberOfUnits"
+                        v-model="selectedItem.numberOfUnits"
                         rules="numeric"
                       />
                     </b-col>
                   </b-row>
+
                   <b-row>
                     <b-col md="4">
                       <gfield
                         label-text="taxRegistrationNumber"
                         name="taxRegistrationNumber"
                         type="number"
-                        v-model="selectedItem.TaxRegistrationNumber"
+                        v-model="selectedItem.taxRegistrationNumber"
                         rules="numeric"
                       />
                     </b-col>
@@ -135,7 +134,7 @@
                         label-text="commercialRegistrationNumber"
                         name="commercialRegistrationNumber"
                         type="number"
-                        v-model="selectedItem.CommercialRegistrationNumber"
+                        v-model="selectedItem.commercialRegistrationNumber"
                         rules="numeric"
                       />
                     </b-col>
@@ -146,15 +145,6 @@
                         rquired
                       />
                     </b-col>
-                    <!-- <b-col md="4">
-                      <gfield
-                        label-text="statrtOfFiscalYear"
-                        name="statrtOfFiscalYear"
-                        type="number"
-                        v-model="selectedItem.fiscalYearStart"
-                        rules="required|numeric"
-                      />
-                    </b-col>  -->
                   </b-row>
                   <b-row>
                     <b-col md="4">
@@ -219,7 +209,7 @@
                         style="font-size: 14px; margin-bottom: 7px"
                         for="registeredInTax"
                       >
-                        {{ $t("registeredInTax") }}
+                        {{ $t('registeredInTax') }}
                       </label>
                       <b-form-group>
                         <b-form-checkbox
@@ -238,7 +228,7 @@
                           style="font-size: 14px; margin-bottom: 7px"
                           for="customer"
                         >
-                          {{ $t("notes") }}
+                          {{ $t('notes') }}
                         </label>
                         <b-form-textarea
                           id="textarea"
@@ -289,6 +279,34 @@
                         v-model="selectedItem.email"
                       />
                     </b-col>
+
+                    <!-- timeFormula  -->
+                    <b-col md="4">
+                      <gfield
+                        label="arabicName"
+                        field="select"
+                        id="timeFormula"
+                        name="timeFormula"
+                        label-text="timeFormula"
+                        v-model="selectedItem.timeFormulaId"
+                        :options="_lookup.timeFormula"
+                        :dir="'rtl'"
+                      />
+                    </b-col>
+
+                    <!-- timeFormula  -->
+                    <b-col md="4">
+                      <gfield
+                        label="arabicName"
+                        field="select"
+                        id="dateFormat"
+                        name="dateFormat"
+                        label-text="dateFormat"
+                        v-model="selectedItem.dateFormatId"
+                        :options="_lookup.dateFormat"
+                        :dir="'rtl'"
+                      />
+                    </b-col>
                   </b-row>
                 </b-tab>
               </b-tabs>
@@ -301,7 +319,7 @@
                     variant="primary"
                     data-action-type="save"
                   >
-                    {{ $t("save") }}
+                    {{ $t('save') }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -313,7 +331,9 @@
   </div>
 </template>
 <script>
-import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
+import { dateFormats, timeFormulas } from '@/libs/acl/Lookups';
+import VueDatePicker from '@/components/form/inputs/VDatePicker.vue';
+import { da } from 'vuetify/lib/locale/index.mjs';
 export default {
   components: {
     VueDatePicker,
@@ -327,57 +347,60 @@ export default {
   data() {
     return {
       selectedItem: {
-        fiscalYearStart: "",
-        logoUrl: "",
+        fiscalYearStart: '',
+        logoUrl: '',
+        dateFormat: '',
+      },
+      _lookup: {
+        dateFormat: dateFormats,
+        timeFormula: timeFormulas,
       },
       items: [],
       countries: [],
       cities: [],
       id: 0,
-      url: "",
+      url: '',
     };
   },
   mounted() {
-    this.id = this.$route.params.id;
-    if (this.id > 0) {
-      this.getSelected();
-    }
+    // this.id = this.$route.params.id;
+    // if (this.id > 0) {
+    //   this.getSelected();
+    // }
     this.getData();
     this.getCities();
     this.getCountries();
   },
   methods: {
     getData() {
-      this.get({ url: "Facilities/@current" }).then((data) => {
+      this.get({ url: 'Facilities/@current' }).then((data) => {
         this.selectedItem = data;
         this.url = this.selectedItem.logoUrl
           ? `${this.domain}${this.selectedItem.logoUrl}`
-          : "default_image.jpg";
+          : 'default_image.jpg';
         this.selectedItem.fiscalYearStart = this.getDate(data.fiscalYearStart);
         this.selectedItem.fiscalYearEnd = this.getDate(data.fiscalYearEnd);
       });
     },
     openFilePicker() {
-      console.log("file");
       this.$refs.imgupload.click();
     },
     getCities() {
-      this.get({ url: "Cities" }).then((data) => {
+      this.get({ url: 'Cities' }).then((data) => {
         this.cities = data;
       });
     },
     getCountries() {
-      this.get({ url: "Countries" }).then((data) => {
+      this.get({ url: 'Countries' }).then((data) => {
         this.countries = data;
       });
     },
     onFileChanged(event) {
-      console.log("daaa");
       const file = event.target.files[0];
-      this.selectedItem.imageExtension = file.name.split(".").pop();
+      this.selectedItem.imageExtension = file.name.split('.').pop();
       this.toBase64(file)
         .then((file1) => {
-          this.selectedItem.base64logo = file1.split(",").pop();
+          this.selectedItem.base64logo = file1.split(',').pop();
         })
         .then(() => {
           this.logoModel = {
@@ -386,7 +409,7 @@ export default {
           };
 
           this.create({
-            url: "Facilities/@current/logo",
+            url: 'Facilities/@current/logo',
             data: this.logoModel,
           }).then((data) => {
             this.selectedItem.logoUrl = data;
@@ -403,31 +426,18 @@ export default {
       });
     },
     save() {
-      this.selectedItem.branchId = this.branchId;
-      if (!this.selectedItem.englishName) {
-        this.selectedItem.englishName = this.selectedItem.arabicName;
-      }
-      if (this.selectedItem.id > 0) {
-        this.update({
-          url: "Cities",
-          data: this.selectedItem,
-          id: this.selectedItem.id,
-        }).then(() => {
-          this.doneAlert({ text: this.$t("updatedSuccessfully") });
-          this.$router.push({ name: "cities" });
-        });
-      } else {
-        this.create({
-          url: "Cities",
-          data: this.selectedItem,
-        }).then(() => {
-          this.doneAlert({ text: this.$t("savedSuccessfully") });
-          this.$router.push({ name: "cities" });
-        });
-      }
+      this.update({
+        url: 'Facilities',
+        data: this.selectedItem,
+        id: this.selectedItem.id,
+      }).then(() => {
+        this.doneAlert({ text: this.$t('updatedSuccessfully') });
+        window.location.reload();
+        this.getData();
+      });
     },
     getSelected() {
-      this.get({ url: "Cities", id: this.id }).then((data) => {
+      this.get({ url: 'Cities', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },

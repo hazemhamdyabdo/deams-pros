@@ -166,6 +166,16 @@ export default {
       date = date || new Date();
       return moment.utc(date).format('HH:mm:ss');
     },
+    adDateToHijriDate(adDate = new Date()) {
+      return new Intl.DateTimeFormat('ar-TN-u-ca-islamic', 
+       {
+         day: 'numeric', 
+         month: 'long', 
+         weekday: 'long', 
+         year: 'numeric'
+       }
+     ).format(new Date(adDate));
+   },
     roundTo(n, digits) {
         if (digits === undefined) {
             digits = 0;

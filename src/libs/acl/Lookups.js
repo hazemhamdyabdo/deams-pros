@@ -84,10 +84,32 @@ const messageTypes = [
     englishName: 'confirm Leave'
   }
 ];
+const dateFormats = [
+  {
+    id: 'yyyymmdd',
+    arabicName: 'yyyy/mm/dd',
+    englishName: 'yyyy/mm/dd'
+  },
+]
+
+const timeFormulas = [
+  {
+    id: 'twentyfour',
+    arabicName: '24',
+    englishName: '24'
+  },
+  {
+    id: 'twelve',
+    arabicName: '12',
+    englishName: '12'
+  },
+]
 
 export {
   genders,
   guestTypes,
   identityTypes,
-  messageTypes
+  messageTypes,
+  timeFormulas,
+  dateFormats
 }

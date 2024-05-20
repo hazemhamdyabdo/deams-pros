@@ -5,6 +5,21 @@
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
+
+              <!-- isActive -->
+              <b-row class="mb-4">
+                <b-col md="3">
+                  <b-form-checkbox
+                    v-model="selectedItem.isActive"
+                    name="check-button"
+                    switch
+                    inline
+                  >
+                    {{ $t('active') }}
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
+
               <b-row>
                 <!-- code -->
                 <b-col 
@@ -20,41 +35,38 @@
                   />
                 </b-col>
 
-                <!-- companion.identityTypeId  -->
+                <!-- arabicName  -->
                 <b-col md="3">
-                    <gfield
-                      label="arabicName"
-                      field="select"  
-                      id="messageType"           
-                      name="messageType"
-                      label-text="messageType"
-                      v-model="selectedItem.messageTypeId"
-                      :options="lookup.messageTypes"
-                      :dir="'rtl'"
-                      rules="required"
-                    />
-                  </b-col>
+                  <gfield
+                    id="arabicName"
+                    rules="required"
+                    v-model="selectedItem.arabicName"
+                    label-text="arabicName"
+                    ref="arabicName"
+                  />
+                </b-col>
 
-                <b-col md="12">
-                  <b-form-group :label="$t('messageContent')">
-                    <b-form-textarea
-                      id="textarea"
-                      v-model="selectedItem.messageContent"
-                      label="Notes"
-                      rows="5"
-                      max-rows="6"
-                    />
-                    <small
-                      class="textarea-counter-value"
-                    > {{ selectedItem.messageContent.length }} / 1000
-                    </small>
-                    <small
-                      v-if="this.selectedItem.messageContent.length > 1000"
-                      class="float-right mt-2 text-danger"
-                    > {{ this.$t('textLengthValidation', { for:$t('messageContent'), count: 1000 }) }}
-                    </small>
-                  </b-form-group>
-                </b-col>             
+                <!-- englishName -->
+                <b-col md="3">
+                  <gfield
+                    id="englishName"
+                    ref="englishName"
+                    v-model="selectedItem.englishName"
+                    name="englishName"
+                    label-text="englishName"
+                  />
+                </b-col>
+
+                <!-- discount -->
+                <b-col md="3">
+                  <gfield
+                    id="discount"
+                    name="discount"
+                    v-model="selectedItem.discountValue"
+                    label-text="discount"
+                    rules="required|numeric"
+                  />
+                </b-col>
               </b-row>
 
               <!-- notes -->
@@ -119,8 +131,6 @@
   </div>
 </template>
 <script>
-import 
-{ messageTypes } from '@/libs/acl/Lookups';
 export default {
   components: {},
   props: {
@@ -133,10 +143,7 @@ export default {
     return {
       id: 0,
       selectedItem: {
-        messageContent: ''
-      },
-      lookup: {
-        messageTypes: messageTypes
+        isActive: true
       }
     };
   },
@@ -148,23 +155,15 @@ export default {
   },
   methods: {
     prepareBeforeSave() {
-      if (this.selectedItem.messageContent.trim().length === 0) {
-        this.selectedItem.messageContent = messageTypes.find((el) => el.id === this.selectedItem.messageTypeId).arabicName
+      if (!this.selectedItem.englishName) {
+        this.selectedItem.englishName = this.selectedItem.arabicName;
       }
     },
-
-    validateBeforeSave() {
-      if (this.selectedItem.messageContent.trim().length > 1000) return false;
-      return true;
-    },
-
     save() {
       this.prepareBeforeSave();
-      if (!this.validateBeforeSave()) return;
-
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'Messages',
+          url: 'ClientsCategories',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
@@ -173,7 +172,7 @@ export default {
         });
       } else {
         this.create({
-          url: 'Messages',
+          url: 'ClientsCategories',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
@@ -182,13 +181,13 @@ export default {
       }
     },
     getSelected() {
-      this.get({ url: 'Messages', id: this.id }).then((data) => {
+      this.get({ url: 'ClientsCategories', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
 
     backToList() {
-      this.$router.push({ name: 'messages' });
+      this.$router.push({ name: 'clientsCategories' });
     },
   },
 };

@@ -308,5 +308,21 @@
   "weeklyPrice": "السعر الأسبوعي",
   "monthlyPrice": "السعر الشهري",
   "hotelData": "بيانات الفندق",
-  "financialTransactions": "الحركات المالية"
+  "financialTransactions": "الحركات المالية",
+  "Accommodations": "التسكين",
+  "previewAccommodations": "استعراض وإدارة التسكين الذي تم تعريفه",
+  "bookingNumber": "رقم الحجز",
+  "bookingDate": "تاريخ الحجز",
+  "bookingStatus": "حالة الحجز",
+  "dateOfEntry": "تاريخ الدخول",
+  "hijriDateOfEntry": "تاريخ الدخول هجري",
+  "exitDate": "تاريخ الخروج",
+  "hijriExitDate": "تاريخ الخروج هجري",
+  "durationInNights": "عدد الليالي",
+  "bookingType": "نوع الحجز",
+  "Families": "العائلات",
+  "Singles": "عذاب",
+  "Confirmed": "مؤكد",
+  "NotConfirmed": "غير مؤكد",
+  "roomData": "بيانات الغرفة"
 }

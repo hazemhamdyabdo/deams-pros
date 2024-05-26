@@ -2,24 +2,25 @@
     <div class="main-wrapper">
       <div class="page-wrapper">
         <div class="content">
-          <pageheader :title="$t(title)" :title1="$t(description)" />
-  
+          <!-- header  -->
+          <pageheader 
+          />
           <div class="card">
             <div class="card-body">
-              <GTable
-                ref="guests-table"
+              <g-table
+                ref="unitesPrices-table"
                 :items="items"
                 :columns="tableColumns"
                 :is-busy="isTableBusy"
                 :noAction="true"
-                perPage="25"
+                :perPage="perPage"
                 :totalRows="totalRows"
                 @filtered="onFiltered"
                 :createButton="{ visiable: true }"
                 :searchInput="{ visiable: true }"
                 @on-create="
                   (v) => {
-                    $router.push({ name: 'addAccommodations' });
+                    $router.push({ name: 'addUnitesPrices' });
                   }
                 "
               >
@@ -33,7 +34,11 @@
                       size="sm"
                       @click="edit(item)"
                     >
-                      <vue-feather type="edit" size="14" class="mx-1 clickable" />
+                      <vue-feather
+                        type="edit"
+                        size="14"
+                        class="mx-1 clickable"
+                      ></vue-feather>
                     </b-button>
                     <b-button
                       data-action-type="delete"
@@ -48,11 +53,11 @@
                         stroke="red"
                         size="14"
                         class="mx-1 danger clickable"
-                      />
+                      ></vue-feather>
                     </b-button>
                   </div>
                 </template>
-              </GTable>
+              </g-table>
             </div>
           </div>
         </div>
@@ -61,78 +66,68 @@
   </template>
   
   <script>
-  import { bookingType } from "@/libs/acl/Lookups";
-  import GTable from "@/views/pages/Shared/Table.vue";
+  import GTable from '../../Shared/Table.vue';
+  
   export default {
     components: {
       GTable,
     },
-    data: () => ({
-      title: "Accommodations",
-      description: "previewAccommodations",
-      items: [],
-      totalRows: 0,
-      perPage: 25,
-    }),
-    // computed section
+    data() {
+      return {
+        selectedItem: {},
+        totalRows: 0,
+        currentPage: 1,
+        perPage: 15,
+        items: [],
+      };
+    },
     computed: {
       tableColumns() {
         return [
-          { key: "code", label: this.$t("code"), sortable: true },
-          { key: "bookingNumber", label: this.$t("bookingNumber") },
-          { key: "bookingDate", label: this.$t("bookingDate") },
-          { key: "bookingStatus", label: this.$t("bookingStatus") },
-          { key: "bookingType", label: this.$t("bookingType") },
-          { key: "actions" },
+          { key: 'code', label: this.$t('code'), sortable: true },
+          { key: 'unitType', label: this.$t('unitType'), sortable: true },
+          { key: 'dailyPrice', label: this.$t('dailyPrice'), sortable: true },
+          { key: 'weeklyPrice', label: this.$t('weeklyPrice'), sortable: true },
+          { key: 'monthlyPrice', label: this.$t('monthlyPrice'), sortable: true },
+          { key: 'notes', label: this.$t('notes'), sortable: true },
+          { key: 'actions' },
         ];
       },
     },
-  
-    // mounted section
     mounted() {
       this.getItems();
     },
-  
-    // methods section
     methods: {
-      async getItems() {
-        const data = await this.get({ url: "Accommodations" });
-        this.items = data;
-        this.items.forEach(item => {
-          item.bookingDate = this.getDate(item.bookingDate);
-          item.bookingStatus = this.$t(item.bookingStatus);
-          item.bookingType = bookingType.find((gt) => gt.id === item.bookingTypeId).arabicName
+      getItems() {
+        this.get({ url: 'UnitPrices' }).then((data) => {
+          this.items = data;
         });
       },
-  
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
+        this.currentPage = 1;
       },
-  
       edit(item) {
         this.$router.push({
-          name: "editAccommodations",
+          name: 'editUnitesPrices',
           params: { id: item.id },
         });
       },
-  
       remove(item) {
         this.confirmAction(
           {
-            text: this.$t("areYouSureYouWantToDelete"),
+            text: this.$t('areYouSureYouWantToDelete'),
           },
           () => {
             // then delete
-            this.delete({ url: "Accommodations", id: item.id }).then(() => {
-              this.doneAlert({ text: this.$t("deletedSuccessfully") });
+            this.delete({ url: 'UnitPrices', id: item.id }).then(() => {
+              this.doneAlert({ text: this.$t('deletedSuccessfully') });
               this.getItems();
             });
           }
         );
       },
-    },
+    }
   };
   </script>
-  
-  <style lang="scss" scoped></style>
   

@@ -218,7 +218,8 @@ export default {
       lookup: {
         expenses: [],
         suppliers: [],
-        paymentMethods: []
+        paymentMethods: [],
+        transactionDate: new Date()
       },
       visibility: {
         tax: false,

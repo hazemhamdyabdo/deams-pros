@@ -168,7 +168,7 @@ export default {
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'PaymentMehtod' });
+          this.$router.push({ name: 'paymentmethods' });
         });
       } else {
         this.create({
@@ -176,7 +176,7 @@ export default {
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'PaymentMehtod' });
+          this.$router.push({ name: 'paymentmethods' });
         });
       }
     },
@@ -186,7 +186,7 @@ export default {
       });
     },
     backToList() {
-      this.$router.push({ name: 'PaymentMehtod' });
+      this.$router.push({ name: 'paymentmethods' });
     },
   },
 };

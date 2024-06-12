@@ -429,7 +429,7 @@ export default {
       this.update({
         url: 'Facilities',
         data: this.selectedItem,
-        id: this.selectedItem.id,
+        id: '@current',
       }).then(() => {
         this.doneAlert({ text: this.$t('updatedSuccessfully') });
         window.location.reload();

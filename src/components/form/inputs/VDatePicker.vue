@@ -44,7 +44,7 @@
       },
       min: {
         type: Date,
-        default: new Date(),
+        default: "",
       },
     },
     emits: ["update:modelValue"],

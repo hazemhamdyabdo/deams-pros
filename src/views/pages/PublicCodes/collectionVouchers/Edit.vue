@@ -156,7 +156,8 @@ export default {
       selectedItem: {},
       lookup: {
         guests: [],
-        paymentMethods: []
+        paymentMethods: [],
+        transactionDate: new Date()
       },
       items: [],
       id: 0,

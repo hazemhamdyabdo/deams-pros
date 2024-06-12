@@ -174,13 +174,6 @@
             </div>
           </div>
           <hr class="m-0" />
-          <router-link class="dropdown-item" to="profile"
-            ><vue-feather type="user"></vue-feather>My Profile</router-link
-          >
-          <router-link class="dropdown-item" to="generalsettings"
-            ><vue-feather type="settings"></vue-feather>Settings</router-link
-          >
-          <hr class="m-0" />
           <router-link class="dropdown-item logout pb-0" to="/"
             ><img
               src="../assets/img/icons/log-out.svg"

@@ -13,4 +13,18 @@ export default [
       },
     ],
   },
+  {
+    path: '/user',
+    children: [
+      {
+        path: '',
+        name: 'user',
+        component: () => import('@/views/pages/Setting/users/Edit.vue'),
+        meta: {
+          pageTitle: 'users',
+          Breadcrumb: 'settings',
+        },
+      },
+    ],
+  },
 ];

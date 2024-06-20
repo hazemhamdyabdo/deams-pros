@@ -1,3 +1,5 @@
+import permissions from './permissionLookups';
+
 const genders = [
   {
     id: 'male',
@@ -116,5 +118,6 @@ export {
   identityTypes,
   messageTypes,
   timeFormulas,
-  dateFormats
+  dateFormats,
+  permissions
 }

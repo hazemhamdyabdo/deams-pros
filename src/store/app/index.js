@@ -56,7 +56,7 @@ export default {
     },
     setCompany(state, company) {
       state.currentCompany = company;
-    //  window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
+      //  window.localStorage.COMAPNY_LOGO = state.currentCompany.logoUrl;
     },
   },
   actions: {
@@ -152,7 +152,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch((error) => {
-         //   reject(error);
+            //   reject(error);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -170,7 +170,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-            // reject(response);
+            reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -188,7 +188,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-          //  reject(response);
+            //  reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -206,7 +206,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-         //   reject(response);
+            //   reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {

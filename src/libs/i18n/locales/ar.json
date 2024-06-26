@@ -344,6 +344,10 @@
   "password": "كلمة المرور",
   "confirmPassword": "تأكيد كلمة المرور",
   "phone": "رقم التواصل",
-  "branches": "الفروع"
-
-}
+  "branches": "الفروع",
+  "all roles":"كل الصلاحيات" ,
+  "permissions":"الأوامر",
+  "view":"عرض",
+   "add":"إضافة",
+   "isadmin":"مدير"
+ }

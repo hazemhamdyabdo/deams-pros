@@ -32,8 +32,8 @@ export default {
         { url: "Users/auth", data: { userName, password } },
         { root: true }
       ).then((data) => {
-        commit("setToken", data.value.token);
-        commit("setProfile", data.value);
+        commit("setToken", data.token);
+        commit("setProfile", data);
         Router.push("/dashboard");
       });
     },

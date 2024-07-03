@@ -98,6 +98,15 @@
                       rows="3"
                       max-rows="6"
                     />
+                    <small
+                      class="textarea-counter-value"
+                    > {{ selectedItem.notes ? selectedItem.notes.length : 0 }} / 500
+                    </small>
+                    <small
+                      v-if="selectedItem.notes && selectedItem.notes.length > 500"
+                      class="float-right mt-2 text-danger"
+                    > {{ this.$t('textLengthValidation', { for:$t('notes'), count: 500 }) }}
+                    </small>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -156,7 +165,8 @@ export default {
       selectedItem: {},
       lookup: {
         guests: [],
-        paymentMethods: []
+        paymentMethods: [],
+        transactionDate: new Date()
       },
       items: [],
       id: 0,
@@ -196,6 +206,7 @@ export default {
     },
     onLoad() {
       this.id = this.$route.params.id;
+      this.selectedItem.transactionDate = this.getDate();
       this.selectedItem.transactionTime = this.getTime();
       this.selectedItem.voucherValue = 0;
     },

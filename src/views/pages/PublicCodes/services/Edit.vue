@@ -2,26 +2,26 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <!-- /add -->
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
 
-              <!-- isShared -->
+              <!-- isActive -->
               <b-row class="mb-4">
                 <b-col md="3">
                   <b-form-checkbox
-                    v-model="selectedItem.isShared"
+                    v-model="selectedItem.isActive"
                     name="check-button"
                     switch
                     inline
                   >
-                    {{ $t('general') }}
+                    {{ $t('active') }}
                   </b-form-checkbox>
                 </b-col>
               </b-row>
 
               <b-row>
+                <!-- code -->
                 <b-col 
                   v-if="selectedItem.id > 0"
                   md="3"  
@@ -34,8 +34,9 @@
                     v-model="selectedItem.code"
                   />
                 </b-col>
+
+                <!-- arabicName  -->
                 <b-col md="3">
-                  <!-- arabicName  -->
                   <gfield
                     id="arabicName"
                     rules="required"
@@ -44,6 +45,8 @@
                     ref="arabicName"
                   />
                 </b-col>
+
+                <!-- englishName -->
                 <b-col md="3">
                   <gfield
                     id="englishName"
@@ -53,7 +56,20 @@
                     label-text="englishName"
                   />
                 </b-col>
+
+                <!-- value -->
+                <b-col md="3">
+                  <gfield
+                    id="value"
+                    v-model="selectedItem.value"
+                    name="value"
+                    label-text="serviceCost"
+                    rules="required|numeric"
+                  />
+                </b-col>
               </b-row>
+
+              <!-- notes -->
               <b-row>
                 <b-col md="12">
                   <b-form-group>
@@ -82,6 +98,8 @@
                   </b-form-group>
                 </b-col>
               </b-row>
+
+              <!-- operations -->
               <b-row>
                 <b-col cols="12" class="d-flex justify-content-end">
                   <b-button
@@ -110,6 +128,7 @@
                   </b-button>
                 </b-col>
               </b-row>
+
             </gform>
           </div>
         </div>
@@ -128,13 +147,11 @@ export default {
   },
   data() {
     return {
-      selectedItem: {
-        isShared: true
-      },
-      items: [],
-      title: '',
-      title1: '',
       id: 0,
+      selectedItem: {
+        isActive: true,
+        value: 0
+      }
     };
   },
   mounted() {
@@ -144,37 +161,40 @@ export default {
     }
   },
   methods: {
-    save() {
-      this.selectedItem.branchId = this.branchId;
+    prepareBeforeSave() {
       if (!this.selectedItem.englishName) {
         this.selectedItem.englishName = this.selectedItem.arabicName;
       }
+    },
+    save() {
+      this.prepareBeforeSave();
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'RoomTypes',
+          url: 'Services',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.backToList();
         });
       } else {
         this.create({
-          url: 'RoomTypes',
+          url: 'Services',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'roomTypes' });
+          this.backToList();
         });
       }
     },
     getSelected() {
-      this.get({ url: 'RoomTypes', id: this.id }).then((data) => {
+      this.get({ url: 'Services', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
+
     backToList() {
-      this.$router.push({ name: 'roomTypes' });
+      this.$router.push({ name: 'services' });
     },
   },
 };

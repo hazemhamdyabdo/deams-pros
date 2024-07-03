@@ -1,0 +1,406 @@
+export default [
+  {
+    name: 'nationalities',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewNationalities' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addNationalities' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editNationalities' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteNationalities' },
+    ],
+    title: 'nationalities',
+  },
+  {
+    dependancies: [],
+    name: 'banks',
+    title: 'banks',
+    roles: [
+      {
+        arabicName: 'عرض',
+        englishName: ' View',
+        id: 'viewBanks',
+      },
+      {
+        arabicName: 'إضافة',
+        englishName: ' Add',
+        id: 'addBanks',
+      },
+      {
+        arabicName: 'تعديل',
+        englishName: ' Edit',
+        id: 'editBanks',
+      },
+      {
+        arabicName: 'حذف',
+        englishName: ' Delete',
+        id: 'deleteBanks',
+      },
+    ],
+  },
+  {
+    dependancies: [],
+    name: 'paymentMethods',
+    roles: [
+      { arabicName: 'عرض', englishName: ' View', id: 'viewPaymentMethods' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addPaymentMethods' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editPaymentMethods' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deletePaymentMethods' },
+    ],
+    title: 'PaymentMethods',
+  },
+  {
+    dependancies: [],
+    name: 'RentTypes',
+    roles: [
+      { arabicName: 'عرض', englishName: ' View', id: 'viewRentTypes' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addRentTypes' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editRentTypes' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteRentTypes' },
+    ],
+    title: 'RentTypes',
+  },
+  {
+    dependancies: [],
+    name: 'discounts',
+    roles: [
+      { arabicName: 'عرض', englishName: ' View', id: 'viewDiscounts' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addDiscounts' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editDiscounts' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteDiscounts' },
+    ],
+    title: 'discounts',
+  },
+  {
+    name: 'expenses',
+    title: 'expenses',
+    roles: [
+      {
+        arabicName: 'عرض',
+        englishName: ' View',
+        id: 'viewExpenses',
+        type: 'mobile',
+      },
+      {
+        arabicName: 'إضافة',
+        englishName: ' Add',
+        id: 'addExpenses',
+      },
+      {
+        arabicName: 'تعديل',
+        englishName: ' Edit',
+        id: 'editExpenses',
+      },
+      {
+        arabicName: 'حذف',
+        englishName: ' Delete',
+        id: 'deleteExpenses',
+      },
+    ],
+  },
+  {
+    dependancies: [],
+    name: 'suppliers',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewSuppliers' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addSuppliers' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editSuppliers' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteSuppliers' },
+    ],
+    title: 'suppliers',
+  },
+  {
+    dependancies: [],
+    name: 'sources',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewSources' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addSources' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editSources' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteSources' },
+    ],
+    title: 'sources',
+  },
+  {
+    dependancies: [],
+    name: 'cities',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewCities' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addCities' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editCities' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteCities' },
+    ],
+    title: 'cities',
+  },
+  {
+    dependancies: [],
+    name: 'countries',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewCountries' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addCountries' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editCountries' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteCountries' },
+    ],
+    title: 'countries',
+  },
+  {
+    dependancies: [],
+    name: 'buildings',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewBuildings' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addBuildings' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editBuildings' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteBuildings' },
+    ],
+    title: 'buildings',
+  },
+  {
+    dependancies: [],
+    name: 'floors',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewFloors' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addFloors' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editFloors' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteFloors' },
+    ],
+    title: 'floors',
+  },
+  {
+    dependancies: [],
+    name: 'KitchensTypes',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewKitchensTypes' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addKitchensTypes' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editKitchensTypes' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteKitchensTypes' },
+    ],
+    title: 'KitchensTypes',
+  },
+  {
+    dependancies: [],
+    name: 'loungesTypes',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewLoungesTypes' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addLoungesTypes' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editLoungesTypes' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteLoungesTypes' },
+    ],
+    title: 'loungesTypes',
+  },
+  {
+    dependancies: [],
+    name: 'roomStatuses',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewRoomStatuses' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addRoomStatuses' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editRoomStatuses' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteRoomStatuses' },
+    ],
+    title: 'roomStatuses',
+  },
+  {
+    dependancies: [],
+    name: 'roomTypes',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewRoomTypes' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addRoomTypes' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editRoomTypes' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteRoomTypes' },
+    ],
+    title: 'roomTypes',
+  },
+  {
+    dependancies: [],
+    name: 'rooms',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewRoom' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addRoom' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editRoom' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteRoom' },
+    ],
+    title: 'rooms',
+  },
+  {
+    dependancies: [],
+    name: 'guests',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewGuests' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addGuests' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editGuests' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteGuests' },
+    ],
+    title: 'guests',
+  },
+  {
+    dependancies: [],
+    name: 'messages',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewMessages' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addMessages' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editMessages' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteMessages' },
+    ],
+    title: 'messages',
+  },
+  {
+    dependancies: [],
+    name: 'clientsCategories',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewClientsCategories' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addClientsCategories' },
+      {
+        arabicName: 'تعديل',
+        englishName: ' Edit',
+        id: 'editClientsCategories',
+      },
+      {
+        arabicName: 'حذف',
+        englishName: ' Delete',
+        id: 'deleteClientsCategories',
+      },
+    ],
+    title: 'clientsCategories',
+  },
+  {
+    dependancies: [],
+    name: 'seasonUnitesPrices',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewSeasonUnitesPrices' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addSeasonUnitesPrices' },
+      {
+        arabicName: 'تعديل',
+        englishName: ' Edit',
+        id: 'editSeasonUnitesPrices',
+      },
+      {
+        arabicName: 'حذف',
+        englishName: ' Delete',
+        id: 'deleteSeasonUnitesPrices',
+      },
+    ],
+    title: 'seasonUnitesPrices',
+  },
+  {
+    dependancies: [],
+    name: 'unitesPrices',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewUnitesPrices' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addUnitesPrices' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editUnitesPrices' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteUnitesPrices' },
+    ],
+    title: 'unitesPrices',
+  },
+  {
+    dependancies: [],
+    name: 'accommodations',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewAccommodations' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addAccommodations' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editAccommodations' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteAccommodations' },
+    ],
+    title: 'accommodations',
+  },
+  {
+    dependancies: [],
+    name: 'insurances',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewInsurances' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addInsurances' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editInsurances' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteInsurances' },
+    ],
+    title: 'insurances',
+  },
+  {
+    dependancies: [],
+    name: 'additionalServices',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewAdditionalServices' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addAdditionalServices' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editAdditionalServices' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteAdditionalServices' },
+    ],
+    title: 'additionalServices',
+  },
+  {
+    dependancies: [],
+    name: 'companiesContracts',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewCompaniesContracts' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addCompaniesContracts' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editCompaniesContracts' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteCompaniesContracts' },
+    ],
+    title: 'companiesContracts',
+  },
+  {
+    dependancies: [],
+    name: 'collectionVouchers',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewCollectionVouchers' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addCollectionVouchers' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editCollectionVouchers' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteCollectionVouchers' },
+    ],
+    title: 'collectionVouchers',
+  },
+  {
+    dependancies: [],
+    name: 'paymentVouchers',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewPaymentVouchers' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addPaymentVouchers' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editPaymentVouchers' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deletePaymentVouchers' },
+    ],
+    title: 'paymentVouchers',
+  },
+  {
+    dependancies: [],
+    name: 'facilitySetting',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewFacilitySetting' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addFacilitySetting' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editFacilitySetting' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteFacilitySetting' },
+    ],
+    title: 'facilitySetting',
+  },
+  {
+    dependancies: [],
+    name: 'users',
+    roles: [
+      { arabicName: 'عرض', englishName: 'View', id: 'viewUsers' },
+      { arabicName: 'إضافة', englishName: ' Add', id: 'addUsers' },
+      { arabicName: 'تعديل', englishName: ' Edit', id: 'editUsers' },
+      { arabicName: 'حذف', englishName: ' Delete', id: 'deleteUsers' },
+    ],
+    title: 'users',
+  },
+  {
+    dependancies: [],
+    name: 'incomes',
+    title: 'incomes',
+    roles: [
+      {
+        arabicName: 'عرض',
+        englishName: ' View',
+        id: 'viewIncomes',
+      },
+      {
+        arabicName: 'إضافة',
+        englishName: ' Add',
+        id: 'addIncomes',
+      },
+      {
+        arabicName: 'تعديل',
+        englishName: ' Edit',
+        id: 'editIncomes',
+      },
+      {
+        arabicName: 'حذف',
+        englishName: ' Delete',
+        id: 'deleteIncomes',
+      },
+    ],
+  },
+];

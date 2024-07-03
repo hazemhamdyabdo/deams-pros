@@ -2,11 +2,25 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
+
+              <!-- status -->
+              <b-row class="mb-4">
+                <b-col md="3">
+                  <b-form-checkbox
+                    v-model="selectedItem.status"
+                    name="check-button"
+                    switch
+                    inline
+                  >
+                    {{ $t('active') }}
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
+
               <b-row>
                 <b-col 
                   v-if="selectedItem.id > 0"
@@ -39,39 +53,6 @@
                     label-text="englishName"
                   />
                 </b-col>
-                <b-col md="3">
-                  <label
-                    style="font-size: 14px; margin-bottom: 7px"
-                    for="buidingInService"
-                  >
-                    {{ $t('buidingInService') }}
-                  </label>
-                  <b-form-group>
-                    <b-form-checkbox
-                      v-model="selectedItem.status"
-                      class="mr-0 mt-50"
-                      name="is-rtl"
-                      inline
-                    />
-                  </b-form-group>
-                </b-col>
-
-                <!-- <b-col md="2">
-                  <label
-                    style="font-size: 14px; margin-bottom: 7px"
-                    for="general"
-                  >
-                    {{ $t('general') }}
-                  </label>
-                  <b-form-group>
-                    <b-form-checkbox
-                      v-model="selectedItem.isShared"
-                      class="mr-0 mt-50"
-                      name="is-rtl"
-                      inline
-                    />
-                  </b-form-group>
-                </b-col> -->
               </b-row>
               <b-row>
                 <b-col md="12">
@@ -89,6 +70,15 @@
                       rows="3"
                       max-rows="6"
                     />
+                    <small
+                      class="textarea-counter-value"
+                    > {{ selectedItem.notes ? selectedItem.notes.length : 0 }} / 500
+                    </small>
+                    <small
+                      v-if="selectedItem.notes && selectedItem.notes.length > 500"
+                      class="float-right mt-2 text-danger"
+                    > {{ this.$t('textLengthValidation', { for:$t('notes'), count: 500 }) }}
+                    </small>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -138,7 +128,9 @@ export default {
   },
   data() {
     return {
-      selectedItem: {},
+      selectedItem: {
+        status: true
+      },
       totalRows: 0,
       currentPage: 1,
       perPage: 25,

@@ -2,12 +2,17 @@
     <div class="main-wrapper">
       <div class="page-wrapper">
         <div class="content">
-          <pageheader :title="$t(title)" :title1="$t(description)" />
+          <!-- header  -->
+          <pageheader 
+            :title="$t(title)" 
+            :title1="$t(description)" 
+          />
   
+          <!-- /add -->
           <div class="card">
             <div class="card-body">
-              <GTable
-                ref="guests-table"
+              <g-table
+                ref="insurance-table"
                 :items="items"
                 :columns="tableColumns"
                 :is-busy="isTableBusy"
@@ -19,12 +24,27 @@
                 :searchInput="{ visiable: true }"
                 @on-create="
                   (v) => {
-                    $router.push({ name: 'addAccommodations' });
+                    $router.push({ name: 'addInsurances' });
                   }
                 "
               >
                 <template #actions="{ item }">
                   <div class="text-nowrap">
+                    <b-button
+                      data-action-type="preview"
+                      v-b-tooltip.hover.top="$t('preview')"
+                      variant="custom"
+                      class="btn-icon"
+                      size="sm"
+                      @click="edit(item)"
+                    >
+                      <feather-icon
+                        icon="EyeIcon"
+                        class="mx-1 clickable"
+                        :hidden="true"
+                        :id="`invoice-row-${item.id}-prev-icon`"
+                      />
+                    </b-button>
                     <b-button
                       data-action-type="edit"
                       v-b-tooltip.hover.top="$t('edit')"
@@ -33,7 +53,11 @@
                       size="sm"
                       @click="edit(item)"
                     >
-                      <vue-feather type="edit" size="14" class="mx-1 clickable" />
+                      <vue-feather
+                        type="edit"
+                        size="14"
+                        class="mx-1 clickable"
+                      ></vue-feather>
                     </b-button>
                     <b-button
                       data-action-type="delete"
@@ -48,11 +72,11 @@
                         stroke="red"
                         size="14"
                         class="mx-1 danger clickable"
-                      />
+                      ></vue-feather>
                     </b-button>
                   </div>
                 </template>
-              </GTable>
+              </g-table>
             </div>
           </div>
         </div>
@@ -61,61 +85,62 @@
   </template>
   
   <script>
-  import { bookingType } from "@/libs/acl/Lookups";
-  import GTable from "@/views/pages/Shared/Table.vue";
+  import GTable from "../../Shared/Table.vue";
+  
   export default {
     components: {
       GTable,
     },
-    data: () => ({
-      title: "accommodations",
-      description: "previewAccommodations",
-      items: [],
-      totalRows: 0,
-      perPage: 25,
-    }),
-    // computed section
+    data() {
+      return {
+        selectedItem: {},
+        paymentMethods: [],
+        totalRows: 0,
+        currentPage: 1,
+        perPage: 25,
+        searchQuery: "",
+        sortDirection: "asc",
+        filter: null,
+        filterOn: [],
+        items: [],
+        title: "insurances",
+        description: "previewInnsurances",
+      };
+    },
     computed: {
       tableColumns() {
         return [
           { key: "code", label: this.$t("code"), sortable: true },
-          { key: "bookingNumber", label: this.$t("bookingNumber") },
-          { key: "bookingDate", label: this.$t("bookingDate") },
-          { key: "bookingStatus", label: this.$t("bookingStatus") },
-          { key: "bookingType", label: this.$t("bookingType") },
+          { key: "insuranceValue", label: this.$t("name"), sortable: true },
+          {
+            key: 'roomTypeAr',
+            label: this.$t('roomType'),
+            sortable: true,
+          },
+          { key: "notes", label: this.$t("notes"), sortable: true },
           { key: "actions" },
         ];
       },
     },
-  
-    // mounted section
     mounted() {
       this.getItems();
     },
-  
-    // methods section
     methods: {
-      async getItems() {
-        const data = await this.get({ url: "Accommodations" });
-        this.items = data;
-        this.items.forEach(item => {
-          item.bookingDate = this.getDate(item.bookingDate);
-          item.bookingStatus = this.$t(item.bookingStatus);
-          item.bookingType = bookingType.find((gt) => gt.id === item.bookingTypeId).arabicName
+      getItems() {
+        this.get({ url: "Insurances" }).then((data) => {
+          this.items = data;
         });
       },
-  
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
+        this.currentPage = 1;
       },
-  
       edit(item) {
         this.$router.push({
-          name: "editAccommodations",
+          name: "editInsurances",
           params: { id: item.id },
         });
       },
-  
       remove(item) {
         this.confirmAction(
           {
@@ -123,7 +148,7 @@
           },
           () => {
             // then delete
-            this.delete({ url: "Accommodations", id: item.id }).then(() => {
+            this.delete({ url: "Insurances", id: item.id }).then(() => {
               this.doneAlert({ text: this.$t("deletedSuccessfully") });
               this.getItems();
             });
@@ -131,8 +156,7 @@
         );
       },
     },
+    name: "Insurance",
   };
   </script>
-  
-  <style lang="scss" scoped></style>
   

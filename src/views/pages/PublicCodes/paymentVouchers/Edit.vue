@@ -142,12 +142,64 @@
                 </b-col>
               </b-row>
 
-              <!-- notes -->
               <b-row>
-                <b-col md="12">
+                <!-- identity image upload -->
+                <b-col md="6">
+                  <b-form-group>
+                    <div class="d-flex justify-content-between">
+                      <label style="margin-bottom: 10px;"> {{ $t('attachmentForPaymentVoucher') }}</label>
+                      <div v-if="selectedItem.attachmentName">
+                        <!-- download button -->
+                        <b-button
+                          v-b-tooltip.hover.top="$t('downloadAttachment')"
+                          class="me-2"
+                          variant="outline-success"
+                          style="font-size: 11px;"
+                          @click="downloadAttachment()"
+                        > 
+                          <vue-feather
+                            type="download"
+                            size="12"
+                          />
+                            {{ $t('download') }}
+                        </b-button>
+                        <!-- remove button -->
+                        <b-button
+                            v-b-tooltip.hover.top="$t('removeAttachment')"
+                            variant="outline-danger"
+                            style="font-size: 11px;"
+                            @click="deleteAttachment()"
+                          > 
+                          <vue-feather
+                            type="trash-2"
+                            size="12"
+                          />
+                          {{ $t('delete') }} 
+                        </b-button>
+                      </div>
+                    </div>
+                    <div class="image-upload">
+                      <input 
+                        type="file" 
+                        style="height: 102px;" 
+                        @change="handleFileInputChange()"  
+                        accept=".pdf, .jpg, .jpeg, .png"
+                      />
+                      <div class="image-uploads">
+                        <img 
+                          src="@/assets/img/icons/upload.svg" alt="upload-img" 
+                        />
+                        <h4>{{ selectedItem.attachmentName ? selectedItem.attachmentName : $t('dragAndDropFileToUpload') }}</h4>
+                      </div>
+                    </div>  
+                  </b-form-group>
+                </b-col>
+
+                <!-- notes -->
+                <b-col md="6">
                   <b-form-group>
                     <label
-                      style="font-size: 14px; margin-bottom: 7px"
+                      style="font-size: 14px; margin-bottom: 12px"
                       for="customer"
                     >
                       {{ $t("notes") }}
@@ -156,9 +208,18 @@
                       id="textarea"
                       v-model="selectedItem.notes"
                       label="Notes"
-                      rows="3"
+                      rows="4"
                       max-rows="6"
                     />
+                    <small
+                      class="textarea-counter-value"
+                    > {{ selectedItem.notes ? selectedItem.notes.length : 0 }} / 500
+                    </small>
+                    <small
+                      v-if="selectedItem.notes && selectedItem.notes.length > 500"
+                      class="float-right mt-2 text-danger"
+                    > {{ this.$t('textLengthValidation', { for:$t('notes'), count: 500 }) }}
+                    </small>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -202,6 +263,8 @@
 
 <script>
 import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
+import saveAs from 'file-saver';
+
 export default {
   components: {
     VueDatePicker,
@@ -214,11 +277,16 @@ export default {
   },
   data() {
     return {
-      selectedItem: {},
+      selectedItem: {
+        attachmentName: '',
+        attachmentFileExtension: '',
+        attachmentBase64Content: '',
+      },
       lookup: {
         expenses: [],
         suppliers: [],
-        paymentMethods: []
+        paymentMethods: [],
+        transactionDate: new Date()
       },
       visibility: {
         tax: false,
@@ -309,6 +377,32 @@ export default {
       this.get({ url: 'Expenses' }).then((data) => {
         this.lookup.expenses = data;
       });
+    },
+
+    handleFileInputChange(event) {
+      if(event.target.files[0] && this.validateFile(event.target.files[0])) {
+        const file = event.target.files[0];
+        this.selectedItem.attachmentName = file.name;
+        this.selectedItem.attachmentFileExtension = file.name.split('.').pop().toLowerCase();;
+        this.toBase64(file).then((fileBase) => {
+          this.selectedItem.attachmentBase64Content = fileBase.split(',').pop();
+        });
+      } else {
+        event.target.value = '';
+      }
+    },
+    validateFile(file) {
+      const allowedExtensions = ["jpg", "jpeg", "png", "pdf"];
+      const extension = file.name.split(".").pop().toLowerCase();
+      return allowedExtensions.includes(extension);
+    },
+    downloadAttachment() {
+      saveAs(`${this.baseUrl}${this.selectedItem.attachmentUrl}`, `${this.selectedItem.attachmentName}`);
+    },
+    deleteAttachment() {
+      this.selectedItem.attachmentFileExtension = null;
+      this.selectedItem.attachmentBase64Content = null;
+      this.selectedItem.attachmentName = null;
     }
   }
 }

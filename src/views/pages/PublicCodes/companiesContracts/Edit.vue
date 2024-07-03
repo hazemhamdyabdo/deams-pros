@@ -5,21 +5,6 @@
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
-              
-              <!-- isActive -->
-              <b-row class="mb-4">
-                <b-col md="3">
-                  <b-form-checkbox
-                    v-model="selectedItem.isActive"
-                    name="check-button"
-                    switch
-                    inline
-                  >
-                    {{ $t('active') }}
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-
               <b-row>
                 <!-- code -->
                 <b-col 
@@ -41,7 +26,7 @@
                     id="arabicName"
                     rules="required"
                     v-model="selectedItem.arabicName"
-                    label-text="arabicName"
+                    label-text="companyArabicName"
                     ref="arabicName"
                   />
                 </b-col>
@@ -53,89 +38,131 @@
                     ref="englishName"
                     v-model="selectedItem.englishName"
                     name="englishName"
-                    label-text="englishName"
+                    label-text="companyEnglishName"
                   />
                 </b-col>
 
-                <!-- seasonStartDate  -->
-                <b-col md="3">
-                  <VueDatePicker
-                    label="seasonStartDateAd"
-                    v-model="selectedItem.seasonStartDate"
-                  />
-                </b-col>
-
-                <!-- seasonStartDateHijri  -->
+                <!-- taxNumber -->
                 <b-col md="3">
                   <gfield
-                    label-text="seasonStartDateHijri"
-                    id="seasonStartDateHijri"
-                    name="seasonStartDateHijri"
-                    v-model="selectedItem.seasonStartDateHijri"
-                    disabled
+                    id="taxNumber"
+                    ref="taxNumber"
+                    v-model="selectedItem.taxNumber"
+                    name="taxNumber"
+                    label-text="companyTaxNumber"
+                    rules="numeric||required"
                   />
                 </b-col>
 
-                <!-- seasonEndDate  -->
-                <b-col md="3">
-                  <VueDatePicker
-                    label="seasonEndDateAd"
-                    v-model="selectedItem.seasonEndDate"
-                  />
-                </b-col>
-
-                <!-- seasonEndDateHijri  -->
+                <!-- commercialNumber -->
                 <b-col md="3">
                   <gfield
-                    label-text="seasonEndDateHijri"
-                    id="seasonEndDateHijri"
-                    name="seasonEndDateHijri"
-                    v-model="selectedItem.seasonEndDateHijri"
-                    disabled
+                    id="taxNumber"
+                    ref="taxNumber"
+                    v-model="selectedItem.commercialNumber"
+                    name="taxNumber"
+                    label-text="companyCommercialNumber"
+                    rules="numeric||required"
                   />
                 </b-col>
 
-                <!-- unitType -->
-                <b-col md="3">
-                  <gfield
-                    id="unitType"
-                    ref="unitType"
-                    v-model="selectedItem.unitType"
-                    name="unitType"
-                    label-text="unitType"
+                <!-- discountType -->
+                <b-col
+                  md="3"
+                >
+                  <label
+                    style="font-size: 14px; margin-bottom: 6px;"
+                  >
+                    {{ $t("discountType") }}
+                  </label>
+                  <b-form-radio-group
+                    class="group-button"
+                    v-model="helper.discountTypeIsValue"
+                    button-variant="outline-primary"
+                    :options="discountTypeOptions"
+                    size="md"
+                    name="radios-btn-default"
                   />
                 </b-col>
 
-                <!-- dailyPrice -->
+                <!-- countryName -->
                 <b-col md="3">
                   <gfield
-                    id="dailyPrice"
-                    name="dailyPrice"
-                    v-model="selectedItem.dailyPrice"
-                    label-text="dailyPrice"
-                    rules="required|numeric"
+                    label-text="countryName"
+                    ref="countryName"
+                    name="countryName"
+                    id="countryName"
+                    v-model="selectedItem.countryName"
                   />
                 </b-col>
 
-                <!-- weeklyPrice -->
+                <!-- cityName -->
                 <b-col md="3">
                   <gfield
-                    id="weeklyPrice"
-                    name="weeklyPrice"
-                    v-model="selectedItem.weeklyPrice"
-                    label-text="weeklyPrice"
-                    rules="required|numeric"
+                    label-text="cityName"
+                    ref="cityName"
+                    name="cityName"
+                    id="cityName"
+                    v-model="selectedItem.cityName"
                   />
                 </b-col>
 
-                <!-- monthlyPrice -->
+                <!-- address -->
                 <b-col md="3">
                   <gfield
-                    id="monthlyPrice"
-                    name="monthlyPrice"
-                    v-model="selectedItem.monthlyPrice"
-                    label-text="monthlyPrice"
-                    rules="required|numeric"
+                    label-text="address"
+                    ref="address"
+                    name="address"
+                    id="address"
+                    v-model="selectedItem.address"
+                  />
+                </b-col>
+
+                <!-- email -->
+                <b-col md="3">
+                  <gfield
+                    label-text="email"
+                    ref="email"
+                    name="email"
+                    id="email"
+                    v-model="selectedItem.email"
+                    rules="email"
+                  />
+                </b-col>
+
+                <!-- companyPhone -->
+                <b-col md="3">
+                  <gfield
+                    label-text="companyPhone"
+                    ref="mobileNumber"
+                    name="mobileNumber"
+                    id="mobileNumber"
+                    v-model="selectedItem.mobileNumber"
+                    rules="numeric"
+                  />
+                </b-col>
+
+                <!-- responsibleName -->
+                <b-col md="3">
+                  <gfield
+                    label-text="responsibleName"
+                    ref="responsibleName"
+                    name="responsibleName"
+                    id="responsibleName"
+                    v-model="selectedItem.responsibleName"
+                    rules="required"
+                  />
+                </b-col>
+
+                <!-- responsibleMobileNumber -->
+                <b-col md="3">
+                  <gfield
+                    label-text="responsibleMobileNumber"
+                    ref="responsibleMobileNumber"
+                    name="responsibleMobileNumber"
+                    id="responsibleMobileNumber"
+                    v-model="selectedItem.responsibleMobileNumber"
+                    rules="numeric||required"
                   />
                 </b-col>
               </b-row>
@@ -208,61 +235,52 @@
   </div>
 </template>
 <script>
-import VueDatePicker from "@/components/form/inputs/VDatePicker.vue";
 export default {
-  components: {
-    VueDatePicker
-  },
+  components: {},
   props: {
     id: {
       type: [Number, String],
       default: 0,
     },
   },
+  computed: {
+    discountTypeOptions() {
+      return [
+        { text: this.$t('value'), value: true },
+        { text: this.$t('percentage'), value: false },
+      ];
+    }
+  },
   data() {
     return {
       id: 0,
-      selectedItem: {
-        isActive: true,
-        seasonStartDate: new Date(),
-        seasonEndDate: new Date()
+      selectedItem: {},
+      helper: {
+        discountTypeIsValue: true
       }
     };
   },
   mounted() {
-    this.inLoad();
+    this.id = this.$route.params.id;
     if (this.id > 0) {
       this.getSelected();
     }
   },
-  watch: {
-    'selectedItem.seasonStartDate'(startAdDate) {
-      this.selectedItem.seasonStartDateHijri = this.adDateToHijriDate(startAdDate)
-    },
-
-    'selectedItem.seasonEndDate'(EndAdDate) {
-      this.selectedItem.seasonEndDateHijri = this.adDateToHijriDate(EndAdDate)
-    }
-  },
   methods: {
     prepareBeforeSave() {
-      if (!this.selectedItem.englishName) {
-        this.selectedItem.englishName = this.selectedItem.arabicName;
-      }
-    },
-    inLoad() {
-      this.id = this.$route.params.id;
-      this.selectedItem.seasonStartDate = this.getDate();
-      this.selectedItem.seasonStartDateHijri = this.adDateToHijriDate();
-      this.selectedItem.seasonEndDate = this.getDate();
-      this.selectedItem.seasonEndDateHijri = this.adDateToHijriDate();
+      this.selectedItem.englishName = !this.selectedItem.englishName 
+                                    ? this.selectedItem.arabicName 
+                                    : this.selectedItem.englishName;
+
+      this.selectedItem.discountType = this.helper.discountTypeIsValue 
+                                     ? 'value' 
+                                     : 'percentage' 
     },
     save() {
       this.prepareBeforeSave();
-      if (!this.selectedItem.englishName) this.selectedItem.englishName = this.selectedItem.arabicName;
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'SeasonUnitesPrices',
+          url: 'CompaniesContracts',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
@@ -271,7 +289,7 @@ export default {
         });
       } else {
         this.create({
-          url: 'SeasonUnitesPrices',
+          url: 'CompaniesContracts',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
@@ -280,13 +298,14 @@ export default {
       }
     },
     getSelected() {
-      this.get({ url: 'SeasonUnitesPrices', id: this.id }).then((data) => {
+      this.get({ url: 'CompaniesContracts', id: this.id }).then((data) => {
         this.selectedItem = data;
+        this.helper.discountTypeIsValue = this.selectedItem.discountType === 'value';
       });
     },
 
     backToList() {
-      this.$router.push({ name: 'seasonUnitesPrices' });
+      this.$router.push({ name: 'companiesContracts' });
     },
   },
 };

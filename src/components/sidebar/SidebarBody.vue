@@ -5,7 +5,7 @@
         <li>
           <router-link class="home" :to="{ name: 'home' }"
             ><vue-feather type="grid"></vue-feather
-            ><span> {{ $t("dashboard") }}</span>
+            ><span> {{ $t('dashboard') }}</span>
           </router-link>
         </li>
       </ul>
@@ -27,14 +27,21 @@
           :href="`#${item.title}`"
           data-bs-toggle="collapse"
           role="button"
-          aria-expanded="false"
+          :aria-expanded="item.title === currentOpenedParent"
           :aria-controls="`${item.title}`"
+          @click='toggleParnt(item.title)'
         >
           <vue-feather :type="item.icon ?? 'server'"></vue-feather>
           <span>{{ $t(`${item.title}`) }}</span>
           <span class="menu-arrow"></span>
         </a>
-        <ul class="collapse menu-dropdown" :id="item.title">
+        <ul
+          class="collapse menu-dropdown"
+          :id="item.title"
+          :class="{
+            show: item.title === currentOpenedParent,
+          }"
+        >
           <li v-for="child in item.children" :key="child.title">
             <router-link
               :class="{ active: isActive(`${child.route}`) }"
@@ -52,12 +59,13 @@
 </template>
 
 <script>
-import navItems from "@/navigation/vertical/index.js";
+import navItems from '@/navigation/vertical/index.js';
 
 export default {
   data() {
     return {
       navItems: navItems,
+      currentOpenedParent: null,
     };
   },
 
@@ -67,6 +75,13 @@ export default {
     },
     isFav(child) {
       return (child.isFav = !child.isFav);
+    },
+    toggleParnt(title) {
+      if (this.currentOpenedParent == title) {
+        this.currentOpenedParent = null;
+      } else {
+        this.currentOpenedParent = title;
+      }
     },
   },
 };

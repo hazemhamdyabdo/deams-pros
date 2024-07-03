@@ -118,7 +118,7 @@
                   {{ $t("roomStatus") }}
                 </label>
                 <b-form-radio-group
-                  class="room-status-group"
+                  class="group-button"
                   v-model="selectedItem.isRoomClean"
                   button-variant="outline-primary"
                   :options="roomStatusOptions"
@@ -159,8 +159,6 @@
                   <b-form-checkbox
                     id="roomContainsKitchen"
                     v-model="selectedItem.isContainKitchen"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
                     inline
                     @change="kitchenChanged()"
                   />
@@ -198,8 +196,6 @@
                   <b-form-checkbox
                     id="roomContainsLounge"
                     v-model="selectedItem.isContainLounge"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
                     inline
                     @change="loungeChanged()"
                   />
@@ -237,8 +233,6 @@
                   <b-form-checkbox
                     id="roomContainsLandline"
                     v-model="selectedItem.isContainLandline"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
                     inline
                     @change="landlineChanged()"
                   />
@@ -271,8 +265,6 @@
                   <b-form-checkbox
                     id="roomContainsTV"
                     v-model="selectedItem.isContainTV"
-                    class="mr-0 mt-50"
-                    name="is-rtl"
                     inline
                   />
                 </b-form-group>
@@ -296,6 +288,15 @@
                     rows="3"
                     max-rows="6"
                   />
+                  <small
+                      class="textarea-counter-value"
+                    > {{ selectedItem.notes ? selectedItem.notes.length : 0 }} / 500
+                    </small>
+                    <small
+                      v-if="selectedItem.notes && selectedItem.notes.length > 500"
+                      class="float-right mt-2 text-danger"
+                    > {{ this.$t('textLengthValidation', { for:$t('notes'), count: 500 }) }}
+                    </small>
                 </b-form-group>
               </b-col>
             </b-row>
@@ -453,15 +454,3 @@ methods: {
 },
 };
 </script>
-
-<style scoped>
-.room-status-group {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ced4da;
-  padding: 6px;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-}
-</style>

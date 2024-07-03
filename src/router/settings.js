@@ -13,4 +13,38 @@ export default [
       },
     ],
   },
+  {
+    path: '/user',
+    children: [
+      {
+        path: '',
+        name: 'user',
+        component: () => import('@/views/pages/Setting/users/List.vue'),
+        meta: {
+          pageTitle: 'users',
+          Breadcrumb: 'settings',
+        },
+      },
+      {
+        path: "/editUsers/:id",
+        name: "editUsers",
+        component: () =>
+          import("@/views/pages/Setting/users/Edit.vue"),
+        meta: {
+          pageTitle: "editUsers",
+          Breadcrumb: "user",
+        },
+      },
+      {
+        path: "/addUsers",
+        name: "addUsers",
+        component: () =>
+          import("@/views/pages/Setting/users/Edit.vue"),
+        meta: {
+          pageTitle: "addUsers",
+          Breadcrumb: "user",
+        },
+      }
+    ],
+  },
 ];

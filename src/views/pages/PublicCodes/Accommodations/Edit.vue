@@ -128,7 +128,6 @@
                           :options="lookup.sources"
                           :dir="'rtl'"
                           id="sources"
-                          rules="required"
                           v-model="_selectedItem.sourceId"
                           field="select"
                         />
@@ -291,8 +290,8 @@
         if (this._selectedItem.id > 0) {
         this.update({
           url: "Accommodations",
-          data: this.selectedItem,
-          id: this.selectedItem.id,
+          data: this._selectedItem,
+          id: this._selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t("updatedSuccessfully") });
           this.backToList();

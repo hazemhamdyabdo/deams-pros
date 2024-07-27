@@ -35,7 +35,9 @@ export default {
         commit("setToken", data.token);
         commit("setProfile", data);
         Router.push("/dashboard");
-      });
+      }).catch((e)=>{
+        return e;
+      })
     },
     logout({ commit }) {
       this.state.app.branchId = null;

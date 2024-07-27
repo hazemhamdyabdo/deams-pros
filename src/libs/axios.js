@@ -18,6 +18,14 @@ const axiosIns = axios.create({
 });
 
 axiosIns.interceptors.request.use((request) => {
+  if (request.method === 'post' || request.method === 'put') {
+    if (request.data) {
+      if (Object.prototype.hasOwnProperty.call(request.data, 'englishName')) {
+        request.data.englishName = request.data.englishName || request.data.arabicName;
+      }
+    }
+  }
+  
   const token = window.localStorage.getItem(TOKEN_KEY);
   const lang = window.localStorage.getItem(LANG);
   const branchId = window.localStorage.getItem(BRANCH_ID);

@@ -6,7 +6,7 @@ export default [
       {
         title: 'Nationalities',
         route: 'nationality',
-        permission: 'viewNationality',
+        permission: "viewNationalities",
         isFav: false,
       },
       {
@@ -117,30 +117,30 @@ export default [
         permission: 'viewGuests',
         isFav: false,
       },
-      {
-        title: 'messages',
-        route: 'messages',
-        permission: 'viewMessages',
-        isFav: false,
-      },
+      // {
+      //   title: 'messages',
+      //   route: 'messages',
+      //   permission: 'viewMessages',
+      //   isFav: false,
+      // },
       {
         title: 'clientsCategories',
         route: 'clientsCategories',
         permission: 'viewClientsCategories',
         isFav: false,
       },
-      {
-        title: 'seasonUnitesPrices',
-        route: 'seasonUnitesPrices',
-        permission: 'viewSeasonUnitesPrices',
-        isFav: false,
-      },
-      {
-        title: 'unitesPrices',
-        route: 'unitesPrices',
-        permission: 'viewUnitesPrices',
-        isFav: false,
-      },
+      // {
+      //   title: 'seasonUnitesPrices',
+      //   route: 'seasonUnitesPrices',
+      //   permission: 'viewSeasonUnitesPrices',
+      //   isFav: false,
+      // },
+      // {
+      //   title: 'unitesPrices',
+      //   route: 'unitesPrices',
+      //   permission: 'viewUnitesPrices',
+      //   isFav: false,
+      // },
       {
         title: 'accommodations',
         route: 'accommodations',
@@ -199,6 +199,12 @@ export default [
         title: 'users',
         route: 'user',
         permission: 'viewuser',
+        isFav: false,
+      },
+      {
+        title: 'branches',
+        route: 'branches-list',
+        permission: 'viewBranches',
         isFav: false,
       },
     ],

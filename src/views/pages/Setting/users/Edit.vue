@@ -69,6 +69,9 @@
                     ref="password"
                     type="password"
                     v-model="selectedItem.passwordHash"
+                    v-b-tooltip.hover.left="
+                      $t('big and small letters and /*@#!')
+                    "
                     name="password"
                     label-text="password"
                     rules="required"
@@ -169,32 +172,74 @@
                       <div>
                         <b-table-simple>
                           <b-thead>
-                            <b-th style="width: 40%"> </b-th>
-                            <b-th> {{ $t('view') }} </b-th>
-                            <b-th> {{ $t('add') }} </b-th>
-                            <b-th> {{ $t('edit') }} </b-th>
-                            <b-th> {{ $t('delete') }} </b-th>
+                            <b-tr> </b-tr>
                           </b-thead>
-                          <b-tbody>
+                          <b-tbody
+                            v-for="(permission, i) in allPermissions"
+                            :key="i"
+                          >
                             <b-tr
-                              v-for="(permission, i) in allPermissions"
-                              :key="i"
+                              v-b-toggle="`collapse-${permission.id}`"
+                              style="cursor: pointer"
                             >
-                              <b-td class="fw-bold">
+                              <b-td
+                                style="text-align: right; font-weight: bold"
+                              >
                                 {{ $t(permission.name) }}
                               </b-td>
-                              <b-td
-                                v-for="(role, j) in permission.roles"
-                                :key="j"
-                              >
-                                <b-form-checkbox
-                                  :checked="isChecked(role.id)"
-                                  class="mx-auto"
-                                  name="check-button"
-                                  switch
-                                  @change="identifyPermissions(role.id, $event)"
-                                >
-                                </b-form-checkbox>
+                            </b-tr>
+
+                            <b-tr>
+                              <b-td>
+                                <b-collapse :id="`collapse-${permission.id}`">
+                                  <b-card>
+                                    <b-table-simple>
+                                      <b-thead>
+                                        <b-tr>
+                                          <b-th style="width: 40%"> </b-th>
+                                          <b-th> {{ $t('view') }} </b-th>
+                                          <b-th> {{ $t('add') }} </b-th>
+                                          <b-th> {{ $t('edit') }} </b-th>
+                                          <b-th> {{ $t('delete') }} </b-th>
+                                        </b-tr>
+                                      </b-thead>
+                                      <b-tbody>
+                                        <b-tr
+                                          v-for="(child, k) in permission.body"
+                                          :key="k"
+                                        >
+                                          <b-td
+                                            style="
+                                              text-align: right;
+                                              font-weight: bold;
+                                            "
+                                          >
+                                            {{ $t(child.name) }}
+                                          </b-td>
+                                          <b-td
+                                            style="text-align: center"
+                                            v-for="(role, j) in child.roles"
+                                            :key="j"
+                                          >
+                                            <b-form-checkbox
+                                              :checked="isChecked(role.id)"
+                                              class="mx-auto"
+                                              name="check-button"
+                                              switch
+                                              @change="
+                                                identifyPermissions(
+                                                  role.id,
+                                                  $event
+                                                )
+                                              "
+                                            >
+                                            </b-form-checkbox>
+                                          </b-td>
+                                        </b-tr>
+                                      </b-tbody>
+                                    </b-table-simple>
+                                  </b-card>
+                                </b-collapse>
                               </b-td>
                             </b-tr>
                           </b-tbody>
@@ -204,7 +249,6 @@
                   </b-card>
                 </b-collapse>
               </div>
-
               <!-- operations -->
               <b-row>
                 <b-col cols="12" class="d-flex justify-content-end">
@@ -327,46 +371,47 @@ export default {
           this.backToList();
         });
       } else {
-       await this.create({
+        await this.create({
           url: 'Users',
           data: this.selectedItem,
-        }).then(() => {
-          this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.backToList();
-        }).catch(({ e }) => {
-          // this.selectedItem = [];
-          // this.passwordHashConfirm = '';
-          // this.selectedBranches = [];
-          // this.selectedBranches = [];
-          // this.doneAlert({
-          //   type: 'error',
-          //   text: this.$t('Failed to create user'),
-          // });
-        // (this.selectedItem.id > 0
-        //     ? this.update({
-        //       url: 'users',
-        //       id: this.selectedItem.id,
-        //       data: this.selectedItem,
-        //     })
-        //     : this.create({ url: 'users', data: this.selectedItem })
-        //   ).then(() => {
-        //     this.doneAlert({
-        //       text:
-        //         this.id > 0
-        //           ? this.$t('updatedSuccessfully')
-        //           : this.$t('savedSuccessfully'),
-        //     });
-
-        // .catch(({ e }) => {
-        //   this.selectedItem = [];
-        //   this.passwordHashConfirm = '';
-        //   this.selectedBranches = [];
-        //   this.selectedBranches = [];
-        //   this.doneAlert({
-        //     type: 'error',
-        //     text: this.$t('Failed to create user'),
-        //   });
-        });
+        })
+          .then(() => {
+            this.doneAlert({ text: this.$t('savedSuccessfully') });
+            this.backToList();
+          })
+          .catch(({ e }) => {
+            // this.selectedItem = [];
+            // this.passwordHashConfirm = '';
+            // this.selectedBranches = [];
+            // this.selectedBranches = [];
+            // this.doneAlert({
+            //   type: 'error',
+            //   text: this.$t('Failed to create user'),
+            // });
+            // (this.selectedItem.id > 0
+            //     ? this.update({
+            //       url: 'users',
+            //       id: this.selectedItem.id,
+            //       data: this.selectedItem,
+            //     })
+            //     : this.create({ url: 'users', data: this.selectedItem })
+            //   ).then(() => {
+            //     this.doneAlert({
+            //       text:
+            //         this.id > 0
+            //           ? this.$t('updatedSuccessfully')
+            //           : this.$t('savedSuccessfully'),
+            //     });
+            // .catch(({ e }) => {
+            //   this.selectedItem = [];
+            //   this.passwordHashConfirm = '';
+            //   this.selectedBranches = [];
+            //   this.selectedBranches = [];
+            //   this.doneAlert({
+            //     type: 'error',
+            //     text: this.$t('Failed to create user'),
+            //   });
+          });
       }
     },
     getSelected() {

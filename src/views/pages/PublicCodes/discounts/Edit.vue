@@ -64,7 +64,7 @@
                     name="discountRatio"
                     v-model="selectedItem.discountRatio"
                     label-text="discountRatio"
-                    rules="required|numeric"
+                    rules="required|numeric|min_value:0|max_value:100"
                   />
                 </b-col>
               </b-row>

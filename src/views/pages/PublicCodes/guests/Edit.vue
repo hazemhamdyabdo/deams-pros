@@ -179,6 +179,19 @@
                       v-model="_selectedItem.address"
                     />
                   </b-col>    
+                   <!-- clientCategory  -->
+                   <b-col md="3">
+                    <gfield
+                      label="arabicName"
+                      field="select"             
+                      name="clientCategoryId"
+                      label-text="clientCategory"
+                      rules="required"
+                      v-model="_selectedItem.clientCategoryId"
+                      :options="_lookup.clientCategories"
+                      :dir="'rtl'"
+                    />
+                  </b-col>
                 </b-row>
 
                 <b-row>
@@ -570,7 +583,8 @@ export default {
         genders: genders,
         guestTypes: guestTypes,
         identityTypes: identityTypes,
-        nationalities: []
+        nationalities: [],
+        clientCategories: []
       },
       _companion: {},
       _companionsList: [],
@@ -828,6 +842,9 @@ export default {
     getLookups() {
       this.get({ url: "Nationalities" }).then((data) => {
         this._lookup.nationalities = data;
+      });
+      this.get({ url: "ClientsCategories" }).then((data) => {
+        this._lookup.clientCategories = data;
       });
     },
 

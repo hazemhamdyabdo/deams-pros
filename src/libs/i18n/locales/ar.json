@@ -381,7 +381,12 @@
   "addUsers": "إضافة مستخدم",
   "incomes": "الإيرادات",
   "previewUsers": "عرض المستخدمين",
-  "error": "خطأ"
-
+  "error": "خطأ",
+  "workHours": "ساعات العمل",
+  "branch-new": "فرع جديد",
+  "branch-edit": "تعديل فرع",
+  "big and small letters and /*@#!":"حروف كبيره و صغيره و خاصه",
+  "country": "الدولة",
+  "roomPrice": "سعر الغرفه"
 
 }

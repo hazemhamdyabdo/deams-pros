@@ -20,7 +20,7 @@
               perPage="25"
               :totalRows="totalRows"
               @filtered="onFiltered"
-              :createButton="{ visiable: true }"
+              :createButton="{ visiable: true, permission: 'addNationalities' }"
               :searchInput="{ visiable: true }"
               @on-create="
                 (v) => {
@@ -34,6 +34,7 @@
                     data-action-type="preview"
                     v-b-tooltip.hover.top="$t('preview')"
                     variant="custom"
+                    v-permission="'addNationalities'"
                     class="btn-icon"
                     size="sm"
                     @click="edit(item)"
@@ -48,6 +49,7 @@
                   <b-button
                     data-action-type="edit"
                     v-b-tooltip.hover.top="$t('edit')"
+                    v-permission="'editNationalities'"
                     variant="custom"
                     class="btn-icon"
                     size="sm"
@@ -63,6 +65,7 @@
                     data-action-type="delete"
                     v-b-tooltip.hover.top="$t('delete')"
                     variant="flat-danger"
+                    v-permission="'deleteNationalities'"
                     class="btn-icon"
                     size="sm"
                     @click="remove(item)"

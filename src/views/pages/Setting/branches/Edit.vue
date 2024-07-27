@@ -6,37 +6,8 @@
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
-              <!-- isShared -->
-              <b-row class="mb-4">
-                <b-col md="3">
-                  <b-form-checkbox
-                    v-model="selectedItem.isShared"
-                    name="check-button"
-                    switch
-                    inline
-                  >
-                    {{ $t('general') }}
-                  </b-form-checkbox>
-                </b-col>
-              </b-row>
-
               <b-row>
-                <!-- country  -->
-                <b-col md="3">
-                  <gfield
-                    label="arabicName"
-                    :dir="'rtl'"
-                    field="select"
-                    :options="countries"
-                    id="CountryId"
-                    ref="CountryId"
-                    v-model="selectedItem.CountryId"
-                    name="CountryId"
-                    label-text="country"
-                    rules="required"
-                  />
-                </b-col>
-                <b-col v-if="selectedItem.id > 0" md="3">
+                <b-col md="4">
                   <gfield
                     label-text="code"
                     ref="code"
@@ -45,17 +16,17 @@
                     v-model="selectedItem.code"
                   />
                 </b-col>
-                <b-col md="3">
-                  <!-- arabicName  -->
+                <b-col md="4">
                   <gfield
-                    id="arabicName"
-                    rules="required"
-                    v-model="selectedItem.arabicName"
                     label-text="arabicName"
                     ref="arabicName"
+                    name="arabicName"
+                    id="arabicName"
+                    v-model="selectedItem.arabicName"
+                    rules="required"
                   />
                 </b-col>
-                <b-col md="3">
+                <b-col md="4">
                   <gfield
                     id="englishName"
                     ref="englishName"
@@ -65,6 +36,36 @@
                   />
                 </b-col>
               </b-row>
+              <b-row>
+                <b-col md="4">
+                  <gfield
+                    id="workHours"
+                    ref="workHours"
+                    v-model="selectedItem.workHours"
+                    name="workHours"
+                    label-text="workHours"
+                  />
+                </b-col>
+                <b-col md="4">
+                  <gfield
+                    id="address"
+                    ref="address"
+                    v-model="selectedItem.address"
+                    name="address"
+                    label-text="address"
+                  />
+                </b-col>
+                <!-- mobileNumber -->
+                <b-col md="4">
+                  <gfield
+                    id="mobileNumber"
+                    v-model="selectedItem.phone1"
+                    name="mobileNumber"
+                    label-text="mobileNumber"
+                  />
+                </b-col>
+              </b-row>
+              <!-- notes -->
               <b-row>
                 <b-col md="12">
                   <b-form-group>
@@ -138,57 +139,50 @@ export default {
     return {
       selectedItem: {
         isShared: true,
+        englishName: ''
       },
       items: [],
       id: 0,
-      countries: [],
     };
   },
   mounted() {
     this.id = this.$route.params.id;
     if (this.id > 0) {
-      this.getSelected();
+      this.getSelectedBranch();
     }
-    this.getCountries();
   },
   methods: {
-    getCountries() {
-      this.get({ url: 'Countries', id: this.id }).then((data) => {
-        this.countries = data;
-      });
-    },
     save() {
       this.selectedItem.branchId = this.branchId;
-      if (!this.selectedItem.englishName) {
-        this.selectedItem.englishName = this.selectedItem.arabicName;
-      }
+      //   if (!this.selectedItem.englishName) {
+      //     this.selectedItem.englishName = this.selectedItem.arabicName;
+      //   }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: 'Cities',
+          url: 'Branches',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
           this.doneAlert({ text: this.$t('updatedSuccessfully') });
-          this.$router.push({ name: 'cities' });
+          this.$router.push({ name: 'branches-list' });
         });
       } else {
         this.create({
-          url: 'Cities',
+          url: 'Branches',
           data: this.selectedItem,
         }).then(() => {
           this.doneAlert({ text: this.$t('savedSuccessfully') });
-          this.$router.push({ name: 'cities' });
+          this.$router.push({ name: 'branches-list' });
         });
       }
     },
-    getSelected() {
-      this.get({ url: 'Cities', id: this.id }).then((data) => {
+    getSelectedBranch() {
+      this.get({ url: 'Branches', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
-
     backToList() {
-      this.$router.push({ name: 'cities' });
+      this.$router.push({ name: 'branches-list' });
     },
   },
 };

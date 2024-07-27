@@ -4,10 +4,11 @@
       <div class="content">
         <!-- header  -->
         <pageheader :title="$t(title)" :title1="$t(description)" />
-        <div class="card">
+        <div class="card" v-permission="$route.meta.permission">
           <div class="card-body">
             <g-table
               ref="users-table"
+              v-permission="'addUsers'"
               :items="items"
               :columns="tableColumns"
               :is-busy="isTableBusy"
@@ -32,6 +33,7 @@
                     class="btn-icon"
                     size="sm"
                     @click="edit(item)"
+                    v-permission="'editUsers'"
                   >
                     <vue-feather
                       type="edit"
@@ -46,6 +48,7 @@
                     class="btn-icon"
                     size="sm"
                     @click="remove(item)"
+                    v-permission="'deleteUsers'"
                   >
                     <vue-feather
                       type="trash"

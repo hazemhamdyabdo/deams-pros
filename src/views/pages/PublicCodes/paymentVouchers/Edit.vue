@@ -343,7 +343,7 @@ export default {
     calculatedTax(voucherValue) {
       if (!this.selectedItem.isTaxable) {
         this.selectedItem.taxValue = 0;
-        this.selectedItem.afterTaxValue = 0;
+        this.selectedItem.afterTaxValue = voucherValue;
       } else {
         this.selectedItem.afterTaxValue = (voucherValue / 1.15).toFixed(2);
         this.selectedItem.taxValue = (voucherValue - this.selectedItem.afterTaxValue).toFixed(2);

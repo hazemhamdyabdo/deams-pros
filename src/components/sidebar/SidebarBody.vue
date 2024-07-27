@@ -14,6 +14,7 @@
     <template v-for="item in navItems">
       <li v-if="!item.children" :key="item.title">
         <router-link
+          v-permission="item?.permission"
           :class="['submenu', { active: isActive(`${item.route}`) }]"
           :to="{ name: `${item.route}` }"
         >
@@ -24,12 +25,13 @@
       </li>
       <li v-else class="submenu" :key="item.children">
         <a
+          v-permission="item.permission"
           :href="`#${item.title}`"
           data-bs-toggle="collapse"
           role="button"
           :aria-expanded="item.title === currentOpenedParent"
           :aria-controls="`${item.title}`"
-          @click='toggleParnt(item.title)'
+          @click="toggleParnt(item.title)"
         >
           <vue-feather :type="item.icon ?? 'server'"></vue-feather>
           <span>{{ $t(`${item.title}`) }}</span>
@@ -44,6 +46,7 @@
         >
           <li v-for="child in item.children" :key="child.title">
             <router-link
+              v-permission="child.permission"
               :class="{ active: isActive(`${child.route}`) }"
               :to="{ name: `${child.route}` }"
             >

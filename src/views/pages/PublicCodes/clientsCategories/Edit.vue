@@ -58,7 +58,7 @@
                 </b-col>
 
                 <!-- discount -->
-                <b-col md="3">
+                <!-- <b-col md="3">
                   <gfield
                     id="discount"
                     name="discount"
@@ -66,7 +66,7 @@
                     label-text="discount"
                     rules="required|numeric"
                   />
-                </b-col>
+                </b-col> -->
               </b-row>
 
               <!-- notes -->

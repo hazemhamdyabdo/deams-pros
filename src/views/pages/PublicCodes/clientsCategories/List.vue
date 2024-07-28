@@ -90,7 +90,7 @@ export default {
       return [
         { key: 'code', label: this.$t('code'), sortable: true },
         { key: 'arabicName', label: this.$t('clientCategory'), sortable: true },
-        { key: 'discountValue', label: this.$t('discount'), sortable: true },
+        // { key: 'discountValue', label: this.$t('discount'), sortable: true },
         { key: 'discountStatusName', label: this.$t('status'), sortable: true },
         { key: 'notes', label: this.$t('notes'), sortable: true },
         { key: 'actions' },

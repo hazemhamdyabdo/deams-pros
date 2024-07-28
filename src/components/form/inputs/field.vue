@@ -44,7 +44,9 @@
             :dir="dir"
             :disabled="disabled"
             :readonly="readonly"
-            :multiple="multiple"
+            :settings="{
+              multiple: multiple,
+            }"
             @input="
               (v) => {
                 handelInput(v);
@@ -80,7 +82,6 @@
           :options="testOptions"
           v-model="localValue"
           :name="$attrs['name'] || $attrs['label-text'] || ''"
-          :multiple="multiple"
           v-bind="{ ...attrs, ...bindOptions }"
           v-on="listeners"
           :dir="dir"
@@ -89,6 +90,9 @@
           "
           :readonly="readonly"
           @change="onChange"
+          :settings="{
+            multiple: multiple,
+          }"
           @input="
             (v) => {
               handelInput(v);
@@ -348,17 +352,17 @@ defineRule("numeric", (value) => {
   return true;
 });
 
-defineRule('string', (value)=> {
+defineRule("string", (value) => {
   if (value) {
-    const regex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z\s]+$/;
+    const regex =
+      /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z\s]+$/;
     const isString = regex.test(value);
     const hasLength = value.toString().trim().length > 0;
 
     return isString & hasLength;
-    
   }
   return true;
-})
+});
 </script>
 
 <style scoped>

@@ -100,7 +100,7 @@ export default {
         { key: "buildingName", label: this.$t("building") },
         { key: "floorName", label: this.$t("floor") },
         { key: "roomType", label: this.$t("roomType") },
-        { key: "roomCleanStatus", label: this.$t("roomStatus") },
+        { key: "roomStatusArabicName", label: this.$t("roomStatus") },
         { key: "notes", label: this.$t("notes")},
         { key: "actions" },
       ];
@@ -117,9 +117,9 @@ export default {
     getItems() {
       this.get({ url: "Rooms" }).then((data) => {
         this.items = data;
-        this.items.forEach(element => {
-          element.roomCleanStatus = this.$t(element.roomCleanStatus);
-        });
+        // this.items.forEach(element => {
+        //   element.roomCleanStatus = this.$t(element.roomCleanStatus);
+        // });
       });
     },
 

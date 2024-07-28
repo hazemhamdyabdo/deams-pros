@@ -109,6 +109,7 @@ export default {
     tableColumns() {
       return [
         { key: "code", label: this.$t("code"), sortable: true },
+        { key: "countryArabicName", label: this.$t("countryName"), sortable: true },
         { key: "arabicName", label: this.$t("cityName"), sortable: true },
         { key: "notes", label: this.$t("notes"), sortable: true },
         { key: "actions" },

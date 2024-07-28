@@ -60,6 +60,15 @@
                       rows="3"
                       max-rows="6"
                     />
+                    <small
+                      class="textarea-counter-value"
+                    > {{ selectedItem.notes ? selectedItem.notes.length : 0 }} / 500
+                    </small>
+                    <small
+                      v-if="selectedItem.notes && selectedItem.notes.length > 500"
+                      class="float-right mt-2 text-danger"
+                    > {{ this.$t('textLengthValidation', { for:$t('notes'), count: 500 }) }}
+                    </small>
                   </b-form-group>
                 </b-col>
               </b-row>

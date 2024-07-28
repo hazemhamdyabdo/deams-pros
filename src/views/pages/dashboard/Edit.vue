@@ -33,24 +33,25 @@
                     {{ $t("bookingAndAccommodation") }} 
                   </label>
                   <a
-                    v-b-tooltip.hover.top="$t('newReservation')"
-                    style="border-radius: 50%; background-color: #fe9f43; margin-right: 10px;"
+                    v-b-tooltip.hover.top="$t('addNewReservation')"
+                    @click= "$router.push({ name: 'addAccommodations' });"
                   >
-                    <vue-feather
-                        type="plus"
-                        size="10"
-                        class="mx-2"
-                      ></vue-feather>
+                    <b-button
+                      variant="outline-primary"
+                      class="btn-sm mr-2"
+                    >
+                      {{ $t('addNew') }}
+                    </b-button>     
                   </a>
 
                   <div class="d-flex flex-wrap mb-4">
                     <div class="dash-widget me-2">
                       <div class="dash-widgetimg">
                         <span
-                          style="background: transparent"
-                        ><img src="@/assets/img/icons/ticket-purchase.svg" alt="img"/></span>
+                          style="background: rgba(40, 199, 111, 0.12);"
+                        ><img src="@/assets/img/icons/correct.svg" alt="img" width="35px"/></span>
                       </div>
-                      <div class="dash-widgetcontent">
+                      <div class="dash-widgetcontent" style="min-width:109px; padding-right: 70px;">
                         <h5>
                           <vue3-autocounter
                             class="counter"
@@ -68,10 +69,10 @@
                     <div class="dash-widget">
                       <div class="dash-widgetimg">
                         <span
-                          style="background: transparent"
-                        ><img src="@/assets/img/icons/waiting-room.svg" alt="img" /></span>
+                          style="background: rgba(234, 84, 85, 0.12);"
+                        ><img src="@/assets/img/icons/wrong.svg" alt="img" width="35px"/></span>
                       </div>
-                      <div class="dash-widgetcontent">
+                      <div class="dash-widgetcontent" style="min-width:109px; padding-right: 51px;">
                         <h5>
                           <vue3-autocounter
                             class="counter"
@@ -100,42 +101,32 @@
                         ></vue-feather>
                       {{ $t("roomService") }} 
                     </label>
+                    <a
+                    v-b-tooltip.hover.top="$t('addNewRoom')"
+                    @click= "$router.push({ name: 'addRoom' });"
+                  >
+                    <b-button
+                      variant="outline-primary"
+                      class="btn-sm mr-2"
+                    >
+                      {{ $t('addNew') }}
+                    </b-button>     
+                  </a>
                     
                     <div class="d-flex flex-wrap">     
-                      <div class="dash-count me-2" style="max-width: 150px; background: rgba(72, 61, 139, 0.7);">
-                        <div class="dash-counts">
-                          <h4>14</h4>
-                          <h5> {{ $t('rented') }} </h5>
-                        </div>
-                        <div class="dash-imgs">
-                          <span
-                            style="background: transparent"
-                          ><img src="@/assets/img/icons/door-close.svg" alt="img" /></span>
-                        </div>
+                      <div class="dash-count me-2" style="border-bottom-color: #7a7ae4;">
+                        <label class="fs-5">14</label>
+                        <label> {{ $t('rented') }} </label>
                       </div>
 
-                      <div class="dash-count me-2" style="max-width: 150px; background: rgba(107, 142, 35, 0.7)">
-                        <div class="dash-counts">
-                          <h4>12</h4>
-                          <h5> {{ $t('empty') }} </h5>
-                        </div>
-                        <div class="dash-imgs">
-                          <span
-                            style="background: transparent"
-                          ><img src="@/assets/img/icons/door-open.svg" alt="img" /></span>
-                        </div>
+                      <div class="dash-count me-2" style="border-bottom-color: #2c9d2a;">
+                        <label class="fs-5">12</label>
+                        <label> {{ $t('empty') }} </label>
                       </div>
 
-                      <div class="dash-count" style="max-width: 150px; background: rgba(205, 92, 92, 0.7);">
-                        <div class="dash-counts">
-                          <h4>19</h4>
-                          <h5> {{ $t('suspended') }} </h5>
-                        </div>
-                        <div class="dash-imgs">
-                          <span
-                            style="background: transparent"
-                          ><img src="@/assets/img/icons/door-hanger.svg" alt="img" /></span>
-                        </div>
+                      <div class="dash-count" style="border-bottom-color: #ae2929;">
+                        <label class="fs-5">19</label>
+                        <label> {{ $t('suspended') }} </label>
                       </div>
                     </div>
                   </div>
@@ -623,8 +614,10 @@ export default {
 .dash-count {
   min-height: 73px !important;
   padding: 5px 10px !important;
-}
-.dash-count .dash-imgs img{
-  height: 35px !important;
+  max-width: 130px;
+  color: #000 !important; 
+  border: 1px solid #e8ebed;
+  border-bottom: 2px solid;
+  background-color: #FFF !important;
 }
 </style>

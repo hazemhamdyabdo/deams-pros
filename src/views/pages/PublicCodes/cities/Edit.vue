@@ -2,16 +2,41 @@
   <div class="main-wrapper">
     <div class="page-wrapper">
       <div class="content">
-        <pageheader />
         <!-- /add -->
         <div class="card">
           <div class="card-body">
             <gform @submit="save()">
+              <!-- isShared -->
+              <b-row class="mb-4">
+                <b-col md="3">
+                  <b-form-checkbox
+                    v-model="selectedItem.isShared"
+                    name="check-button"
+                    switch
+                    inline
+                  >
+                    {{ $t('general') }}
+                  </b-form-checkbox>
+                </b-col>
+              </b-row>
+
               <b-row>
-                <b-col 
-                  v-if="selectedItem.id > 0"
-                  md="3"  
-                >
+                <!-- country  -->
+                <b-col md="3">
+                  <gfield
+                    label="arabicName"
+                    :dir="'rtl'"
+                    field="select"
+                    :options="countries"
+                    id="CountryId"
+                    ref="CountryId"
+                    v-model="selectedItem.CountryId"
+                    name="CountryId"
+                    label-text="country"
+                    rules="required"
+                  />
+                </b-col>
+                <b-col v-if="selectedItem.id > 0" md="3">
                   <gfield
                     label-text="code"
                     ref="code"
@@ -39,22 +64,6 @@
                     label-text="englishName"
                   />
                 </b-col>
-                <b-col md="3">
-                  <label
-                    style="font-size: 14px; margin-bottom: 7px"
-                    for="general"
-                  >
-                    {{ $t("general") }}
-                  </label>
-                  <b-form-group>
-                    <b-form-checkbox
-                      v-model="selectedItem.isShared"
-                      class="mr-0 mt-50"
-                      name="is-rtl"
-                      inline
-                    />
-                  </b-form-group>
-                </b-col>
               </b-row>
               <b-row>
                 <b-col md="12">
@@ -63,7 +72,7 @@
                       style="font-size: 14px; margin-bottom: 7px"
                       for="customer"
                     >
-                      {{ $t("notes") }}
+                      {{ $t('notes') }}
                     </label>
                     <b-form-textarea
                       id="textarea"
@@ -72,6 +81,23 @@
                       rows="3"
                       max-rows="6"
                     />
+                    <small class="textarea-counter-value">
+                      {{ selectedItem.notes ? selectedItem.notes.length : 0 }} /
+                      500
+                    </small>
+                    <small
+                      v-if="
+                        selectedItem.notes && selectedItem.notes.length > 500
+                      "
+                      class="float-right mt-2 text-danger"
+                    >
+                      {{
+                        this.$t('textLengthValidation', {
+                          for: $t('notes'),
+                          count: 500,
+                        })
+                      }}
+                    </small>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -83,22 +109,11 @@
                     variant="primary"
                     data-action-type="save"
                   >
-                    <vue-feather
-                      type="check-circle"
-                      size="12"
-                      class="mx-1"
-                    />
+                    <vue-feather type="check-circle" size="12" class="mx-1" />
                     {{ $t('save') }}
                   </b-button>
-                  <b-button
-                    variant="outline-primary"
-                    @click="backToList()"
-                  >
-                    <vue-feather
-                      type="log-out"
-                      size="12"
-                      class="mx-1"
-                    />
+                  <b-button variant="outline-primary" @click="backToList()">
+                    <vue-feather type="log-out" size="12" class="mx-1" />
                     {{ $t('backToPreview') }}
                   </b-button>
                 </b-col>
@@ -110,7 +125,7 @@
     </div>
   </div>
 </template>
-  <script>
+<script>
 export default {
   components: {},
   props: {
@@ -121,9 +136,12 @@ export default {
   },
   data() {
     return {
-      selectedItem: {},
+      selectedItem: {
+        isShared: true,
+      },
       items: [],
       id: 0,
+      countries: [],
     };
   },
   mounted() {
@@ -131,8 +149,14 @@ export default {
     if (this.id > 0) {
       this.getSelected();
     }
+    this.getCountries();
   },
   methods: {
+    getCountries() {
+      this.get({ url: 'Countries', id: this.id }).then((data) => {
+        this.countries = data;
+      });
+    },
     save() {
       this.selectedItem.branchId = this.branchId;
       if (!this.selectedItem.englishName) {
@@ -140,25 +164,25 @@ export default {
       }
       if (this.selectedItem.id > 0) {
         this.update({
-          url: "Cities",
+          url: 'Cities',
           data: this.selectedItem,
           id: this.selectedItem.id,
         }).then(() => {
-          this.doneAlert({ text: this.$t("updatedSuccessfully") });
-          this.$router.push({ name: "cities" });
+          this.doneAlert({ text: this.$t('updatedSuccessfully') });
+          this.$router.push({ name: 'cities' });
         });
       } else {
         this.create({
-          url: "Cities",
+          url: 'Cities',
           data: this.selectedItem,
         }).then(() => {
-          this.doneAlert({ text: this.$t("savedSuccessfully") });
-          this.$router.push({ name: "cities" });
+          this.doneAlert({ text: this.$t('savedSuccessfully') });
+          this.$router.push({ name: 'cities' });
         });
       }
     },
     getSelected() {
-      this.get({ url: "Cities", id: this.id }).then((data) => {
+      this.get({ url: 'Cities', id: this.id }).then((data) => {
         this.selectedItem = data;
       });
     },
@@ -169,4 +193,3 @@ export default {
   },
 };
 </script>
-  

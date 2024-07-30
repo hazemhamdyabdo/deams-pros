@@ -42,6 +42,20 @@
                     ></vue-feather>
                   </b-button>
                   <b-button
+                    data-action-type="print"
+                    v-b-tooltip.hover.top="$t('print')"
+                    variant="flat-success"
+                    class="btn-icon"
+                    size="sm"
+                    @click="print(item)"
+                  >
+                    <vue-feather
+                      type="printer"
+                      stroke="green"
+                      size="14"
+                    ></vue-feather>
+                  </b-button>
+                  <b-button
                     data-action-type="delete"
                     v-b-tooltip.hover.top="$t('delete')"
                     variant="flat-danger"
@@ -55,20 +69,6 @@
                       size="14"
                     ></vue-feather>
                   </b-button>
-                  <!-- <b-button
-                    data-action-type="print"
-                    v-b-tooltip.hover.top="$t('print')"
-                    variant="flat-success"
-                    class="btn-icon"
-                    size="sm"
-                    @click="print(item)"
-                  >
-                    <vue-feather
-                      type="printer"
-                      stroke="green"
-                      size="14"
-                    ></vue-feather>
-                  </b-button> -->
                 </div>
               </template>
             </g-table>
@@ -81,11 +81,13 @@
 
 <script>
 import GTable from '../../Shared/Table.vue';
+import reportMixin from '@/mixin/reportMixin';
 
 export default {
   components: {
     GTable,
   },
+  mixins: [reportMixin],
   data() {
     return {
       selectedItem: {},

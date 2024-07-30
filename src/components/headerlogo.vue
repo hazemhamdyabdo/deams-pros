@@ -1,13 +1,13 @@
 <template>
   <!-- Logo -->
-  <div class="header-left active">
-    <router-link to="index" class="logo logo-normal">
+  <div class="header-left active d-flex justify-content-center">
+    <router-link to="dashboard" class="logo logo-normal">
       <img src="../assets/img/logo.png" alt="" />
     </router-link>
-    <router-link to="index" class="logo logo-white">
+    <router-link to="dashboard" class="logo logo-white">
       <img src="../assets/img/logo-white.png" alt="" />
     </router-link>
-    <router-link to="index" class="logo-small">
+    <router-link to="dashboard" class="logo-small">
       <img src="../assets/img/logo-small.png" alt="" />
     </router-link>
     <a :class="$route.meta.hideClass" id="toggle_btn" href="javascript:void(0);">

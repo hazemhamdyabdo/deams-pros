@@ -223,7 +223,9 @@ export default {
     return {
       id: 0,
       selectedItem: {
-        isActive: true
+        isActive: true,
+        seasonStartDate: new Date(),
+        seasonEndDate: new Date()
       }
     };
   },

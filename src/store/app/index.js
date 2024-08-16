@@ -170,7 +170,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-            // reject(response);
+             reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {
@@ -188,7 +188,7 @@ export default {
             commit("TOGGLE_OVERLAY", false);
           })
           .catch(({ response }) => {
-          //  reject(response);
+            reject(response);
             commit("TOGGLE_OVERLAY", false);
           })
           .finally(() => {

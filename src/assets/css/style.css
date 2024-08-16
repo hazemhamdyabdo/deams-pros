@@ -4624,7 +4624,7 @@ td.ant-table-column-sort {
   line-height: 0;
 }
 .header .header-left .logo img {
-  width: 140px;
+  width: 120px;
 }
 @media (max-width: 991px) {
   .header .header-left .logo {
@@ -4632,7 +4632,7 @@ td.ant-table-column-sort {
     width: 100%;
   }
   .header .header-left .logo img {
-    width: 140px;
+    width: 120px;
   }
 }
 .header .header-left .logo-small {

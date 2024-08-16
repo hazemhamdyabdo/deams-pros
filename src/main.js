@@ -92,6 +92,9 @@ import 'weathericons/css/weather-icons.css';
 import './assets/css/vue-form-wizard.css';
 import './assets/css/style.css';
 import swal from 'sweetalert2';
+// custom directives
+import customDirect from "@/directives/CustomPermission";
+
 window.Swal = swal;
 // const store = createStore({
 //   modules: {
@@ -166,3 +169,4 @@ app
 
 app.use(router);
 app.mount('#app');
+app.directive("permission", customDirect);

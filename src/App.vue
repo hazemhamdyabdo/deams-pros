@@ -19,10 +19,10 @@ export default {
   watch: {
     profile(newVal) {
       if (newVal.isAdmin || this.profile.userId) this.Startup();
-    //   window.localStorage.USERID = this.profile.userId;
-    //   window.localStorage.USERNAME = this.profile.userName;
-    //   this.selectedItem.phone = this.profile.phone;
-    //   this.selectedItem.email = this.profile.email;
+      //   window.localStorage.USERID = this.profile.userId;
+      //   window.localStorage.USERNAME = this.profile.userName;
+      //   this.selectedItem.phone = this.profile.phone;
+      //   this.selectedItem.email = this.profile.email;
     },
   },
   methods: {
@@ -32,48 +32,66 @@ export default {
     ...mapMutations({
       setCompany: "app/setCompany",
     }),
-	Startup() {
+    Startup() {
       this.get({ url: "aggregates/StartUp" })
         .then((data) => {
           this.setBranches(data.branches);
           this.setCompany(data.currentCompany);
           this.mainCompany = data.currentCompany;
           // this.setCompany(data.currentCompany);
-        }).then(() => {
-          this.get({ url: 'FiscalYears' })
-        .then((data) => {
-          if (this.profile.isAdmin || this.profile.permissions.indexOf('viewAllFiscalYears') > -1) {
-            const dtaLength = data.length
-            data.push({
-              year: null,
-              startDate: data[0].startDate,
-              endDate: data[dtaLength - 1].endDate,
+        })
+        .then(() => {
+          this.get({ url: "FiscalYears" })
+            .then((data) => {
+              if (
+                this.profile.isAdmin ||
+                this.profile.permissions.indexOf("viewAllFiscalYears") > -1
+              ) {
+                const dtaLength = data.length;
+                data.push({
+                  year: null,
+                  startDate: data[0].startDate,
+                  endDate: data[dtaLength - 1].endDate,
+                });
+                this.setYears(data);
+              }
+              if (
+                this.profile.isAdmin === false &&
+                this.profile.permissions.indexOf("viewFiscalYears") === -1
+              ) {
+                this.setYears(data);
+              }
+              if (
+                this.profile.isAdmin === false &&
+                this.profile.permissions.indexOf("viewFiscalYears") > -1
+              ) {
+                this.setYears(data);
+              }
+              if (JSON.stringify(this.currentYear) === "{}") {
+                const year = {
+                  ...data.find(
+                    (item) => item.year === new Date().getFullYear()
+                  ),
+                };
+                this.setCurrentYear(year);
+              }
             })
-            this.setYears(data);
-          }
-          if (this.profile.isAdmin === false && this.profile.permissions.indexOf('viewFiscalYears') === -1) {
-          this.setYears(data);
-          }
-          if (this.profile.isAdmin === false && this.profile.permissions.indexOf('viewFiscalYears') > -1) {
-            this.setYears(data);
-          }
-          if (JSON.stringify(this.currentYear) === '{}') {
-            const year = { ...(data.find((item) => item.year === new Date().getFullYear())) }
-            this.setCurrentYear(year)
-          }
-        }).catch(() => {
-          if (this.profile.isAdmin === false && this.profile.permissions.indexOf('viewFiscalYears') === -1) {
-            this.setYears(data);
-          }
-        })
-        })
-      },
+            .catch(() => {
+              if (
+                this.profile.isAdmin === false &&
+                this.profile.permissions.indexOf("viewFiscalYears") === -1
+              ) {
+                this.setYears(data);
+              }
+            });
+        });
+    },
   },
 };
 </script>
 <style>
 #body {
-	font-family: "Dubai", sans-serif !important;
+  font-family: "Dubai", sans-serif !important;
 }
 .b-table-empty-slot,
 .b-table {
@@ -111,18 +129,18 @@ export default {
 
 .router-link-exact-active,
 .sidebar .sidebar-menu > ul > li > a:active {
-  color: #FF9F43 !important;
+  color: #ff9f43 !important;
   background-color: rgba(254, 159, 67, 0.08) !important;
 }
 
 .router-link-exact-active span {
-  color: #FF9900 !important;
+  color: #ff9900 !important;
 }
 
 @media (max-width: 768px) {
-	.sticky-sidebar {
-		display: none;
-	}
+  .sticky-sidebar {
+    display: none;
+  }
 }
 
 .group-button {

@@ -12,7 +12,11 @@
           handelInput(v);
         }
       "
-      @change="onChange"
+      @change="
+        (v) => {
+          onChange(v);
+        }
+      "
       @focus="onFocus"
       @blur="onBlur"
       :vid="name || $attrs['label-text'] || $attrs['name'] || ''"
@@ -52,7 +56,11 @@
                 handelInput(v);
               }
             "
-            @change="onChange"
+            @change="
+              (v) => {
+                onChange(v);
+              }
+            "
             @focus="onFocus"
             @blur="onBlur"
             @option:selected="
@@ -89,7 +97,11 @@
             disabled || ($attrs.name === 'code' && $route.params.id > 0)
           "
           :readonly="readonly"
-          @change="onChange"
+          @change="
+            (v) => {
+              onChange(v);
+            }
+          "
           :settings="{
             multiple: multiple,
           }"
@@ -337,7 +349,9 @@ export default {
     onChange(v) {
       this.emitValue(v);
       this.updateAndValidate();
-      console.log('changed',v)
+      console.log("changed", v);
+
+      this.$emit("changedd", v);
     },
   },
 };

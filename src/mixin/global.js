@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import { mapActions, mapGetters } from 'vuex';
-import moment from 'moment';
-import { domain, baseReportURL } from '@/libs/acl/config';
+import Vue from "vue";
+import { mapActions, mapGetters } from "vuex";
+import moment from "moment";
+import { domain, baseReportURL } from "@/libs/acl/config";
 
 export default {
   data() {
@@ -20,44 +20,45 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentLang: 'appConfig/lang',
-      isRight: 'appConfig/isRTL',
-      branchId: 'app/branchId',
-      branches: 'app/branches',
-      fiscalYears: 'app/fiscalYears',
-      currentBranch: 'app/currentBranch',
-      currentYear: 'app/currentYear',
-      company: 'app/currentCompany',
-      profile: 'auth/profile',
-      currentBreakPoint: 'app/currentBreakPoint',
+      currentLang: "appConfig/lang",
+      isRight: "appConfig/isRTL",
+      branchId: "app/branchId",
+      branches: "app/branches",
+      fiscalYears: "app/fiscalYears",
+      currentBranch: "app/currentBranch",
+      currentYear: "app/currentYear",
+      company: "app/currentCompany",
+      profile: "auth/profile",
+      currentBreakPoint: "app/currentBreakPoint",
     }),
     today() {
-      return moment().format('YYYY-MM-DD');
+      return moment().format("YYYY-MM-DD");
     },
     updatedToday() {
-      return moment().format('YYYY-MM-DDTHH:mm:ss');
+      return moment().format("YYYY-MM-DDTHH:mm:ss");
     },
     time() {
-      const time = moment().format('HH:mm:ss A');
-      return moment(time, ['h:mm:ss A']).format('HH:mm:ss');
+      const time = moment().format("HH:mm:ss A");
+      return moment(time, ["h:mm:ss A"]).format("HH:mm:ss");
     },
   },
   methods: {
     format(value) {
-      return moment(value).format('YYYY-MM-DD')
+      return moment(value).format("YYYY-MM-DD");
     },
     fetch() {
       if (this.currentBranch.isMaster) {
         fetch(this.currentUrl)
           .then(() => {
-            const buttons = document.querySelectorAll('[data-action-type]');
+            const buttons = document.querySelectorAll("[data-action-type]");
             buttons.forEach((el) => {
               if (
-                el.getAttribute('data-action-type') === 'delete' || el.getAttribute('data-action-type') === 'edit'
+                el.getAttribute("data-action-type") === "delete" ||
+                el.getAttribute("data-action-type") === "edit"
               ) {
-                el.setAttribute('hidden', true);
-              } else if (el.getAttribute('data-action-type') === 'preview') {
-                el.removeAttribute('hidden');
+                el.setAttribute("hidden", true);
+              } else if (el.getAttribute("data-action-type") === "preview") {
+                el.removeAttribute("hidden");
               } else {
                 el.disabled = true;
               }
@@ -71,7 +72,7 @@ export default {
       //         buttons.forEach(button => {
       //           button.addEventListener('click', handleClick);
       //         });
-            
+
       //         // Click event handler
       //         function handleClick(event) {
       //           // Handle click event
@@ -87,11 +88,11 @@ export default {
       // }
     },
     getDayTime(time) {
-      return moment(time, ['h:mm:ss']).format('H:mm:ss');
+      return moment(time, ["h:mm:ss"]).format("H:mm:ss");
     },
     getTime(time) {
-      time = time || moment().format('HH:mm:ss A');
-      return moment(time, ['h:mm:ss A']).format('HH:mm:ss');
+      time = time || moment().format("HH:mm:ss A");
+      return moment(time, ["h:mm:ss A"]).format("HH:mm:ss");
     },
     fixTime(d) {
       var x = new Date(d);
@@ -99,90 +100,91 @@ export default {
       var minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
       x.setHours(hoursDiff);
       x.setMinutes(minutesDiff);
-      return moment(x).format('YYYY-MM-DD HH:mm:ss');
+      return moment(x).format("YYYY-MM-DD HH:mm:ss");
     },
     getTimeOrder(time) {
-      time = time || moment().format('HH:mm A');
-      return moment(time, ['h:mm A']).format('HH:mm');
+      time = time || moment().format("HH:mm A");
+      return moment(time, ["h:mm A"]).format("HH:mm");
     },
     checkForFiscalYearPermForTrans(transDate) {
+      console.log(this.currentYear);
       // if (this.profile.isAdmin === false && this.profile.permissions.indexOf('viewFiscalYears') === -1 || this.profile.isAdmin) {
-        if (this.getDate(transDate) < this.getDate(this.currentYear.startDate)) {
-          this.doneAlert({
-            type: 'error',
-            text: this.$t('youDontHavePermToThisYear'),
-          });
-          return false;
-        }
-        if (this.getDate(transDate) > this.getDate(this.currentYear.endDate)) {
-          this.doneAlert({
-            type: 'error',
-            text: this.$t('youDontHavePermToThisYear'),
-          });
-          return false;
-        }
+      if (this.getDate(transDate) < this.getDate(this.currentYear.startDate)) {
+        this.doneAlert({
+          type: "error",
+          text: this.$t("youDontHavePermToThisYear"),
+        });
+        return false;
+      }
+      if (this.getDate(transDate) > this.getDate(this.currentYear.endDate)) {
+        this.doneAlert({
+          type: "error",
+          text: this.$t("youDontHavePermToThisYear"),
+        });
+        return false;
+      }
       // }
-      return true
+      return true;
     },
     checkForFiscalYearPerm(fromDate, toDate) {
       // if (this.profile.isAdmin === false && this.profile.permissions.indexOf('viewFiscalYears') === -1 || this.profile.isAdmin) {
-        if (this.getDate(fromDate) < this.getDate(this.currentYear.startDate)) {
-          this.doneAlert({
-            type: 'error',
-            text: this.$t('youDontHavePermToThisYear'),
-          });
-          return false;
-        }
-        if (this.getDate(toDate) > this.getDate(this.currentYear.endDate)) {
-          this.doneAlert({
-            type: 'error',
-            text: this.$t('youDontHavePermToThisYear'),
-          });
-          return false;
-        }
+      if (this.getDate(fromDate) < this.getDate(this.currentYear.startDate)) {
+        this.doneAlert({
+          type: "error",
+          text: this.$t("youDontHavePermToThisYear"),
+        });
+        return false;
+      }
+      if (this.getDate(toDate) > this.getDate(this.currentYear.endDate)) {
+        this.doneAlert({
+          type: "error",
+          text: this.$t("youDontHavePermToThisYear"),
+        });
+        return false;
+      }
       // }
-      return true
+      return true;
     },
     getDate24(date, isTime = false) {
-      const format = isTime ? 'YYYY-MM-DD HH:mm' : 'YYYY-MM-DD';
+      const format = isTime ? "YYYY-MM-DD HH:mm" : "YYYY-MM-DD";
       date = date || new Date();
       return moment(date).format(format);
     },
     getDate(date, isTime = false) {
-      const format = isTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+      const format = isTime ? "YYYY-MM-DD HH:mm:ss" : "YYYY-MM-DD";
       date = date || new Date();
       return moment(date).format(format);
     },
     getShortDate(date, isTime = false) {
-      const format = isTime ? 'YYYY-MM-DD HH:mm:ss' : 'MM-DD';
+      const format = isTime ? "YYYY-MM-DD HH:mm:ss" : "MM-DD";
       date = date || new Date();
       return moment(date).format(format);
     },
     getUtcDate(date) {
       date = date || new Date();
-      return moment.utc(date).format('YYYY-MM-DD HH:mm:ss');
+      return moment.utc(date).format("YYYY-MM-DD HH:mm:ss");
     },
     getUtcTime(date) {
       date = date || new Date();
-      return moment.utc(date).format('HH:mm:ss');
+      return moment.utc(date).format("HH:mm:ss");
     },
     adDateToHijriDate(adDate = new Date()) {
-      return new Intl.DateTimeFormat('ar-TN-u-ca-islamic', 
-       {
-         day: 'numeric', 
-         month: 'long', 
-         weekday: 'long', 
-         year: 'numeric'
-       }
-     ).format(new Date(adDate));
-   },
+      return new Intl.DateTimeFormat("ar-TN-u-ca-islamic", {
+        day: "numeric",
+        month: "long",
+        weekday: "long",
+        year: "numeric",
+      }).format(new Date(adDate));
+    },
     roundTo(n, digits) {
-        if (digits === undefined) {
-            digits = 0;
-        }
-        var multiplicator = Math.pow(10, digits);
-        n = n ? parseFloat((n * multiplicator).toFixed(11)) : 0;
-        return (Math.round(n) / multiplicator).toFixed(this.currentBranch.decimalDigits);
+      if (digits === undefined) {
+        digits = 0;
+      }
+      var multiplicator = Math.pow(10, digits);
+      n = n ? parseFloat((n * multiplicator).toFixed(11)) : 0;
+      return (Math.round(n) / multiplicator).toFixed(
+        this.currentBranch.decimalDigits
+      );
     },
     fraction(number) {
       number = this.roundTo(number, this.currentBranch.decimalDigits) || 0;
@@ -190,28 +192,33 @@ export default {
       // if (this.currentBranch.decimalDigits === 2 && this.$route.name !== 'vouchers-new') {
       //   return with2Decimals
       // }
-      return Number(parseFloat(number).toFixed(this.currentBranch.decimalDigits)) || 0;
+      return (
+        Number(parseFloat(number).toFixed(this.currentBranch.decimalDigits)) ||
+        0
+      );
     },
     getMonthName(month) {
       const d = new Date();
       d.setMonth(month - 1);
-      const monthName = d.toLocaleString('default', { month: 'short' });
+      const monthName = d.toLocaleString("default", { month: "short" });
       return monthName;
     },
     a2hex(str) {
       // const strLength = str.length
-      return Buffer.from(str, 'utf8').toString('hex');
+      return Buffer.from(str, "utf8").toString("hex");
     },
     s2ab(s) {
       const buf = new ArrayBuffer(s.length);
       const view = new Uint8Array(buf);
-      for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) && 0xFF;
+      for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) && 0xff;
       return buf;
     },
-    d2h(d) { return d > 16 ? (+d).toString(16) : `0${(+d).toString(16)}` },
+    d2h(d) {
+      return d > 16 ? (+d).toString(16) : `0${(+d).toString(16)}`;
+    },
     hex_to_ascii(str1) {
       const hex = str1.toString();
-      this.str = '';
+      this.str = "";
       for (let n = 0; n < hex.length; n += 2) {
         this.str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
       }
@@ -220,18 +227,22 @@ export default {
     truncateNum(number) {
       return number.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
     },
-    Export2Word(element, filename = '') {
-      var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-      var postHtml = '</body></html>';
-      var html = preHtml + document.getElementById(element).innerHTML + postHtml;
-      var blob = new Blob(['\ufeff', html], {
-        type: 'application/msword',
+    Export2Word(element, filename = "") {
+      var preHtml =
+        "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+      var postHtml = "</body></html>";
+      var html =
+        preHtml + document.getElementById(element).innerHTML + postHtml;
+      var blob = new Blob(["\ufeff", html], {
+        type: "application/msword",
       });
       // Specify link url
-      var url = `data:application/vnd.ms-word;charset=utf-8,${encodeURIComponent(html)}`;
-      var downloadLink = document.createElement('a');
+      var url = `data:application/vnd.ms-word;charset=utf-8,${encodeURIComponent(
+        html
+      )}`;
+      var downloadLink = document.createElement("a");
       // Specify file name
-      filename = filename ? `${filename} + '.doc'` : 'document.doc';
+      filename = filename ? `${filename} + '.doc'` : "document.doc";
       // Create download link element
       // var downloadLink = document.createElement('a');
       document.body.appendChild(downloadLink);
@@ -249,118 +260,89 @@ export default {
     },
     getFilterObj(obj) {
       return Object.entries(obj).reduce((query, item) => {
-        if ([null, ''].indexOf(item[1]) > -1) return query;
-        if (query) query += '&';
+        if ([null, ""].indexOf(item[1]) > -1) return query;
+        if (query) query += "&";
         query += `${item[0]}=${item[1]}`;
         return query;
-      }, '');
+      }, "");
     },
     orderQuery(sortBy, sortDesc) {
-      if (sortBy) return `${sortBy} ${sortDesc ? 'DESC' : 'ASC'}`;
-      return '';
+      if (sortBy) return `${sortBy} ${sortDesc ? "DESC" : "ASC"}`;
+      return "";
     },
-    // ...mapActions(['create']), 
-    ...mapActions('app', [
-      'get',
-      'getAll',
-      'create',
-      'update',
-      'delete',
-    ]),
+    // ...mapActions(['create']),
+    ...mapActions("app", ["get", "getAll", "create", "update", "delete"]),
     doneAlert({ type, title, text }) {
-      type = type || 'success';
+      type = type || "success";
       this.$swal({
         icon: type,
         title: title || this.$t(type),
         text: text,
         timer: 2000,
         customClass: {
-          confirmButton: 'btn btn-primary',
+          confirmButton: "btn btn-primary",
         },
       });
     },
     $can(permission) {
       if (this.profile.isAdmin) return this.profile.isAdmin;
       return (
-        !this.profile.permissions || this.profile.permissions.indexOf(permission) > -1
+        !this.profile.permissions ||
+        this.profile.permissions.indexOf(permission) > -1
       );
     },
     confirmAction(data, callbackFn) {
-      const {
-        title,
-        text,
-        type,
-        confirmText,
-        cancelText
-      } = data;
-      this.$swal(
-        {
-        title: title || this.$t('Are you sure?'),
+      const { title, text, type, confirmText, cancelText } = data;
+      this.$swal({
+        title: title || this.$t("Are you sure?"),
         text: text,
-        icon: type || 'warning',
+        icon: type || "warning",
         showCancelButton: true,
-        confirmButtonText: confirmText || this.$t('Yes!'),
-        cancelButtonText: cancelText || this.$t('Cancel'),
+        confirmButtonText: confirmText || this.$t("Yes!"),
+        cancelButtonText: cancelText || this.$t("Cancel"),
         customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-outline-danger ml-1",
         },
         buttonsStyling: false,
-      }
-      )
-      .then(
-        (result) => {
+      }).then((result) => {
         if (result.value) {
           if (callbackFn) callbackFn();
         }
-      }
-      );
+      });
     },
     confirmActionAdd(data, callbackFn) {
-      const {
-        title,
-        text,
-        type,
-        confirmText,
-        cancelText
-      } = data;
-      this.$swal(
-        {
-        title: title || this.$t('codeIsNotExsist'),
+      const { title, text, type, confirmText, cancelText } = data;
+      this.$swal({
+        title: title || this.$t("codeIsNotExsist"),
         text: text,
-        icon: type || 'warning',
+        icon: type || "warning",
         showCancelButton: true,
-        confirmButtonText: confirmText || this.$t('Yes!'),
-        cancelButtonText: cancelText || this.$t('Cancel'),
+        confirmButtonText: confirmText || this.$t("Yes!"),
+        cancelButtonText: cancelText || this.$t("Cancel"),
         customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-outline-danger ml-1",
         },
         buttonsStyling: false,
-      }
-      )
-      .then(
-        (result) => {
+      }).then((result) => {
         if (result.value) {
           if (callbackFn) callbackFn();
         }
-      }
-      );
+      });
     },
     confirmActivate(data, callbackFn) {
-      const {
-        title, text, type, confirmText, cancelText
-      } = data;
+      const { title, text, type, confirmText, cancelText } = data;
       this.$swal({
-        title: title || this.$t('Are you sure?'),
+        title: title || this.$t("Are you sure?"),
         text: text,
-        icon: type || 'warning',
+        icon: type || "warning",
         showCancelButton: true,
-        confirmButtonText: confirmText || this.$t('Yes!'),
-        cancelButtonText: cancelText || this.$t('Cancel'),
+        confirmButtonText: confirmText || this.$t("Yes!"),
+        cancelButtonText: cancelText || this.$t("Cancel"),
         customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-outline-danger ml-1",
         },
         buttonsStyling: false,
       }).then((result) => {
@@ -370,35 +352,24 @@ export default {
       });
     },
     confirmActionTechSupport(data, callbackFn) {
-      const {
-        title,
-        text,
-        type,
-        confirmText,
-        cancelText
-      } = data;
-      this.$swal(
-        {
+      const { title, text, type, confirmText, cancelText } = data;
+      this.$swal({
         title: title,
         text: text,
-        icon: type || 'warning',
+        icon: type || "warning",
         showCancelButton: true,
-        confirmButtonText: confirmText || this.$t('Yes!'),
-        cancelButtonText: cancelText || this.$t('Cancel'),
+        confirmButtonText: confirmText || this.$t("Yes!"),
+        cancelButtonText: cancelText || this.$t("Cancel"),
         customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-outline-danger ml-1",
         },
         buttonsStyling: false,
-      }
-      )
-      .then(
-        (result) => {
+      }).then((result) => {
         if (result.value) {
           if (callbackFn) callbackFn();
         }
-      }
-      );
+      });
     },
   },
 };

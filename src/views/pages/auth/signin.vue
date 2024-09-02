@@ -51,7 +51,21 @@
                   </div>
                 </b-row>
                 <div class="form-login">
-                  <button class="btn btn-login" to="dashboard">Sign In</button>
+                  <button
+                    v-if="!isLoading"
+                    class="btn btn-login"
+                    to="dashboard"
+                  >
+                    Sign In
+                  </button>
+                  <button v-else class="btn btn-login" type="button" disabled>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </button>
                 </div>
               </gform>
             </div>
@@ -66,9 +80,9 @@
   <!-- /Main Wrapper -->
 </template>
 <script>
-import { Form, Field } from 'vee-validate';
-import { mapActions } from 'vuex';
-import * as Yup from 'yup';
+import { Form, Field } from "vee-validate";
+import { mapActions } from "vuex";
+import * as Yup from "yup";
 export default {
   components: {
     Form,
@@ -82,41 +96,42 @@ export default {
       updatedUserName: null,
       checkSympole: null,
       prodctionUrl: null,
+      isLoading: false,
     };
   },
   computed: {
     buttonLabel() {
-      return this.showPassword ? 'Hide' : 'Show';
+      return this.showPassword ? "Hide" : "Show";
     },
   },
   methods: {
     ...mapActions({
-      loginApi: 'auth/login',
+      loginApi: "auth/login",
     }),
     beforeLoginValidation() {
-      this.checkSympole = this.userName?.indexOf('\\');
+      this.checkSympole = this.userName?.indexOf("\\");
       // this.prodctionUrl = document.location.host.indexOf("eduprosys.net"); // ! idk
       if (this.checkSympole === -1) {
         // change not
         this.doneAlert({
-          title: this.$t('notAllowToAddThisSyempol'),
-          type: 'error',
+          title: this.$t("notAllowToAddThisSyempol"),
+          type: "error",
         });
         return false;
       }
       return true;
     },
     checkUserName() {
-      const check = this.userName?.indexOf('\\');
+      const check = this.userName?.indexOf("\\");
       // const prodction = document.location.host.indexOf("eduprosys.net"); // ! idk
-      const hostName = document.location.host.split('.');
+      const hostName = document.location.host.split(".");
       if (check === -1) {
         this.updatedUserName = `${hostName[0]}\\${this.userName}`;
       } else if (check === -1) {
         // change not
         this.doneAlert({
-          title: this.$t('notAllowToAddThisSyempol'),
-          type: 'error',
+          title: this.$t("notAllowToAddThisSyempol"),
+          type: "error",
         });
       } else {
         this.updatedUserName = this.userName;
@@ -126,37 +141,39 @@ export default {
       this.showPassword = !this.showPassword;
     },
     async onSubmit() {
+      this.isLoading = true;
       if (!this.beforeLoginValidation()) return;
       this.checkUserName();
       const body = {
         userName: this.updatedUserName,
         password: this.password,
       };
-      await this.loginApi(body);
+      const res = await this.loginApi(body);
+      this.isLoading = false;
     },
   },
   mounted() {
-    this.checkSympole = this.userName?.indexOf('\\');
+    this.checkSympole = this.userName?.indexOf("\\");
   },
   setup() {
-    let users = localStorage.getItem('storedData');
+    let users = localStorage.getItem("storedData");
     if (users === null) {
       let password = [
         {
-          email: 'admin@dreamguystech.com',
-          password: '123456',
+          email: "admin@dreamguystech.com",
+          password: "123456",
         },
       ];
       const jsonData = JSON.stringify(password);
-      localStorage.setItem('storedData', jsonData);
+      localStorage.setItem("storedData", jsonData);
     }
     const schema = Yup.object().shape({
       email: Yup.string()
-        .required('Email is required')
-        .email('Email is invalid'),
+        .required("Email is required")
+        .email("Email is invalid"),
       password: Yup.string()
-        .min(6, 'Password must be at least 6 characters')
-        .required('Password is required'),
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
     });
 
     return {

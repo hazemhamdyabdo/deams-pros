@@ -27,17 +27,20 @@ export default {
   },
   actions: {
     login({ commit, dispatch }, { userName, password }) {
-      dispatch(
+      return dispatch(
         "app/create",
         { url: "Users/auth", data: { userName, password } },
         { root: true }
-      ).then((data) => {
-        commit("setToken", data.token);
-        commit("setProfile", data);
-        Router.push("/dashboard");
-      }).catch((e)=>{
-        return e;
-      })
+      )
+        .then((data) => {
+          commit("setToken", data.token);
+          commit("setProfile", data);
+          Router.push("/dashboard");
+          return true;
+        })
+        .catch((e) => {
+          return false;
+        });
     },
     logout({ commit }) {
       this.state.app.branchId = null;

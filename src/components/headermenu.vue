@@ -78,6 +78,12 @@
         </a>
       </div>
     </li>
+    <!-- branch -->
+    <Branch />
+    <!-- branch -->
+    <!-- fisical year -->
+    <FiscalYears />
+    <!-- fisical year -->
     <!-- /Flag -->
     <li class="nav-item nav-item-box">
       <a href="javascript:void(0);" id="btnFullscreen" @click="initFullScreen">
@@ -153,7 +159,12 @@
       >
         <span class="user-info">
           <span class="user-letter">
-            <img src="../assets/img/profiles/brand.png" alt="" class="rounded img-fluid" style="height: 42px;"/>
+            <img
+              src="../assets/img/profiles/brand.png"
+              alt=""
+              class="rounded img-fluid"
+              style="height: 42px"
+            />
           </span>
           <span class="user-detail">
             <span class="user-name">ساكن</span>
@@ -189,11 +200,14 @@
 </template>
 <script>
 import headernotification from "../assets/json/headernotification.json";
+import Branch from "./Branch.vue";
+import FiscalYears from "./FiscalYears.vue";
 export default {
   /**
    * ! changes in headermenu component, sidebarBody, router file (dashboard- publicCode), headerlogo and auth / signin
    * ?? main js and package.json
    */
+  components: { Branch, FiscalYears },
   data() {
     return {
       headernotification: headernotification,
@@ -222,8 +236,7 @@ export default {
       ],
     };
   },
-  computed: {
-  },
+  computed: {},
 
   methods: {
     setLanguage(locale, country, flag) {
